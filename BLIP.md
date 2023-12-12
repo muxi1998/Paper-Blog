@@ -37,10 +37,18 @@
 # 2. Related Work
 
 ## 2.1 Vision-language Pre-training
+- 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出**CapFilt**
+- 不同性質的任務背後的backbone會不同 ⇒ 提出**多模態混合encoder-decoder**
+    - understanding-base tasks ⇒ encoder
+    - generation-base tasks ⇒ encoder-decoder
 
 ## 2.2 Knowledge Distillation
+- CapFilt模組類似於student-teacher方法，Captioner透過生成產生字幕來學習語意，Filter透過過濾雜訊來學習語意
+- CapFilt可以相輔相成
 
 ## 2.3 Data Augmentation
+- 語言任務中的DA(Data Augmentation)相較於vision tasks較為困難
+- 本篇研究展現了合成字幕對於大規模的vision-language pre-training的成效是不錯的
 
 # 3. Method
 

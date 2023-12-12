@@ -26,6 +26,7 @@
 - [深度學習和神經網絡](link-to-your-article)
 - [卷積神經網絡解析](link-to-your-article)
 - [更多...](link-to-category)
+- [BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation](BLIP.md)
 
 ### 數據科學
 - [數據探索和清洗](link-to-your-article)

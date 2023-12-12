@@ -1,3 +1,31 @@
+# Outline
+- [Abstract](#abstract)
+- [1. Introduction](#1-introduction)
+- [2. Related Work](#2-related-work)
+  - [2.1 Vision-language Pre-training](#21-vision-language-pre-training)
+  - [2.2 Knowledge Distillation](#22-knowledge-distillation)
+  - [2.3 Data Augmentation](#23-data-augmentation)
+- [3. Method](#3-method)
+  - [3.1 Model Architecture](#31-model-architecture)
+  - [3.2 Pre-training Objectives](#32-pre-training-objectives)
+  - [3.3 CapFilt](#33-capfilt)
+- [4. Experiments](#4-experiments)
+  - [4.1 Pre-training Details](#41-pre-training-details)
+  - [4.2 Effect of CapFilt](#42-effect-of-capfilt)
+  - [4.3 Diversity is Key for Synthetic Captions](#43-diversity-is-key-for-synthetic-captions)
+  - [4.4 Parameter Sharing and Decoupling](#44-parameter-sharing-and-decoupling)
+- [5. Comparison with State-of-the-arts](#5--comparison-with-state-of-the-arts)
+  - [5.1 Image-Text Retrieval](#51-image-text-retrieval)
+  - [5.2 Image Captioning](#52-image-captioning)
+  - [5.3 Visual Question Answering (VQA)](#53-visal-question-answering-vqa)
+  - [5.4 Natural Language Visual Reasoning (NLVR2)](#54-natural-language-visual-reasoning-nlvr2)
+  - [5.5 Visual Dialog (VisDial)](#55-visual-dialog-visdial)
+  - [5.6 Zero-shot Transfer to Video-Language Tasks](#56-zero-shot-transfer-to-video-language-tasks)
+- [6. Additional Ablation Study](#6-additional-ablation-study)
+- [7. Conclusion](#7-conclusion)
+---
+---
+
 # Abstract
 - 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練
     - 網路上的data很大的可能存在noise

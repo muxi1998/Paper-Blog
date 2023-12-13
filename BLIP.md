@@ -81,7 +81,7 @@
 # 3. Method
 
 ## 3.1 Model Architecture
-**MED** (Multimodal mixture encoder-decoder) 是一個multi-task modal，並可以提供以下**三種功能**
+**MED** (Multimodal mixture encoder-decoder) 是一個multi-task modal，並可以提供以下<span style="color:red">**三種功能**</span>
 
 1. Unimodal encoder
     1. Image Encoder

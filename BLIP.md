@@ -81,6 +81,32 @@
 # 3. Method
 
 ## 3.1 Model Architecture
+**MED** (Multimodal mixture encoder-decoder) 是一個multi-task modal，並可以提供以下**三種功能**
+
+1. Unimodal encoder
+    1. Image Encoder
+        - Transformer is better than the object detection model in feature extraction propose
+        - <details>
+            <summary>employ <b>Vision Transformer</b></summary>
+
+            ![Vision Transformer Image](./BLIP/model.png)
+            </details>
+
+            
+    2. Text Encoder
+        - <details>
+            <summary>employ <b>BERT</b></summary>
+
+            ![BERT Image](./BLIP/BERT.png)
+            </details>
+            
+2. Image-grounded text encoder
+    - Inject **visual information** for  the cross-attention(CA)
+    - Use specific task-specific **token [Encode]** appended to the input text to show the purpose is to generate the representation of the image-text pair
+3. Image-grounded text decoder
+    - Bi-directional attention ⇒ (change to) **causal self-attention**
+    - token [Decode] is used to signal the beginning of the sequence
+    - end-of-sequence token is used to signal the end
 
 ## 3.2 Pre-training Objectives
 

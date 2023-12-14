@@ -109,6 +109,24 @@
     - end-of-sequence token is used to signal the end
 
 ## 3.2 Pre-training Objectives
+- **Three** objectives
+    - Understanding-based (x2)
+    - Generation-based (x1)
+- Computation flow
+    - vision transformer (ViT): one-pass to save the computation loading
+    - text transformer (BERT): three-pass
+- **Three Losses**
+    - Image-Text Contrastive Loss (ITC) ⇒ Align the representation of vision and text
+        - A positive image-text pair should have similar **representation** between image feature and text feature
+        - Negative image-text pair should have more different representation
+    - Image-Text Matching Loss (ITM) ⇒ Distinguish whether the image-text pair is positive or negative
+        - binary classification problem
+        - Purpose is to check whether the image and text are matched
+    - Language Modeling Loss (LM) ⇒ generate textual description given an image
+        - cross entropy loss: maximize the likelihood of the text in an autoregressive manner
+- Tricks of Minimizing the training computation
+    - Share Weights between text encoder and text decoder, except **SA layers**
+    - Main components that makes the encoder and decoder different is the <attention layer>
 
 ## 3.3 CapFilt
 

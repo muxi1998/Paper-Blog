@@ -1,4 +1,4 @@
-# Outline
+<!-- # Outline
 - [Abstract](#abstract)
 - [1. Introduction](#1-introduction)
 - [2. Related Work](#2-related-work)
@@ -24,7 +24,7 @@
 - [6. Additional Ablation Study](#6-additional-ablation-study)
 - [7. Conclusion](#7-conclusion)
 ---
----
+--- -->
 
 # Abstract
 - 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練

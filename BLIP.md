@@ -129,6 +129,18 @@
     - Main components that makes the encoder and decoder different is the <attention layer>
 
 ## 3.3 CapFilt
+- **Previous Problem:** limited number of high-quality human annotated image-text pairs $\{(I_h, T_h)\}$
+    - e.g. COCO dataset
+- **Previous solution and limitation:** Crawl image and alt-text pairs from the website
+    - often do not accurately describe the visual content ⇒ **noisy data**
+- **Proposed solution:** Finetune CapFilt on high-quality annotated image-text pair (e.g. COCO dataset)
+    - Cap (Captioner)
+        - finetune with **LM loss** to decode (synthesis) texts $T_s$ of given web images $I_w$
+        - $Cap(I_w)=T_s$
+    - Filt (Filter)
+        - finetune with **ITC** and **ITM loss** to learn whether a text matches an image
+        - a text is considered to be noisy if the ITM predicts the input text and image pair is unmatched.
+    - Finally combine the filtered image-text pairs with the human-annotated pairs to form a new dataset
 
 # 4. Experiments
 

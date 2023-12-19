@@ -143,7 +143,19 @@
     - Finally combine the filtered image-text pairs with the human-annotated pairs to form a new dataset
 
 # 4. Experiments
-
+- Dataset
+    - 14M images, includes
+    - **two** human-annotated dataset
+        - COCO
+        - Visual Genome
+    - **three** web dataset
+        - Conceptual Captions
+        - Conceptual 12M
+        - SBU captions
+- Extra experiment on LAION
+    - 115M images
+    - More noisy texts
+    
 ## 4.1 Pre-training Details
 
 ## 4.2 Effect of CapFilt

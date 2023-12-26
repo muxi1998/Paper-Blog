@@ -2,8 +2,10 @@
 
 歡迎來到我的AI工程師部落格！這裡分享我關於人工智能、機器學習和數據科學的知識和經驗。
 
-- ［ ] setup the update schedule
--［ ］Setup
+TODO:
+1. setup the update schedule
+2. Upload PPT file
+3. Add backward link
 
 ## 目錄
 - [關於我](#關於我)

@@ -2,15 +2,7 @@
 
 歡迎來到我的AI工程師部落格！這裡分享我關於人工智能、機器學習和數據科學的知識和經驗。
 
-<!-- ## 目錄
-- [關於我](#關於我)
-- [文章分類](#文章分類)
-  - [機器學習](#機器學習)
-  - [深度學習](#深度學習)
-  - [數據科學](#數據科學)
-  - [項目案例](#項目案例)
-- [最新文章](#最新文章)
-- [聯絡方式](#聯絡方式) -->
+
 
 ## 關於我
 （這裡可以簡單介紹自己的背景和專業領域）
@@ -23,9 +15,19 @@
 - [更多...](link-to-category)
 
 ### 深度學習
-- [深度學習和神經網絡](link-to-your-article)
-- [卷積神經網絡解析](link-to-your-article)
-- [更多...](link-to-category)
+- [Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding (ZITS)](link-to-your-article)
+- [Temporal Group Fusion Network for Deep Video Inpainting](link-to-your-article)
+- [Alias-Free Generative Adversarial Networks (StyleGAN3)](link-to-category)
+- [A Style-Based Generator Architecture for Generative Adversarial Network (StyleGAN)]()
+- [Learning Joint Spatial-Temporal Transformation for Video Inpainting (STTN)]()
+- [StEP: Style-based Encoder Pre-training for Multi-modal Image Synthesis (StEP)]()
+- [Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN]()
+- [Self-Attention Temporal Convolutional Network for Long-Term Daily Living Activity Detection (SA-TCN)]()
+- [ HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms]() 
+- [GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields]()
+- [FuseFormer: Fusing Fine-Grained Information in Transformers for Video Inpainting]()
+- [Deep Image Compositing]()
+- [Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications]()
 - [BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation](BLIP.md)
 
 ### 數據科學

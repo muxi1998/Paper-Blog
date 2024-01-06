@@ -1,6 +1,6 @@
 baseURL = 'https://muxi1998.github.io/Paper-Blog/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'My Paper note site'
 
 [module]
   [[module.imports]]

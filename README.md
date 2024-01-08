@@ -6,6 +6,7 @@ Recently studying topics related to transformer or VLP.
 
 ## About Me
 Master of Artificial Intelligence, Specializing in Deep Learning and Generative AI
+[2024/01/08] Still fixing some bug
 
 ## Articles
 

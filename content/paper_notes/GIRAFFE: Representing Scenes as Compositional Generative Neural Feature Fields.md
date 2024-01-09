@@ -1,3 +1,9 @@
+---
+title: "GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"
+date: 2024-01-09
+draft: false
+---
+
 # GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields
 
 # Abstract

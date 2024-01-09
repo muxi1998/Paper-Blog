@@ -1,0 +1,503 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title> - My Paper note site</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1." />
+  <meta name="author" content="My Paper note site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://muxi1998.github.io/Paper-Blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://muxi1998.github.io/Paper-Blog/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://muxi1998.github.io/Paper-Blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://muxi1998.github.io/Paper-Blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://muxi1998.github.io/Paper-Blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="">
+<meta itemprop="description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.">
+
+<meta itemprop="wordCount" content="265">
+<meta itemprop="keywords" content="" />
+  
+  <meta property="og:title" content="" />
+<meta property="og:description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/" /><meta property="article:section" content="paper_notes" />
+
+
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://muxi1998.github.io/Paper-Blog/"
+      >My Paper note site</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5"></h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="histogan-controlling-colors-of-gan-generated-and-real-images-via-color-histograms">HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</h1>
+<p>方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留</p>
+<h1 id="main-idea">Main idea</h1>
+<h2 id="scheme">Scheme</h2>
+<p>在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）</p>
+<h2 id="previous-work">Previous work</h2>
+<h2 id="problems-motivation">Problems (motivation)</h2>
+<ul>
+<li>基於一張風格目標圖做轉換
+<ul>
+<li>可能會影響到被轉換的內容細節（紋理、色調）</li>
+</ul>
+</li>
+<li>轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain）
+<ul>
+<li>想要有好的風格轉換效果就必須在同一個domain下</li>
+</ul>
+</li>
+</ul>
+<h2 id="method">Method</h2>
+<ul>
+<li>只藉由color histogram來協助deep network的效果
+<ul>
+<li>由此就可以從任意的domain中提取色彩</li>
+</ul>
+</li>
+</ul>
+<h2 id="result">Result</h2>
+<hr>
+<h1 id="abstract">Abstract</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>HistoGAN
+<ul>
+<li>based on StyleGAN architecture</li>
+<li>control the GAN-generated images specified by a target color histogram feature</li>
+</ul>
+</li>
+<li>ReHistoGAN
+<ul>
+<li>expend HistoGAN to recolor the generated image</li>
+<li>encoder</li>
+<li>unsupervised</li>
+<li>keep the original images content while changing the colors based on the given target histogram</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-motivation-and-related-work">1. Motivation and Related work</h1>
+<p>顏色直方圖是個很好用來表達圖片顏色的方法，有許多種不同的顏色直方圖來表達顏色分佈</p>
+<ul>
+<li>3D histogram</li>
+<li>2D histogram</li>
+<li>color palette</li>
+<li>color triad</li>
+</ul>
+<p><strong>動機</strong></p>
+<p>近期的深度學習模型在做顏色轉換時都是靠一張目標範例進行轉換，且會在同一個domain下。
+不同的目標範例（target image）會導致生成出的圖片效果不同，有時候不只更改顏色，連質地、紋理都會變動</p>
+<p><strong>此篇特色</strong></p>
+<p>只專注於控制圖片的顏色特徵，單純藉由顏色直方圖的資訊來協助DL模型</p>
+<p><strong>控制GAN生成圖片的顏色</strong></p>
+<ul>
+<li>GAN被視為黑盒子能將一個簡單的分佈轉換成一個有意義的範疇，但並沒有能力控制細節
+<ul>
+<li>直到StyleGAN出現才開始可以控制更細節的風格</li>
+<li>一開始發展了StyleGAN用來對生成的圖片風格進行限制，Style mixing</li>
+<li>使用不同的latent space vectors來控制風格</li>
+</ul>
+</li>
+<li>達到此目標會有許多的計算花費，也有人另外訓練一個encoder-generator網路來學習一個映射關係
+將目標風格轉換成latent code</li>
+<li>本篇論文希望簡化轉換過程，單純使用color histogram來當作input轉換風格
+不受domain的限制，讓不同domain的圖片也可以達到相同的色彩分佈</li>
+</ul>
+<p><strong>重新在真實圖片上著色</strong></p>
+<ul>
+<li>利用前一個訓練好的GAN繼續作延伸應用</li>
+<li>完全非監督學習</li>
+<li>模型被訓練能夠對顏色直方圖提取特徵與資訊</li>
+<li>可以不用給定一個目標顏色直方圖就能自動著色
+較少研究</li>
+<li>輸入一張真實存在的圖與一個target histogram就可以轉換顏色</li>
+</ul>
+<h1 id="2-histogan">2. HistoGAN</h1>
+<p>首先先介紹本論文是使用histrgram什麼樣的特徵，再來會討論針對於StyleGAN的一些小更動，最後會解釋怎麼擴展該模型來對圖片做重新上色的動作</p>
+<h2 id="21-histogram-feature">2.1. Histogram feature</h2>
+<ul>
+<li>
+<p>使用log-chroma的特性</p>
+<ul>
+<li>對於光亮的變化有更好的不便性</li>
+<li>且是可微分的</li>
+</ul>
+</li>
+<li>
+<p>特徵就是一張圖片的2D直方圖映射到log-chroma空間</p>
+<ul>
+<li>此2D直方圖是由$uv$來表達</li>
+<li>使用$uv$來表達的顏色空間會比$rbg$來的緊湊</li>
+</ul>
+</li>
+<li>
+<p>log-chroma空間是選擇一個顏色作為基底並由另外兩個顏色作歸一化，如此也可以觀察到主色的強度
+可以選擇不同顏色，因此特徵圖會是$H=h\times h\times 3$ 的張</p>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6466987">The importance of the normalizing channel in log-chromaticity space</a></p>
+</li>
+<li>
+<p>histgram的計算方法</p>
+<ul>
+<li>一張給定的input $I$ 先轉換成log-chroma空間</li>
+<li>舉例選擇R為主色，並對G, B歸一
+$I_{uR}(x)=\log{\frac{I_R(x)+\epsilon}{I_G(x)+\epsilon}}$ $I_{vR}(x)=\log{\frac{I_R(x)+\epsilon}{I_B(x)+\epsilon}}$
+其中$x$為pixel index</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-color-controlled-image-generation">2.2. Color-controlled Image Generation</h2>
+<ul>
+<li>
+<p>想法是將histogram feature合併至StyleGAN的架構中使用</p>
+<ul>
+<li>差別在於在最後一個block，原本是將將風格圖轉成Style vector後再轉成latent code來使用，但本篇論文是本風格圖拿掉，換成Historgram圖，並使用一個projection network再轉成latent code</li>
+<li>projected into a lower-dimentional representation是什麼意思？</li>
+</ul>
+<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%881.57.41.png" alt="Histo 截圖 2021-10-07 下午1.57.41.png"></p>
+</li>
+<li>
+<p>此網路架構有8個layer</p>
+<ul>
+<li>第一個layer有1024個神經元，其他7個則有512個神經元</li>
+<li>橘色的to latent區塊會將histogram feature映射到一個latent space，輸出為$2^nm$神經元  $n$為block編號，$m$ 為一個控制網路容量的變數</li>
+</ul>
+</li>
+<li>
+<p>Color loss</p>
+<ul>
+<li>使用Hellinger distance</li>
+<li>$C(H_g,H_t)=\frac{1}{\sqrt{2}}\parallel H^{\frac{1}{2}}<em>g-H^{\frac{1}{2}}</em>{t} \parallel_{2}$</li>
+<li>$\parallel \cdot \parallel_2$ 是標準歐式norm (似乎就是pixel-wise的平方根號)</li>
+</ul>
+</li>
+<li>
+<p>Generator的loss</p>
+<ul>
+<li>$\mathcal{L}=D(I_g)+\alpha C(H_g,H_t)$</li>
+<li>$I_g$ 是generator生出的圖片</li>
+<li>$D(\cdot)$ 是個discriminator負責產出一個scalar feature</li>
+</ul>
+</li>
+<li>
+<p>訓練細節</p>
+<ul>
+<li>因為loss函數是可微分的，因此可以使用SGD來更新 （Stochastic Gradient Descent）</li>
+<li>訓練過程中需要不同的target histogram
+<ul>
+<li>隨機在training set中選擇兩張圖並計算其histogram $H_1, H_2$</li>
+<li>並隨機的將兩個histogram進行插值</li>
+<li>$H_t=\delta H_1+(1-\delta)H_2$
+$\delta \sim U(0,1)$</li>
+<li>會需要一直產生不同的target histogram是為了增加histogram的變異性，減少overfitting的可能並提高robustness</li>
+<li>雖然此方法不適用於多樣性domain的case，但實驗證明每次產生不同的target histogram仍能帶來較好的結果</li>
+</ul>
+</li>
+</ul>
+<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%882.27.28.png" alt="截圖 2021-10-07 下午2.27.28.png"></p>
+</li>
+</ul>
+<h2 id="23-image-recoloring">2.3. Image Recoloring</h2>
+<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.31.43.png" alt="截圖 2021-10-07 下午3.31.43.png"></p>
+<ul>
+<li>擴展HistoGAN的設計來對已知的input $I_i$ 進行著色</li>
+<li>並非想像中直觀，因為在HistoGAN中控制顏色的部分是隱含在model裡面的（HistoGAN的最後兩個block負責顏色）</li>
+<li>不使用對noise和style vector進行優化，而是訓練一個encoder，將input映射到HistoGAN可以使用的input</li>
+</ul>
+<h3 id="架構">架構</h3>
+<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.38.46.png" alt="截圖 2021-10-07 下午3.38.46.png"></p>
+<ul>
+<li>類似於U-net有個skip connections</li>
+<li>為了保存input的細節，因此會保留encoder前兩個block的latent feature並透過skip connections來傳到HistoGAN的頭作為細節input</li>
+<li>修改HistoGAN的架構
+<ul>
+<li>可以在最頭的地方丟入target histogram</li>
+<li>透過U-Net架構中的skip connections來將前兩個encoder輸出的feature map（histogram的特徵）直接放到尾巴（HistoGAN開始的地方）</li>
+<li>此作法（只傳入前兩個block的target histogram特徵）可以讓模型學習在著色的步驟時同時考慮input image content和target histogram的顏色</li>
+</ul>
+</li>
+</ul>
+<h3 id="loss-function">loss function</h3>
+<p>$\mathcal{L}=\beta R(I_i,I_r)+\gamma D(I_r)+\alpha C(H_r,H_t)$</p>
+<ul>
+<li>$R(\cdot)$ 是一個reconstruct的term用來保存input content的細節</li>
+<li>reconstruct的計算方式是使用L1 norm來計算input和recolor圖片的微分距離</li>
+<li>ReHistoGAN有三大目標
+<ol>
+<li>與目標histogram有相近的顏色分佈</li>
+<li>生成的結果要真實</li>
+<li>與input image的content要一樣</li>
+</ol>
+</li>
+</ul>
+<h1 id="3-results-and-discussion">3. Results and Discussion</h1>
+<h1 id="4-conclusion">4. Conclusion</h1>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/fuseformer-fusing-fine-grained-information-in-transformers-for-video-inpainting/"
+      ><span class="mr-1.5">←</span><span></span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/"
+      ><span></span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://muxi1998.github.io/Paper-Blog/">My Paper note site</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

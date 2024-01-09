@@ -1,0 +1,824 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields - My Paper note site</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
+過去解法
+研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
+多數研究都專注於2D空間，而忘記我們的世界是3D空間 只有少數的研究著重於場景的構成性質(c nature of scenes) 目前僅能在單個物件場景下才能有較好結果 背景過於複雜或逼真，會導致模型的效果不穩定 提出方法
+讓模型基於一個組合式的3D場景表示來生成物件，來達到圖片合成的可控性。 用神經特徵域來描述場景可以幫助對多物件的解耦合(物件的形狀或外觀) 不需要額外的監督即可透過unstructured和unposed的圖片集合來訓練整個網路 講此3D場景表示法與神經渲染管道結合，可以生成快速且逼真的圖像合成模型 達到成果
+能夠將圖片中的物件個別的解耦合出來，並對該物件進行平移或旋轉，改變相機視角
+1. Introduction 前情提要 生成和操控逼真的圖像內容是電腦視覺領域一直在努力的目標 若要處理3D資訊，會花費大量硬體資源，及人力創建 GAN在近期促進高度逼真圖像合成的進步，可以合成1024*1024高畫質的圖片合成 合成逼真的2D圖片並非唯一目標，對於合成過程也要有簡單、一致的控制方法 許多方法研究如何在未明確監督下，從數據中的學習解耦表示 解耦合的解釋各式各樣，通常是指控制感興趣的屬性(物件形狀、大小、姿勢)，且不影響其他屬性 大多數的方法都沒有考慮到場景的組合性質，都在2D圖片中操作，而忘記我們的世界是3D空間 會導致糾纏的控制機制不是內建的，而是後來才在潛在空間中發現的 在許多應用場景中，3D的合成是很關鍵的，能達到更細緻的合成結果，因此有些研究開始著重於在3D空間上的操作 voxels primitives radiance fields Contribution 提出GIRAFFE，從原始非結構化圖像集訓練出一個可控且逼真的場景生成方法
+提出兩個主要見解：
+將3D場景表示直接合併到生成模型中，可以得到一個更可控的圖像合成 將3D表示法與神經渲染管道相結合，可以實現更快的推理，與生成更逼真的圖像 將場景視為一連串的神經特徵場的組合
+將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
+2. Related work GAN-based Image Synthesis 目前情況
+已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變" />
+  <meta name="author" content="My Paper note site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://muxi1998.github.io/Paper-Blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://muxi1998.github.io/Paper-Blog/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://muxi1998.github.io/Paper-Blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://muxi1998.github.io/Paper-Blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://muxi1998.github.io/Paper-Blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields">
+<meta itemprop="description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
+過去解法
+研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
+多數研究都專注於2D空間，而忘記我們的世界是3D空間 只有少數的研究著重於場景的構成性質(c nature of scenes) 目前僅能在單個物件場景下才能有較好結果 背景過於複雜或逼真，會導致模型的效果不穩定 提出方法
+讓模型基於一個組合式的3D場景表示來生成物件，來達到圖片合成的可控性。 用神經特徵域來描述場景可以幫助對多物件的解耦合(物件的形狀或外觀) 不需要額外的監督即可透過unstructured和unposed的圖片集合來訓練整個網路 講此3D場景表示法與神經渲染管道結合，可以生成快速且逼真的圖像合成模型 達到成果
+能夠將圖片中的物件個別的解耦合出來，並對該物件進行平移或旋轉，改變相機視角
+1. Introduction 前情提要 生成和操控逼真的圖像內容是電腦視覺領域一直在努力的目標 若要處理3D資訊，會花費大量硬體資源，及人力創建 GAN在近期促進高度逼真圖像合成的進步，可以合成1024*1024高畫質的圖片合成 合成逼真的2D圖片並非唯一目標，對於合成過程也要有簡單、一致的控制方法 許多方法研究如何在未明確監督下，從數據中的學習解耦表示 解耦合的解釋各式各樣，通常是指控制感興趣的屬性(物件形狀、大小、姿勢)，且不影響其他屬性 大多數的方法都沒有考慮到場景的組合性質，都在2D圖片中操作，而忘記我們的世界是3D空間 會導致糾纏的控制機制不是內建的，而是後來才在潛在空間中發現的 在許多應用場景中，3D的合成是很關鍵的，能達到更細緻的合成結果，因此有些研究開始著重於在3D空間上的操作 voxels primitives radiance fields Contribution 提出GIRAFFE，從原始非結構化圖像集訓練出一個可控且逼真的場景生成方法
+提出兩個主要見解：
+將3D場景表示直接合併到生成模型中，可以得到一個更可控的圖像合成 將3D表示法與神經渲染管道相結合，可以實現更快的推理，與生成更逼真的圖像 將場景視為一連串的神經特徵場的組合
+將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
+2. Related work GAN-based Image Synthesis 目前情況
+已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變"><meta itemprop="datePublished" content="2024-01-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-01-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="351">
+<meta itemprop="keywords" content="" />
+  
+  <meta property="og:title" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields" />
+<meta property="og:description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
+過去解法
+研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
+多數研究都專注於2D空間，而忘記我們的世界是3D空間 只有少數的研究著重於場景的構成性質(c nature of scenes) 目前僅能在單個物件場景下才能有較好結果 背景過於複雜或逼真，會導致模型的效果不穩定 提出方法
+讓模型基於一個組合式的3D場景表示來生成物件，來達到圖片合成的可控性。 用神經特徵域來描述場景可以幫助對多物件的解耦合(物件的形狀或外觀) 不需要額外的監督即可透過unstructured和unposed的圖片集合來訓練整個網路 講此3D場景表示法與神經渲染管道結合，可以生成快速且逼真的圖像合成模型 達到成果
+能夠將圖片中的物件個別的解耦合出來，並對該物件進行平移或旋轉，改變相機視角
+1. Introduction 前情提要 生成和操控逼真的圖像內容是電腦視覺領域一直在努力的目標 若要處理3D資訊，會花費大量硬體資源，及人力創建 GAN在近期促進高度逼真圖像合成的進步，可以合成1024*1024高畫質的圖片合成 合成逼真的2D圖片並非唯一目標，對於合成過程也要有簡單、一致的控制方法 許多方法研究如何在未明確監督下，從數據中的學習解耦表示 解耦合的解釋各式各樣，通常是指控制感興趣的屬性(物件形狀、大小、姿勢)，且不影響其他屬性 大多數的方法都沒有考慮到場景的組合性質，都在2D圖片中操作，而忘記我們的世界是3D空間 會導致糾纏的控制機制不是內建的，而是後來才在潛在空間中發現的 在許多應用場景中，3D的合成是很關鍵的，能達到更細緻的合成結果，因此有些研究開始著重於在3D空間上的操作 voxels primitives radiance fields Contribution 提出GIRAFFE，從原始非結構化圖像集訓練出一個可控且逼真的場景生成方法
+提出兩個主要見解：
+將3D場景表示直接合併到生成模型中，可以得到一個更可控的圖像合成 將3D表示法與神經渲染管道相結合，可以實現更快的推理，與生成更逼真的圖像 將場景視為一連串的神經特徵場的組合
+將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
+2. Related work GAN-based Image Synthesis 目前情況
+已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/" /><meta property="article:section" content="paper_notes" />
+<meta property="article:published_time" content="2024-01-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-01-09T00:00:00+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"/>
+<meta name="twitter:description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
+過去解法
+研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
+多數研究都專注於2D空間，而忘記我們的世界是3D空間 只有少數的研究著重於場景的構成性質(c nature of scenes) 目前僅能在單個物件場景下才能有較好結果 背景過於複雜或逼真，會導致模型的效果不穩定 提出方法
+讓模型基於一個組合式的3D場景表示來生成物件，來達到圖片合成的可控性。 用神經特徵域來描述場景可以幫助對多物件的解耦合(物件的形狀或外觀) 不需要額外的監督即可透過unstructured和unposed的圖片集合來訓練整個網路 講此3D場景表示法與神經渲染管道結合，可以生成快速且逼真的圖像合成模型 達到成果
+能夠將圖片中的物件個別的解耦合出來，並對該物件進行平移或旋轉，改變相機視角
+1. Introduction 前情提要 生成和操控逼真的圖像內容是電腦視覺領域一直在努力的目標 若要處理3D資訊，會花費大量硬體資源，及人力創建 GAN在近期促進高度逼真圖像合成的進步，可以合成1024*1024高畫質的圖片合成 合成逼真的2D圖片並非唯一目標，對於合成過程也要有簡單、一致的控制方法 許多方法研究如何在未明確監督下，從數據中的學習解耦表示 解耦合的解釋各式各樣，通常是指控制感興趣的屬性(物件形狀、大小、姿勢)，且不影響其他屬性 大多數的方法都沒有考慮到場景的組合性質，都在2D圖片中操作，而忘記我們的世界是3D空間 會導致糾纏的控制機制不是內建的，而是後來才在潛在空間中發現的 在許多應用場景中，3D的合成是很關鍵的，能達到更細緻的合成結果，因此有些研究開始著重於在3D空間上的操作 voxels primitives radiance fields Contribution 提出GIRAFFE，從原始非結構化圖像集訓練出一個可控且逼真的場景生成方法
+提出兩個主要見解：
+將3D場景表示直接合併到生成模型中，可以得到一個更可控的圖像合成 將3D表示法與神經渲染管道相結合，可以實現更快的推理，與生成更逼真的圖像 將場景視為一連串的神經特徵場的組合
+將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
+2. Related work GAN-based Image Synthesis 目前情況
+已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://muxi1998.github.io/Paper-Blog/"
+      >My Paper note site</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 9, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="giraffe-representing-scenes-as-compositional-generative-neural-feature-fields">GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1>
+<h1 id="abstract">Abstract</h1>
+<p><strong>問題情境</strong></p>
+<p>除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的</p>
+<p><strong>過去解法</strong></p>
+<ul>
+<li>研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性</li>
+</ul>
+<p><strong>問題發現</strong></p>
+<ul>
+<li>多數研究都專注於2D空間，而忘記我們的世界是3D空間</li>
+<li>只有少數的研究著重於場景的構成性質(c nature of scenes)</li>
+<li>目前僅能在單個物件場景下才能有較好結果</li>
+<li>背景過於複雜或逼真，會導致模型的效果不穩定</li>
+</ul>
+<p><strong>提出方法</strong></p>
+<ul>
+<li>讓模型基於一個組合式的3D場景表示來生成物件，來達到圖片合成的可控性。
+<ul>
+<li>用神經特徵域來描述場景可以幫助對多物件的解耦合(物件的形狀或外觀)</li>
+</ul>
+</li>
+<li>不需要額外的監督即可透過unstructured和unposed的圖片集合來訓練整個網路</li>
+<li>講此3D場景表示法與神經渲染管道結合，可以生成快速且逼真的圖像合成模型</li>
+</ul>
+<p><strong>達到成果</strong></p>
+<p>能夠將圖片中的物件個別的解耦合出來，並對該物件進行平移或旋轉，改變相機視角</p>
+<h1 id="1-introduction">1. Introduction</h1>
+<h3 id="前情提要">前情提要</h3>
+<ul>
+<li>生成和操控逼真的圖像內容是電腦視覺領域一直在努力的目標
+<ul>
+<li>若要處理3D資訊，會花費大量硬體資源，及人力創建</li>
+<li>GAN在近期促進高度逼真圖像合成的進步，可以合成1024*1024高畫質的圖片合成</li>
+</ul>
+</li>
+<li>合成逼真的2D圖片並非唯一目標，對於合成過程也要有<strong>簡單</strong>、<strong>一致</strong>的控制方法
+<ul>
+<li>許多方法研究如何在未明確監督下，從數據中的學習解耦表示</li>
+</ul>
+</li>
+<li>解耦合的解釋各式各樣，通常是指控制感興趣的屬性(物件形狀、大小、姿勢)，且不影響其他屬性</li>
+<li>大多數的方法都沒有考慮到場景的組合性質，都在2D圖片中操作，而忘記我們的世界是3D空間
+<ul>
+<li>會導致糾纏的控制機制不是內建的，而是後來才在潛在空間中發現的</li>
+</ul>
+</li>
+<li>在許多應用場景中，3D的合成是很關鍵的，能達到更細緻的合成結果，因此有些研究開始著重於在3D空間上的操作
+<ul>
+<li>voxels</li>
+<li>primitives</li>
+<li>radiance fields</li>
+</ul>
+</li>
+</ul>
+<h3 id="contribution">Contribution</h3>
+<ul>
+<li>
+<p>提出GIRAFFE，從原始非結構化圖像集訓練出一個可控且逼真的場景生成方法</p>
+</li>
+<li>
+<p>提出兩個主要見解：</p>
+<ul>
+<li>將3D場景表示直接合併到生成模型中，可以得到一個更可控的圖像合成</li>
+<li>將3D表示法與神經渲染管道相結合，可以實現更快的推理，與生成更逼真的圖像</li>
+</ul>
+</li>
+<li>
+<p>將場景視為一連串的神經特徵場的組合</p>
+<ul>
+<li>將場景<a href="https://zh.wikipedia.org/wiki/%E7%AB%8B%E4%BD%93%E6%B8%B2%E6%9F%93">體積渲染</a>到一個較低畫素的特徵圖片</li>
+</ul>
+</li>
+<li>
+<p>透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖</p>
+</li>
+</ul>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-25_%E4%B8%8B%E5%8D%8811.42.43.png" alt="截圖 2022-01-25 下午11.42.43.png"></p>
+<h1 id="2-related-work">2. Related work</h1>
+<h3 id="gan-based-image-synthesis">GAN-based Image Synthesis</h3>
+<p><strong>目前情況</strong></p>
+<ul>
+<li>已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成</li>
+<li>多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合
+<ul>
+<li>修改訓練目標(training objective)</li>
+<li>改變網路架構</li>
+<li>研究潛在空間</li>
+</ul>
+</li>
+</ul>
+<p><strong>遇到挑戰</strong></p>
+<ul>
+<li>傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制</li>
+</ul>
+<p><strong>創新改變</strong></p>
+<ul>
+<li>撇開在2D空間的思維，將所有運算轉成在3D空間進行</li>
+<li>發現能夠達到更好的解耦合且更可控的合成</li>
+</ul>
+<h3 id="implicit-functions">Implicit Functions</h3>
+<p><strong>目前情況</strong></p>
+<ul>
+<li>重塑3D幾何結構，目前也使用重構場景</li>
+<li>傳統3D的重構是需要大量的人力監督來完成，因此有人提出微分渲染</li>
+<li>有人提出重要的NeRFs，可以達到在複雜場景下仍能以不同視角的合成
+<ul>
+<li>隱涵神經網路模型</li>
+<li>體渲染技術</li>
+</ul>
+</li>
+</ul>
+<p><strong>遇到挑戰</strong></p>
+<ul>
+<li>大部分所討論的模型方法都還是需要大量不同視角的訓練資料才能完成</li>
+</ul>
+<p><strong>創新改變</strong></p>
+<ul>
+<li>使用NeRFs來表示object-level的東西</li>
+<li>可使用非結構化的資料集來訓練生成模型，並行對該場景進行逼真且可控的生成</li>
+</ul>
+<h3 id="3d-aware-image-synthesis">3D-Aware Image Synthesis</h3>
+<p><strong>目前情況</strong></p>
+<ul>
+<li>許多研究在思考如何將3D表示法當作歸納偏置加進生成模型</li>
+<li>有人提出Generative Neural Radiances Fields (GRAF)
+<ul>
+<li>在高解析度的圖片中可以控制合成</li>
+<li>僅能使用單一物件</li>
+<li>當場景太複雜或近似於現實，效果會變差</li>
+</ul>
+</li>
+</ul>
+<p><strong>遇到挑戰</strong></p>
+<ul>
+<li>使用監督式方法來達到</li>
+<li>若要處理圖片中的多物件時，會需要額外的監督，而此方法在實際世界中是不實際的</li>
+</ul>
+<p><strong>創新改變</strong></p>
+<ul>
+<li>只要使用raw data，不用額外監督處理即可訓練</li>
+<li>將3D表示法融合進GRAF中
+<ul>
+<li>可以同時處理多物件</li>
+</ul>
+</li>
+<li>加入神經渲染管道
+<ul>
+<li>模型可以處理更複雜且真實的資料</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-method">3. Method</h1>
+<p><strong>目標</strong></p>
+<ul>
+<li>在不給予額外監督的條件下，使用raw data即可訓練出一個可控的圖片合成模型</li>
+</ul>
+<p><strong>主要元素</strong></p>
+<ul>
+<li>將單個對象分別建模為神經特徵場(Neural feature field)</li>
+<li>將上述的神經特徵場作為額外的屬性，來合成來自多個單獨對象的場景</li>
+</ul>
+<p><strong>其他方法研究</strong></p>
+<ul>
+<li>探索了體積和神經渲染技術的有效組合</li>
+<li>討論如何用原始圖像集合中訓練我們的模型</li>
+</ul>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-26_%E4%B8%8B%E5%8D%884.22.39.png" alt="截圖 2022-01-26 下午4.22.39.png"></p>
+<h2 id="31-objects-as-neural-feature-fields">3.1. <strong>Objects as Neural Feature Fields</strong></h2>
+<h3 id="neural-radiance-fields">Neural Radiance fields</h3>
+<ul>
+<li>
+<p>透過連續函式$f$，將3D點$x\in \mathbb{R}^3$和視角$d\in\mathbb{S}^2$映射到volume density$\sigma\in\mathbb{R}^+$以及RGB顏色$c\in\mathbb{R}^3$</p>
+</li>
+<li>
+<p>映射公式如下</p>
+<ul>
+<li>$f_{\theta}:\mathbb{R}^{L_X}\times\mathbb{R}^{L_d}\rightarrow\mathbb{R}^+\times\mathbb{R}^3$</li>
+<li>$(\gamma(x),\gamma(d))\mapsto(\sigma,c)$</li>
+<li>$\theta$為網路參數，$L_x, L_d$經過positional encoding後輸出的維度</li>
+</ul>
+</li>
+<li>
+<p>並非直接將$x, d$直接丟進輻射域轉換函數$f$，而是要先進行一個低維至高維空間的轉換（positional encoding），用來促使位置和視角輸入能傳達更多資訊</p>
+<ul>
+<li>
+<p>positional encoding是預先定義好的</p>
+</li>
+<li>
+<p>positional encoding函式如下</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-27_%E4%B8%8A%E5%8D%881.39.21.png" alt="截圖 2022-01-27 上午1.39.21.png"></p>
+</li>
+<li>
+<p>使用positional encoding所帶來的效果</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-27_%E4%B8%8A%E5%8D%881.40.50.png" alt="截圖 2022-01-27 上午1.40.50.png"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>透過MLP來建構$f$</p>
+</li>
+</ul>
+<h3 id="generative-neural--feature-fields">Generative Neural  Feature Fields</h3>
+<ul>
+<li>
+<p>在NeRFs此篇論文中是將模型的塑造是基於許多多角度且單一場景的資料集所建構</p>
+</li>
+<li>
+<p>GRAF則是NeRFs加上GAN模型，使得訓練資料不必是特定角度</p>
+<ul>
+<li>
+<p>為了讓模型不受資料集限制，需要對物件的形狀外觀進行encode，並且使用shape和apperance的latent code來限制MLP</p>
+</li>
+<li>
+<p>$z_s,z_a \sim N(0,I)$</p>
+</li>
+<li>
+<p>公式如下</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-27_%E4%B8%8A%E5%8D%881.50.38.png" alt="截圖 2022-01-27 上午1.50.38.png"></p>
+</li>
+<li>
+<p>$M_s,M_a$為shape和appearance經過encode出的維度</p>
+</li>
+</ul>
+</li>
+<li>
+<p>此篇論文稍微改變GRAF的公式，把原本三維的顏色輸出$c$改成$M_f-$維的特徵$f$，並用以下公式來表達物件的Generative Neural Feature Fields</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-01-27_%E4%B8%8A%E5%8D%881.55.58.png" alt="截圖 2022-01-27 上午1.55.58.png"></p>
+</li>
+</ul>
+<h3 id="object-representation">Object Representation</h3>
+<ul>
+<li>上述的方法都是過去研究中，一個GRAF模型只能適用於一個場景中的單一物件，但此篇論文的目標是<strong>個別控制</strong>各個物件的
+<ul>
+<li>姿勢</li>
+<li>形狀</li>
+<li>外觀顏色</li>
+</ul>
+</li>
+<li>因此此篇論文將各個物件都分別用一個feature field表示，並同時加入affine transformation的資訊
+<ul>
+<li>$T={s,t,R}$</li>
+<li>$s,t\in \mathbb{R}^3$
+<ul>
+<li>$s$: scale放大倍數</li>
+<li>$t$: tranlation平移參數</li>
+</ul>
+</li>
+<li>$R\in SO(3)$ 為旋轉矩陣</li>
+</ul>
+</li>
+<li>由上述參數可以透過以下公式將物件的每個點在場景中進行變換
+<ul>
+<li>$k(x)=R\ \cdot\ \left [    \begin{array}{cc}
+s_1 &amp;  &amp; \
+&amp; s_2 &amp; \
+&amp; &amp; s_3
+\end{array}
+\right ]\cdot x+t$</li>
+<li>$x$ 為一個3D的點</li>
+</ul>
+</li>
+</ul>
+<h2 id="32-scene-compositions"><strong>3.2. Scene Compositions</strong></h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>依據資料集特性分成兩種情況</p>
+<ul>
+<li>N是固定的
+<ul>
+<li>在該資料集中，每張照片中的實體適量都是一樣的</li>
+</ul>
+</li>
+<li>N是可變動的
+<ul>
+<li>在該資料集中，每張照片的實體數目可能不一樣</li>
+</ul>
+</li>
+<li>第N個實體為背景本身，但該物體不會被放大或平移（固定不動的實體）</li>
+</ul>
+</li>
+<li>
+<p>Composition Operator</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>單一個實體的特徵場$h^i_{\theta_i}$會由一個給定的3D點$x$和視角$d$，預測出一個密度$\sigma_i\in \mathbb{R}^+$和一個特徵vector$f_i\in \mathbb{R}^{M_f}$</li>
+<li>$C(x,d)=(\sigma, \frac{1}{\sigma}\sum^N_{i=1}\sigma_if_i)$, where $\sigma=\sum^N_{i=1}\sigma_i$</li>
+<li>此運算方式簡單直覺且可以計算梯度</li>
+</ul>
+</li>
+</ul>
+<h2 id="33-scene-rendering"><strong>3.3. Scene Rendering</strong></h2>
+<ul>
+<li>
+<p>3D體積渲染</p>
+<ul>
+<li>給定一個相機視角（影響光線）的射線$d$和$N_s$個採樣點得到${x_j}^{N_s}_{j=1}$，$x$為三維空間上的一點</li>
+<li>將 $d$ 和 ${x_s}^{N_s}_{j=1}$作為參數傳入合成運算子$C(\cdot)$，得到各採樣點對應的密度和特徵向量
+<ul>
+<li>$<strong>(\sigma_j,f_j)=C(x_j,d)</strong>$</li>
+</ul>
+</li>
+<li>體積渲染運算子將該射線上的量合成為該pixel最終的特徵向量 f
+<ul>
+<li>$<strong>\pi_{vol}:(\mathbb{R}^+\times \mathbb{R}^{M_f})^{N_s}\rightarrow \mathbb{R}^{M_f}, { \sigma_j, f_j }^{N_s}_{j=1}\mapsto f</strong>$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2D神經渲染</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>2D神經渲染運算子
+<ul>
+<li>$\pi^{neural}_\theta:\mathbb{R}^{H_V\times W_V\times M_f}\rightarrow\mathbb{R}^{H\times W\times 3}$</li>
+<li>3D體積渲染後 $I_V\in\mathbb{R}^{H_V\times W_V\times M_f}$</li>
+<li>2D神經渲染後 $\hat{I}\in \mathbb{R}^{H\times W\times 3}$</li>
+</ul>
+</li>
+</ul>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-12_%E4%B8%8A%E5%8D%8812.29.24.png" alt="截圖 2022-02-12 上午12.29.24.png"></p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-12_%E4%B8%8A%E5%8D%8812.30.11.png" alt="截圖 2022-02-12 上午12.30.11.png"></p>
+</li>
+</ul>
+<h2 id="34-training"><strong>3.4. Training</strong></h2>
+<ul>
+<li>生成器</li>
+<li>判別</li>
+<li>訓練過程</li>
+<li>損失函數</li>
+</ul>
+<h2 id="35-implementation-details"><strong>3.5. Implementation Details</strong></h2>
+<h1 id="4-experiments"><strong>4. Experiments</strong></h1>
+<ul>
+<li>
+<p>資料集</p>
+<ul>
+<li>
+<p>單一物件</p>
+<ul>
+<li>Chairs</li>
+<li>Cats</li>
+<li>CelebA</li>
+<li>CelebA-HQ</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>更複雜、符合現實的單一物件資料集</p>
+<ul>
+<li>CompCars</li>
+<li>LSUN Churches</li>
+<li>FFHQ</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>多物件資料集</p>
+<ul>
+<li>
+<p>執行Clevr-N來製造2~5個物件的圖片</p>
+<p><img src="./GIRAFFE/teaser.jpg" alt="teaser.jpg"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>比較基準</p>
+<ul>
+<li>
+<p>voxel-based 基於體素的GAN</p>
+<ol>
+<li>PlatonicGAN</li>
+<li>BlockGAN</li>
+<li>HoloGAN</li>
+</ol>
+<p><img src="./GIRAFFE/v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png" alt="v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png"></p>
+<p><img src="./GIRAFFE/v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg" alt="v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg"></p>
+</li>
+<li>
+<p>radiance field-based</p>
+<ul>
+<li>GRAF</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>評分機制</p>
+<ul>
+<li>Frechet Inception Distance (FID)</li>
+<li>20,000真假樣本來計算FID</li>
+</ul>
+</li>
+</ul>
+<h2 id="41-controllable-scene-generation"><strong>4.1. Controllable Scene Generation</strong></h2>
+<ul>
+<li>
+<p>Disentangled Scene Generation</p>
+<ul>
+<li>
+<p>著重於物件是否能從背景中被解開</p>
+<ul>
+<li>將合成運算子當作一個加法運算</li>
+<li>對個別物件先進行渲染，並套上alpha值</li>
+</ul>
+</li>
+<li>
+<p>實驗發現模型在非監督式學習下可以將物件解耦合，且生成合理的背景</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.15.10.png" alt="截圖 2022-02-13 下午2.15.10.png"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Controllable Scene Generation</p>
+<ul>
+<li>
+<p>由於前實驗已證明物件可以成功地被解耦合，則現在著重的會是物件是否能被單獨的旋轉平疑惑改變外觀形狀</p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.24.30.png" alt="截圖 2022-02-13 下午2.24.30.png"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Generalize Beyond Training Data</p>
+<ul>
+<li>學習式的合成場景表示法可以讓模型更泛化，而非受限於資料集</li>
+<li>例如可以對物件逕行任意的平移或增加更多物件在一個場景中</li>
+</ul>
+</li>
+</ul>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.32.27.png" alt="截圖 2022-02-13 下午2.32.27.png"></p>
+<h2 id="42-comparison-to-baseline-methods"><strong>4.2. Comparison to Baseline Methods</strong></h2>
+<ul>
+<li>在像素$64^2$和$256^2$時，此方法的FID分數都是最佳的</li>
+<li>儘管其他方法在有限的資料集複雜度下都能對圖片合成進行控制，但實驗發現當場景更為複雜時，其他方法較為不穩定，而此論文方法得以將個別物件從背景解耦合出來，因此物件和背景都能各自獨立處理</li>
+</ul>
+<hr>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.29.43.png" alt="截圖 2022-02-13 下午2.29.43.png"></p>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.29.55.png" alt="截圖 2022-02-13 下午2.29.55.png"></p>
+<h2 id="43-ablation-studies"><strong>4.3. Ablation Studies</strong></h2>
+<h2 id="44-limitations"><strong>4.4. Limitations</strong></h2>
+<ul>
+<li>
+<p>資料集偏差</p>
+<ul>
+<li>從celebA-HQ資料集發現此資料集內圖片中的眼睛幾乎都是看向鏡頭，而和面向無關，因此在旋轉時會發現眼鏡並沒有隨著臉部的面向不同而感變，而是固定看向鏡頭</li>
+</ul>
+<p><img src="./GIRAFFE/%E6%88%AA%E5%9C%96_2022-02-13_%E4%B8%8B%E5%8D%882.51.39.png" alt="截圖 2022-02-13 下午2.51.39.png"></p>
+</li>
+<li>
+<p>Object Transformation Distribution</p>
+<ul>
+<li>有時仍會發生解糾纏失敗，因為相機姿態假設的均勻分布和物件級轉換和真實分布不同</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-conclusion"><strong>5. Conclusion</strong></h1>
+<ul>
+<li>提出GIRAFFE，先進的可控制圖片合成</li>
+<li>主要想法貢獻
+<ul>
+<li>將合成的3D場景表示法融合進傳統的生成模型中</li>
+<li>將場景以物件的神經特徵場表示法合成</li>
+<li>在非監督下將獨立的物件從背景中解糾纏</li>
+<li>初步進行3D合成後再使用2D神經渲染方法來加速圖片合成</li>
+</ul>
+</li>
+<li>未來改進
+<ul>
+<li>思考相機姿態的分佈如何從資料集中進行學習</li>
+<li>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/blip/"
+      ><span>BLIP</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://muxi1998.github.io/Paper-Blog/">My Paper note site</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

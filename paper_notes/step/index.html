@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title> - My Paper note site</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
+Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1." />
+  <meta name="author" content="My Paper note site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://muxi1998.github.io/Paper-Blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://muxi1998.github.io/Paper-Blog/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://muxi1998.github.io/Paper-Blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://muxi1998.github.io/Paper-Blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://muxi1998.github.io/Paper-Blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="">
+<meta itemprop="description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
+Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1.">
+
+<meta itemprop="wordCount" content="529">
+<meta itemprop="keywords" content="" />
+  
+  <meta property="og:title" content="" />
+<meta property="og:description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
+Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/step/" /><meta property="article:section" content="paper_notes" />
+
+
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
+Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://muxi1998.github.io/Paper-Blog/paper_notes/step/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://muxi1998.github.io/Paper-Blog/"
+      >My Paper note site</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5"></h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="style-based-encoder-pre-training-for-multi-modal-image-synthesis">Style-based Encoder Pre-training for Multi-modal Image Synthesis</h1>
+<h1 id="main-idea">Main idea</h1>
+<h2 id="scheme">Scheme</h2>
+<p>對圖片作一對多的樣態轉換</p>
+<h2 id="problems-motivation">Problems (motivation)</h2>
+<ul>
+<li>為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法）</li>
+<li>Mode collapse問題</li>
+<li>遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集）</li>
+</ul>
+<h2 id="relative-work">Relative work</h2>
+<ul>
+<li>VAE</li>
+<li>BicycleGAN</li>
+<li>MUNIT-p</li>
+</ul>
+<h2 id="method">Method</h2>
+<ul>
+<li>預訓練一個不錯的風格encoder來將輸入的風格encode成latent code</li>
+<li>調整並尋找適合的loss function (loss terms越少越好)</li>
+</ul>
+<h2 id="result">Result</h2>
+<ul>
+<li>合成的結果最好</li>
+<li>模型成效不依賴目標訓練資料集（泛用度更廣）</li>
+<li>更有效更有能力表達風格特徵（latent code），對風格的保真度提高</li>
+<li>簡化訓練目標並加快訓練速度</li>
+</ul>
+<hr>
+<h1 id="abstract">Abstract</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="過去i2i遇到的問題">過去I2I遇到的問題</h3>
+<ul>
+<li>輸入輸出的一對多對應關係</li>
+<li>Mode collapses problem</li>
+</ul>
+<h3 id="過去解決方法">過去解決方法</h3>
+<ul>
+<li>針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法</li>
+</ul>
+<h3 id="本論文的解決方法">本論文的解決方法</h3>
+<ul>
+<li>強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練</li>
+</ul>
+<h3 id="本論文的方法概念">本論文的方法概念</h3>
+<ul>
+<li>將 I2I 轉換的行為分成兩個工作
+<ol>
+<li>pre-trained generic style encoder ( proxy task )
+學習圖片的嵌入資訊
+任意domain的image → 低維度的風格空間資訊</li>
+<li>圖片合成</li>
+</ol>
+</li>
+</ul>
+<h3 id="本論文的優勢">本論文的優勢</h3>
+<ol>
+<li>模型不依賴目標訓練資料集（泛用度更廣）</li>
+<li>更有效更有能力表達空間特徵，對風格的保真度提高</li>
+<li>簡化訓練目標並加快訓練速度</li>
+<li>不同loss term對multi-modal I2I的影響</li>
+<li>提出VAEs的替代方案來對未受限制的空間特徵進行採樣</li>
+<li>跟六個對照組相比結果最好</li>
+</ol>
+<h1 id="1-introduction">1. Introduction</h1>
+<h3 id="image-to-image-i2i">Image-to-image (I2I)</h3>
+<ul>
+<li>是一個將圖片從一個domain轉到另外一個domain的任務
+e.g. 語意圖→場景、手繪稿→現實照片</li>
+<li>應用於許多使用場景
+e.g. 超解析度成像、著色、修補</li>
+</ul>
+<h3 id="i2i-的瓶頸">I2I 的瓶頸</h3>
+<ul>
+<li>
+<p>輸入A → 輸出B 通常都是 一對多
+$I_i^A\in A$  可以對應到domain $B$ 中的多個輸出
+e.g. 鞋子的手稿可以對應的不同顏色/風格的樣式</p>
+</li>
+<li>
+<p>因為I2I本身是一對一學習，因此若要指定output為某種特定型態則要再另外給一個input (指定轉換的mode)
+在訓練期間增加雜訊已經被證實為無效且可能造成mode collapse問題</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>BicycleGAN提出解決模式崩潰的方法</p>
+<ul>
+<li>訓練一個encoder $E$ 與 I2I翻譯的合成網路，來針對輸出理應該有的分佈進行學習encode並放到一個空間特徵向量 $$ $z$ 中
+有了latent vector $z$ 空間特徵向量 $z$ 就可以更明確的知道要選擇哪一個輸出結果當作目標（e.g. $z$ 會說是英國短毛貓、波斯貓、孟加拉貓&hellip;等哪一個）</li>
+<li>然後再透過原始輸入$A$和$z$進行圖片翻譯
+$G:(A,z)\rightarrow B$</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何變成unsupervised">如何變成unsupervised</h3>
+<ul>
+<li>cross-cycle consistency constraint</li>
+</ul>
+<h3 id="本論文的做法">本論文的做法</h3>
+<ul>
+<li>弱監督式學習預訓練策略
+encoder $E$ 加上 $I2I$ 的end-to-end training</li>
+<li>pre-training的優勢
+<ol>
+<li>更有能力對空間特徵進行表示法
+<ol>
+<li>可以抓到更細節的風格（大風格中還可以找到潛在的特殊風格）</li>
+<li>風格提取與轉換更有可信度</li>
+<li>更有能力對複雜風格的特徵進行表示</li>
+</ol>
+</li>
+<li>模型並不依賴訓練的目標資料集（通用性更高、適用於更多domain）</li>
+<li>透過更少的losses來簡化訓練目標，並提高訓練速度</li>
+<li>提高訓練穩定度和整體的品質與多樣性</li>
+</ol>
+</li>
+<li>不需要任何手動標籤（弱監督式學習）
+基於預訓練VGG所提供的training supervision</li>
+<li>參考包括標準的電腦視覺預訓練資料集（ImageNet）和非監督是學習的成果來進行finetuning (transfer learning)</li>
+<li>強調pre-training的重要性</li>
+</ul>
+<h3 id="本論文的貢獻">本論文的貢獻</h3>
+<ul>
+<li>提出預訓練encoder來學習低維度gram matrices的特徵，以提升multi-modal I2I翻譯的成效</li>
+<li>證明pre-trained latent embedding不必依賴訓練資料集就能達到通用化的效果</li>
+<li>提出不同loss對於multi-modal I2I翻譯網路的影響</li>
+<li>提出使用VAE做空間特徵取樣的替代方案</li>
+<li>本論文提出的方法在風格提取和轉換上都比起另外六個對照組好上許多</li>
+</ul>
+<h1 id="2-related-work">2. Related work</h1>
+<h3 id="deep-generative-models">Deep generative models</h3>
+<p>在過去的經驗中decoder會學習在一個已知的分佈(Gaussian)中隨機取樣，並將該樣本map到對應的output image</p>
+<ul>
+<li><strong>VAEs</strong>
+在latent distribution和output image間進行對射(bijection)</li>
+<li><strong>GANs</strong>
+將一個從Gaussian分佈取樣的random values直接映射到對應的image，並使用額外的discriminator加強生成image的真實性</li>
+</ul>
+<h3 id="conditional-image-synthesis">Conditional image synthesis</h3>
+<p>附加條件合成，在input多餵一個flag讓模型知道輸出應該是在哪個domain</p>
+<ul>
+<li>flag: 類別標籤、文字敘述</li>
+<li>cGANs</li>
+</ul>
+<h3 id="image-to-image-i2i-translation">Image-to-Image (I2I) translation</h3>
+<p>將A domain的圖片轉換成B domain的圖片</p>
+<ul>
+<li>inpainting、colorization、super-resolution、rendering(描寫)</li>
+</ul>
+<h3 id="multi-modal-i2i-translation">Multi-modal I2I translation</h3>
+<p>過去的I2I模型通常都是one-to-one mapping，而不能將一個input對應到多種不同的output mode</p>
+<ul>
+<li>BicycleGAN
+學習到的latent是對output domain和條件進行encode的vector</li>
+<li>BicycleGAN的加強
+不使用成對的訓練資料，而是使用cross-cycle consistency constraint來限制不同domain</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h1 id="3-approach">3. Approach</h1>
+<h2 id="31-weakly-supervised-encoder-pre-training">3.1 Weakly-supervised encoder pre-training</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>目標圖片 $I_i^B\in B$ 其latent style code為 $z_i=E(I_i^B)$</p>
+<ul>
+<li>相似風格的圖片應該有相近的 latent space</li>
+<li>相異風格的圖片應該有迥異的latent space</li>
+</ul>
+<h3 id="如何判斷風格是否相似">如何判斷風格是否相似？</h3>
+<ul>
+<li>使用style loss來作為距離矩陣來判斷兩張風格是否相近，公式如下
+$L_{style}(\vec{a},\vec{x})=\sum_{l=0}^Lw_lE_l$</li>
+</ul>
+<p>$E_l=\frac{1}{4N_l^2M_l^2}\sum_{i,j}(G_{ij}^l-A_{ij}^l)^2$</p>
+<h3 id="如何訓練style-encoder">如何訓練style encoder</h3>
+<ul>
+<li>
+<p>使用triplet輸入 $(I_a,I_p,I_n)$, $I_a$和$I_p$  風格相似而$I_a$和$I_n$ 風格不同(使用style loss來評斷風格是否相似)</p>
+</li>
+<li>
+<p>訓練目標函式</p>
+<p>$\mathcal{L}^{tri}(I_a,I_p,I_n)=\max([\parallel z_a-z_p\parallel^2-\parallel z_a-z_n\parallel^2+\alpha],0)+\lambda \mathcal{L}^{reg}(z_a,z_p,z_n)$</p>
+<p>$\mathcal{L^{reg}}(z_a,z_p,z_n)$是L2 regression $\lambda\sum_{i=1}^dw_i^2$ 可以避免overfitting並增加泛用性</p>
+</li>
+<li>
+<p>triplet loss?</p>
+</li>
+</ul>
+<h3 id="怎麼選擇triplet">怎麼選擇triplet?</h3>
+<p>首先有個anchor image $I_a$並分別使用style loss計算在資料集中風格與$I_a$最接近的群$k_c$與最遠的群$k_f$並從此兩個最近最遠群中分別取樣出$I_p$和$I_n$</p>
+<p>為了避免異常風個的特例影響取樣，在選擇不同風格的群時會選擇最大的群，而選擇相似風個的群則是選擇最近的小群</p>
+<h2 id="32-generator-training">3.2 Generator training</h2>
+<p>當預訓練的風格提取encoder $E$ 訓練好後開始訓練generator，此時將$E$ 的參數fix</p>
+<ul>
+<li>目標風格圖$I_i^B$</li>
+<li>該目標圖的風格embedding為 $z_i=E(I_i^B)$</li>
+<li>將輸入圖連同目標風格一起放入generator中生成 $\hat{I_i^B}=G(I_i^A,z_i)$</li>
+<li>在使用以下loss function來衡量轉換後的風格是否與目標風格$B$接近，並使用此loss function進行finetune
+$\mathcal{L}^{img}(I_i^B,\hat{I_i^B})=\mathcal{L}<em>{cGAN}(I_i^B,\hat{I_i^B})+\lambda</em>{rec}\mathcal{L}_{rec}(I_i^B,\hat{I_i^B})$
+<ul>
+<li>$\mathcal{L}_{cGAN}$: Least Square GAN</li>
+<li>$\mathcal{L}_{rec}$: VGG-based perceptual loss</li>
+</ul>
+</li>
+</ul>
+<h3 id="風格取樣">風格取樣</h3>
+<ul>
+<li>**有目標風格圖：**如果有已知的目標風格圖，就能透過encoder來提取該風格的資訊$z$，並利用$z$來生成新的圖</li>
+<li>**無目標風格圖：**但如果沒有已知的目標風格圖，而是想同latent distribution中隨機取樣並直接轉換，則需要有個已知的latent distribution
+<ul>
+<li>
+<p>在latent vector中加入L2 regularization可以強制zero-mean embedding並限制latent space的變異性</p>
+</li>
+<li>
+<p>另外訓練一個mapper網路$\mathcal{M}$來將一個單位的高斯分佈映射到latent distribution 此做法可以在style encoder訓練玩且微調後進行後處理
+$\mathcal{M}$ 是使用nearest-neighbor based Implicit Maximum Likelihood Estimation (IMLE)來訓練
+$\mathcal{M}=\arg\min_{\tilde{\mathcal{M}}}\sum_i\parallel z_i-\tilde{\mathcal{M}}(e_i)\parallel_2^2$
+$e_i=\arg\min_{rj}\parallel z_i-\tilde{\mathcal{M}}(r_j)\parallel_2^2$
+${{r_j}}$是從unit Gaussian prior隨機取樣的集合</p>
+</li>
+<li>
+<p>為什麼要使用mapping network?</p>
+<ul>
+<li>
+<p>避免在假設的training data set distribution中sample到不好的image</p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.52.28.png" alt="截圖 2021-08-23 下午1.52.28.png"></p>
+</li>
+</ul>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.53.29.png" alt="截圖 2021-08-23 下午1.53.29.png"></p>
+<p><a href="https://www.researchgate.net/figure/A-schematic-diagram-of-generative-model-The-unit-Gaussian-distribution-is-mapped-to-a_fig3_339986932"></a></p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.56.56.png" alt="截圖 2021-08-23 下午1.56.56.png"></p>
+<p><a href="https://arxiv.org/pdf/1812.08985.pdf"></a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="33-generalizing-the-pre-training-stage">3.3 Generalizing the pre-training stage</h2>
+<p>從Neural Style Transfer提出的Gram matrices被證明能夠有效且可信來的抓取任意圖片的風格，隱含Gram matrices可以在大範圍的domain中準確的encode風格，並且不只是特定的風格</p>
+<p>引此在本論文中以Gram matrices為基礎，希望除了有優秀的風格特徵抓取能力，還要也在多個domain間有不錯的效果</p>
+<ul>
+<li>pre-training階段是讓模型具有泛用性
+讓模型真正學習認識style的特徵而非單純的將style區分cluster</li>
+<li>fine-tuning階段是讓模型對特定的target domain能更fit</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h1 id="4-experimental-evaluation">4. Experimental evaluation</h1>
+<h3 id="dataset">Dataset</h3>
+<ul>
+<li>Space Needle timelapse
+<ul>
+<li>2068對照片</li>
+<li>8280$\times$1080</li>
+<li>西雅圖3年的timelapse video</li>
+<li><a href="https://hackernoon.com/seattle-3-year-time-lapse-video-from-the-space-needle-9a9e76cfe8bf">https://hackernoon.com/seattle-3-year-time-lapse-video-from-the-space-needle-9a9e76cfe8bf</a></li>
+</ul>
+</li>
+<li>5個比較範例
+<ol>
+<li>標籤 → 圖片</li>
+<li>空拍圖 → 地圖</li>
+<li>edge圖 → 鞋子</li>
+<li>edge圖 → 包包</li>
+<li>晚上 → 早上</li>
+</ol>
+</li>
+</ul>
+<h3 id="baselines">Baselines</h3>
+<ul>
+<li>
+<p><strong>BicycleGAN v0 (原作者的source code)</strong></p>
+</li>
+<li>
+<p><strong>BicycleGAN v1 (論文作者使用BicycleGAN實作本論文提出的架構)</strong></p>
+</li>
+<li>
+<p><strong>MUNIT-p</strong></p>
+<ul>
+<li>應用其cross-cycle consistency constraint的概念</li>
+<li>訓練輸入是兩組資料 $(I_1^A,I_1^B)$，$(I_2^A,I_2^B)$</li>
+<li>算出1、2兩個風格的embedding $z_1=E(I_1^B)$，$z_2=E(I_2^B)$</li>
+<li>在來使用兩階段的cyclic reconstruction
+<ul>
+<li>Step1. 生成交換風格的圖
+$u=G(I_1^A,z_2)$，$v=G(I_2^A,z_1)$</li>
+<li>Step2. 在試圖從兩個新生成的圖各自抓取風格embedding，並再次生成圖片(結果理應和最原始的圖一樣)
+$\hat{z_2}=E(u)$，$\hat{z_1}=E(v)$
+$\hat{I_1^B}=G(I_1^A,\hat{z_1})$，$\hat{I_2^B}=G(I_2^A,\hat{z_2})$
+$\hat{I_1^B}$應和$I_1^B$ 越像越好 $\hat{I_2^B}$應和$I_2^B$ 越像越好</li>
+</ul>
+</li>
+</ul>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal//MUNIT.png" alt="MUNIT.png"></p>
+</li>
+</ul>
+<h2 id="41-image-reconstruction">4.1. Image reconstruction</h2>
+<h3 id="重構圖評分機制">重構圖評分機制</h3>
+<ul>
+<li>PSNR</li>
+<li>AlexNet-based LPIPS metrics 圖像感知相似度指標
+<ul>
+<li>使用深度特徵來衡量</li>
+</ul>
+</li>
+</ul>
+<h3 id="小結論">小結論</h3>
+<ul>
+<li>在本論文提出的架構中在第2階段(finetune前)就已達到大部分baseline的成果
+第2階段後(finetune完)就能有好許多的成果</li>
+<li>本論文提出的方法可以更好的重構目標風格圖</li>
+<li>若在模型中有使用VAE架構則會影響輸出的品質
+<ul>
+<li>VAE對於噪聲的寬容度較高，但連帶影響對較細節風格的特徵抓取</li>
+<li>VAE會學著忽略雜訊(把更細節的資訊忽略掉)</li>
+</ul>
+</li>
+<li>若將VAE從架構中移除可以更好的抓取風格特徵並且重構</li>
+</ul>
+<h2 id="42-style-transfer-and-sampling">4.2. Style transfer and sampling</h2>
+<p>從驗證集看到同個場景但不同氛圍的轉換（晴天、日落、霧霾）</p>
+<ul>
+<li>此論文提出的方法可以更細緻的轉換，而不只是光影變化</li>
+<li>隨機在latent distribution中採樣（也可以使用mapping$\mathcal{M}$）
+<ul>
+<li>
+<p>採樣的風格不只是單純只有顏色的差別，而是有清楚的天氣變化（cloudy、sunny）等等</p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-18_%E4%B8%8B%E5%8D%888.53.02.png" alt="截圖 2021-08-18 下午8.53.02.png"></p>
+</li>
+<li>
+<p>latent vector的小變化可能就控制某個變量（雲朵數量、空氣清楚程度）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="43-style-interpolation">4.3. Style interpolation</h2>
+<ul>
+<li>
+<p>在兩個特定場景（風格）的latent vector間進行取樣可以看到漸進式的變化</p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-18_%E4%B8%8B%E5%8D%888.56.08.png" alt="截圖 2021-08-18 下午8.56.08.png"></p>
+</li>
+</ul>
+<h2 id="44-pre-training-generalization">4.4. Pre-training generalization</h2>
+<h3 id="假設風格embedding通用">假設風格embedding通用</h3>
+<p>本論文作者表示，在Neural Style Transfer文獻中提出的風格矩陣在不同的input都是通用的，因此在本論文也假設從input中encode出該圖的embedding（latent vector）的做法也是可以通用在不同的input</p>
+<h3 id="驗證假設">驗證假設</h3>
+<p>在一個指定的目標資料集下，分別訓練generator $G$ 三次，其中這三次都是使用不同預訓練集訓練出的pre-train style encoder</p>
+<ul>
+<li>
+<p>Style encoder配置</p>
+<ol>
+<li>使用<strong>轉換後目標風格</strong>的同個資料集進行訓練</li>
+<li>類似於<strong>轉換後的目標風格但是為不同</strong>的資料集進行訓練</li>
+<li>使用完全不同風格的資料集進行訓練</li>
+</ol>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-18_%E4%B8%8B%E5%8D%889.04.27.png" alt="截圖 2021-08-18 下午9.04.27.png"></p>
+</li>
+<li>
+<p>結論</p>
+<ul>
+<li>使用不同的資料集來訓練style encoder的結果只有些微的差別
+因此使用哪一個資料進行style encoder的訓練並不是太重要（代表訓練出的style encoder有一定程度的泛用性）</li>
+<li>finetune後的結果都有更好一些</li>
+</ul>
+</li>
+</ul>
+<h2 id="45-ablative-study">4.5. Ablative study</h2>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.23.00.png" alt="截圖 2021-08-23 下午1.23.00.png"></p>
+<h3 id="各方法配置">各方法配置</h3>
+<ul>
+<li><strong>v1</strong>
+<ul>
+<li>Bicycle v1</li>
+<li>MUNIT-p</li>
+</ul>
+</li>
+<li><strong>v2</strong>
+<ul>
+<li>Bicycle v2: 移除VAE(變異數部分)</li>
+<li>MUNIT-p v2: 移除VAE(變異數部分)</li>
+</ul>
+</li>
+<li><strong>v3</strong>
+<ul>
+<li>Bicycle v3: 使用L2正則來取代KL loss</li>
+<li>MUNIT-p v3: 使用L2正則來取代KL loss</li>
+</ul>
+</li>
+<li><strong>本論文方法</strong>
+<ul>
+<li>Ours v1: 基於MUNIT-p v3再加上使用pre-trained embedings</li>
+<li>Ours v2: 移除cyclic reconstruction</li>
+<li>Ours v3: 移除random z sampling</li>
+<li>Ours v4: 移除L2正則</li>
+</ul>
+</li>
+</ul>
+<h3 id="小結論-1">小結論</h3>
+<ol>
+<li>移除VAE的圖片合成結果更好
+VAE的robust和latent space對於風格的表達力是一個tradeoff</li>
+<li>較少的loss terms效果更好（限制越少）</li>
+</ol>
+<h2 id="46-diversity-and-user-study">4.6. Diversity and user study</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>在100張驗證資料集下分別使用兩種配置</p>
+<ul>
+<li>
+<p>客觀評分</p>
+<ol>
+<li>隨機選擇16張image來當作style transfer的目標風格圖</li>
+<li>隨機選擇16組風格code(mapper network$\mathcal{M}$)</li>
+</ol>
+<p>分別將16個目標風格應用在100張驗證資料圖片中，並計算LPIPS的平均值</p>
+</li>
+<li>
+<p>主觀評分</p>
+<ul>
+<li>30位參與者</li>
+<li>每位參與者給予四張圖
+<ol>
+<li>鞋子鉛筆稿</li>
+<li>目標風格圖片</li>
+<li>兩張風格轉換後的輸出</li>
+</ol>
+</li>
+<li>使用者要選出哪一張輸出更為擬真，若皆為擬真則哪一張輸出的風格轉換的更為相似</li>
+<li>以Ours v4作為主要比較對象，分別與其他方法做比較</li>
+<li>Ours v2的User preference分數較低是因為有比較多的假影</li>
+</ul>
+</li>
+</ul>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.20.23.png" alt="截圖 2021-08-23 下午1.20.23.png"></p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-23_%E4%B8%8B%E5%8D%881.20.50.png" alt="截圖 2021-08-23 下午1.20.50.png"></p>
+<h2 id="47-visualizing-pre-trained-embeddings">4.7. Visualizing pre-trained embeddings</h2>
+<p>將latent space視覺化可以看到相近風格的圖片會被分在同的cluster中</p>
+<p><img src="./Style-based%20Encoder%20Pre-training%20for%20Multi-modal/%E6%88%AA%E5%9C%96_2021-08-20_%E4%B8%8B%E5%8D%888.19.32.png" alt="截圖 2021-08-20 下午8.19.32.png"></p>
+<h1 id="5-conclusion">5. Conclusion</h1>
+<ul>
+<li>在有多個domain轉換需求的應用下，通用程度非常的好</li>
+<li>因為loss function變得簡單，訓練更快也能更好的抓取風格特徵</li>
+<li>分別分析了各個loss term的意義</li>
+<li>指出VAE在多模態轉換應用時會面臨的瓶頸</li>
+</ul>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/self-attention-temporal-convolutional-network-for-long-term-daily-living-activity-detection/"
+      ><span class="mr-1.5">←</span><span></span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/"
+      ><span></span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://muxi1998.github.io/Paper-Blog/">My Paper note site</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

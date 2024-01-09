@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My Paper note site</title>
+    <link>https://muxi1998.github.io/Paper-Blog/post/</link>
+    <description>Recent content in Posts on My Paper note site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Jan 2024 21:08:49 +0800</lastBuildDate>
+    <atom:link href="https://muxi1998.github.io/Paper-Blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello Hugo</title>
+      <link>https://muxi1998.github.io/Paper-Blog/post/hello-hugo/</link>
+      <pubDate>Fri, 05 Jan 2024 21:08:49 +0800</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/post/hello-hugo/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

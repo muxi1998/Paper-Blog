@@ -1,0 +1,557 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>BLIP - My Paper note site</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構
+🕰️ 過去方法
+在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法
+針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果
+引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2." />
+  <meta name="author" content="My Paper note site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://muxi1998.github.io/Paper-Blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://muxi1998.github.io/Paper-Blog/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://muxi1998.github.io/Paper-Blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://muxi1998.github.io/Paper-Blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://muxi1998.github.io/Paper-Blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="BLIP">
+<meta itemprop="description" content="Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構
+🕰️ 過去方法
+在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法
+針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果
+引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2."><meta itemprop="datePublished" content="2024-01-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-01-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="524">
+<meta itemprop="keywords" content="" />
+  
+  <meta property="og:title" content="BLIP" />
+<meta property="og:description" content="Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構
+🕰️ 過去方法
+在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法
+針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果
+引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/blip/" /><meta property="article:section" content="paper_notes" />
+<meta property="article:published_time" content="2024-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-01-06T00:00:00+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="BLIP"/>
+<meta name="twitter:description" content="Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構
+🕰️ 過去方法
+在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法
+針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果
+引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://muxi1998.github.io/Paper-Blog/paper_notes/blip/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://muxi1998.github.io/Paper-Blog/"
+      >My Paper note site</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">BLIP</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 6, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="abstract">Abstract</h1>
+<ul>
+<li>目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練
+<ul>
+<li>網路上的data很大的可能存在noise</li>
+<li>此論文提出一個<strong>標題產生器</strong>和<strong>去噪器</strong>來處理網路資料集所存在的噪音問題</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-introduction">1. Introduction</h1>
+<p>🎯 <strong>目標：</strong> 提出一個更強大的VLP架構</p>
+<p>🕰️ <strong>過去方法</strong></p>
+<ul>
+<li>在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制
+<ul>
+<li>模型層面
+<ul>
+<li>針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型
+<ul>
+<li>生成任務（e.g. 文字生成）⇒ Encoder-Decoder</li>
+<li>理解任務（e.g. 檢索）⇒ Encoder</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>資料層面
+<ul>
+<li>過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>💡 <strong>本篇方法</strong></p>
+<ul>
+<li>針對上述提到的兩大層面問題進行研究
+<ul>
+<li>模型層面
+<ul>
+<li>提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED)
+<ul>
+<li>可以在後續應用在更多的下游任務中</li>
+<li>保持預訓練時的效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>資料層面
+<ul>
+<li>提出一個引導（Bootstrapping）方法來避免noisy image-text pair</li>
+<li>Finetune一個pre-trained MED成兩個子模組
+<ul>
+<li>Cap (Captioner) ⇒ 生成合成字幕</li>
+<li>Filt (Filter)⇒ 過濾掉noisy字幕</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>🔥 <strong>研究成果</strong></p>
+<ol>
+<li>引導字幕可以提升下游任務的效能，且字幕多樣性越高越好</li>
+<li>BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能</li>
+</ol>
+<h1 id="2-related-work">2. Related Work</h1>
+<h2 id="21-vision-language-pre-training">2.1 Vision-language Pre-training</h2>
+<ul>
+<li>過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出<strong>CapFilt</strong></li>
+<li>不同性質的任務背後的backbone會不同 ⇒ 提出<strong>多模態混合encoder-decoder</strong>
+<ul>
+<li>understanding-base tasks ⇒ encoder</li>
+<li>generation-base tasks ⇒ encoder-decoder</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-knowledge-distillation">2.2 Knowledge Distillation</h2>
+<ul>
+<li>CapFilt模組類似於student-teacher方法，Captioner透過生成產生字幕來學習語意，Filter透過過濾雜訊來學習語意</li>
+<li>CapFilt可以相輔相成</li>
+</ul>
+<h2 id="23-data-augmentation">2.3 Data Augmentation</h2>
+<ul>
+<li>語言任務中的DA(Data Augmentation)相較於vision tasks較為困難</li>
+<li>本篇研究展現了合成字幕對於大規模的vision-language pre-training的成效是不錯的</li>
+</ul>
+<h1 id="3-method">3. Method</h1>
+<h2 id="31-model-architecture">3.1 Model Architecture</h2>
+<p><strong>MED</strong> (Multimodal mixture encoder-decoder) 是一個multi-task modal，並可以提供以下<!-- raw HTML omitted --><strong>三種功能</strong><!-- raw HTML omitted --></p>
+<ol>
+<li>
+<p>Unimodal encoder</p>
+<ol>
+<li>
+<p>Image Encoder</p>
+<ul>
+<li>
+<p>Transformer is better than the object detection model in feature extraction propose</p>
+</li>
+<li>
+<!-- raw HTML omitted -->
+<p><img src="./BLIP/model.png" alt="Vision Transformer Image"></p>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+<li>
+<p>Text Encoder</p>
+<ul>
+<li>
+<!-- raw HTML omitted -->
+<p><img src="./BLIP/BERT.png" alt="BERT Image"></p>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Image-grounded text encoder</p>
+<ul>
+<li>Inject <strong>visual information</strong> for  the cross-attention(CA)</li>
+<li>Use specific task-specific <strong>token [Encode]</strong> appended to the input text to show the purpose is to generate the representation of the image-text pair</li>
+</ul>
+</li>
+<li>
+<p>Image-grounded text decoder</p>
+<ul>
+<li>Bi-directional attention ⇒ (change to) <strong>causal self-attention</strong></li>
+<li>token [Decode] is used to signal the beginning of the sequence</li>
+<li>end-of-sequence token is used to signal the end</li>
+</ul>
+</li>
+</ol>
+<h2 id="32-pre-training-objectives">3.2 Pre-training Objectives</h2>
+<ul>
+<li><strong>Three</strong> objectives
+<ul>
+<li>Understanding-based (x2)</li>
+<li>Generation-based (x1)</li>
+</ul>
+</li>
+<li>Computation flow
+<ul>
+<li>vision transformer (ViT): one-pass to save the computation loading</li>
+<li>text transformer (BERT): three-pass</li>
+</ul>
+</li>
+<li><strong>Three Losses</strong>
+<ul>
+<li>Image-Text Contrastive Loss (ITC) ⇒ Align the representation of vision and text
+<ul>
+<li>A positive image-text pair should have similar <strong>representation</strong> between image feature and text feature</li>
+<li>Negative image-text pair should have more different representation</li>
+</ul>
+</li>
+<li>Image-Text Matching Loss (ITM) ⇒ Distinguish whether the image-text pair is positive or negative
+<ul>
+<li>binary classification problem</li>
+<li>Purpose is to check whether the image and text are matched</li>
+</ul>
+</li>
+<li>Language Modeling Loss (LM) ⇒ generate textual description given an image
+<ul>
+<li>cross entropy loss: maximize the likelihood of the text in an autoregressive manner</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tricks of Minimizing the training computation
+<ul>
+<li>Share Weights between text encoder and text decoder, except <strong>SA layers</strong></li>
+<li>Main components that makes the encoder and decoder different is the <!-- raw HTML omitted --></li>
+</ul>
+</li>
+</ul>
+<h2 id="33-capfilt">3.3 CapFilt</h2>
+<ul>
+<li><strong>Previous Problem:</strong> limited number of high-quality human annotated image-text pairs ${(I_h, T_h)}$
+<ul>
+<li>e.g. COCO dataset</li>
+</ul>
+</li>
+<li><strong>Previous solution and limitation:</strong> Crawl image and alt-text pairs from the website
+<ul>
+<li>often do not accurately describe the visual content ⇒ <strong>noisy data</strong></li>
+</ul>
+</li>
+<li><strong>Proposed solution:</strong> Finetune CapFilt on high-quality annotated image-text pair (e.g. COCO dataset)
+<ul>
+<li>Cap (Captioner)
+<ul>
+<li>finetune with <strong>LM loss</strong> to decode (synthesis) texts $T_s$ of given web images $I_w$</li>
+<li>$Cap(I_w)=T_s$</li>
+</ul>
+</li>
+<li>Filt (Filter)
+<ul>
+<li>finetune with <strong>ITC</strong> and <strong>ITM loss</strong> to learn whether a text matches an image</li>
+<li>a text is considered to be noisy if the ITM predicts the input text and image pair is unmatched.</li>
+</ul>
+</li>
+<li>Finally combine the filtered image-text pairs with the human-annotated pairs to form a new dataset</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-experiments">4. Experiments</h1>
+<ul>
+<li>Dataset
+<ul>
+<li>14M images, includes</li>
+<li><strong>two</strong> human-annotated dataset
+<ul>
+<li>COCO</li>
+<li>Visual Genome</li>
+</ul>
+</li>
+<li><strong>three</strong> web dataset
+<ul>
+<li>Conceptual Captions</li>
+<li>Conceptual 12M</li>
+<li>SBU captions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Extra experiment on LAION
+<ul>
+<li>115M images</li>
+<li>More noisy texts</li>
+</ul>
+</li>
+</ul>
+<h2 id="41-pre-training-details">4.1 Pre-training Details</h2>
+<h2 id="42-effect-of-capfilt">4.2 Effect of CapFilt</h2>
+<h2 id="43-diversity-is-key-for-synthetic-captions">4.3 Diversity is Key for Synthetic Captions</h2>
+<h2 id="44-parameter-sharing-and-decoupling">4.4 Parameter Sharing and Decoupling</h2>
+<h1 id="5--comparison-with-state-of-the-arts">5.  Comparison with State-of-the-arts</h1>
+<h2 id="51-image-text-retrieval">5.1 Image-Text Retrieval</h2>
+<h2 id="52-image-captioning">5.2 Image Captioning</h2>
+<h2 id="53-visal-question-answering-vqa">5.3 Visal Question Answering (VQA)</h2>
+<h2 id="54-natural-language-visual-reasoning-nlvr2">5.4 Natural Language Visual Reasoning (NLVR2)</h2>
+<h2 id="55-visual-dialog-visdial">5.5 Visual Dialog (VisDial)</h2>
+<h2 id="56-zero-shot-transfer-to-video-language-tasks">5.6 Zero-shot Transfer to Video-Language Tasks</h2>
+<h1 id="6-additional-ablation-study">6. Additional Ablation Study</h1>
+<h1 id="7-conclusion">7. Conclusion</h1>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/"
+      ><span class="mr-1.5">←</span><span>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/"
+      ><span></span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://muxi1998.github.io/Paper-Blog/">My Paper note site</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

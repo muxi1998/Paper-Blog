@@ -362,7 +362,7 @@ $I_{uR}(x)=\log{\frac{I_R(x)+\epsilon}{I_G(x)+\epsilon}}$ $I_{vR}(x)=\log{\frac{
 <li>差別在於在最後一個block，原本是將將風格圖轉成Style vector後再轉成latent code來使用，但本篇論文是本風格圖拿掉，換成Historgram圖，並使用一個projection network再轉成latent code</li>
 <li>projected into a lower-dimentional representation是什麼意思？</li>
 </ul>
-<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%881.57.41.png" alt="Histo 截圖 2021-10-07 下午1.57.41.png"></p>
+<p><img src="../paper_resources/HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%881.57.41.png" alt="Histo 截圖 2021-10-07 下午1.57.41.png"></p>
 </li>
 <li>
 <p>此網路架構有8個layer</p>
@@ -402,18 +402,18 @@ $\delta \sim U(0,1)$</li>
 </ul>
 </li>
 </ul>
-<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%882.27.28.png" alt="截圖 2021-10-07 下午2.27.28.png"></p>
+<p><img src="../paper_resources/HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%882.27.28.png" alt="截圖 2021-10-07 下午2.27.28.png"></p>
 </li>
 </ul>
 <h2 id="23-image-recoloring">2.3. Image Recoloring</h2>
-<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.31.43.png" alt="截圖 2021-10-07 下午3.31.43.png"></p>
+<p><img src="../paper_resources/HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.31.43.png" alt="截圖 2021-10-07 下午3.31.43.png"></p>
 <ul>
 <li>擴展HistoGAN的設計來對已知的input $I_i$ 進行著色</li>
 <li>並非想像中直觀，因為在HistoGAN中控制顏色的部分是隱含在model裡面的（HistoGAN的最後兩個block負責顏色）</li>
 <li>不使用對noise和style vector進行優化，而是訓練一個encoder，將input映射到HistoGAN可以使用的input</li>
 </ul>
 <h3 id="架構">架構</h3>
-<p><img src="./HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.38.46.png" alt="截圖 2021-10-07 下午3.38.46.png"></p>
+<p><img src="../paper_resources/HistoGAN/%E6%88%AA%E5%9C%96_2021-10-07_%E4%B8%8B%E5%8D%883.38.46.png" alt="截圖 2021-10-07 下午3.38.46.png"></p>
 <ul>
 <li>類似於U-net有個skip connections</li>
 <li>為了保存input的細節，因此會保留encoder前兩個block的latent feature並透過skip connections來傳到HistoGAN的頭作為細節input</li>

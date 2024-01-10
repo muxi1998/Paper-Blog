@@ -1,3 +1,9 @@
+---
+title: "HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms"
+date: 2021-10-06
+draft: false
+---
+
 # HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms
 
 

@@ -30,6 +30,13 @@
       <description></description>
     </item>
     <item>
+      <title>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</link>
+      <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</guid>
+      <description>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留&#xA;Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）&#xA;Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.</description>
+    </item>
+    <item>
       <title></title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -49,13 +56,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/fuseformer-fusing-fine-grained-information-in-transformers-for-video-inpainting/</guid>
       <description></description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</guid>
-      <description>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留&#xA;Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）&#xA;Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.</description>
     </item>
     <item>
       <title></title>

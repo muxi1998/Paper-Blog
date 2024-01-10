@@ -23,6 +23,13 @@
       <description>Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構&#xA;🕰️ 過去方法&#xA;在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法&#xA;針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果&#xA;引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2.</description>
     </item>
     <item>
+      <title>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</link>
+      <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</guid>
+      <description>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留&#xA;Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）&#xA;Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.</description>
+    </item>
+    <item>
       <title></title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -42,13 +49,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/fuseformer-fusing-fine-grained-information-in-transformers-for-video-inpainting/</guid>
       <description></description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</guid>
-      <description>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留&#xA;Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）&#xA;Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.</description>
     </item>
     <item>
       <title></title>

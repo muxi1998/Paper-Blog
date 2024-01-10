@@ -62,7 +62,7 @@ draft: false
     - 將場景[體積渲染](https://zh.wikipedia.org/wiki/立体渲染)到一個較低畫素的特徵圖片
 - 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
 
-![截圖 2022-01-25 下午11.42.43.png](./GIRAFFE/截圖_2022-01-25_下午11.42.43.png)
+![截圖 2022-01-25 下午11.42.43.png](../paper_resources/GIRAFFE/截圖_2022-01-25_下午11.42.43.png)
 
 # 2. Related work
 
@@ -143,7 +143,7 @@ draft: false
 - 探索了體積和神經渲染技術的有效組合
 - 討論如何用原始圖像集合中訓練我們的模型
 
-![截圖 2022-01-26 下午4.22.39.png](./GIRAFFE/截圖_2022-01-26_下午4.22.39.png)
+![截圖 2022-01-26 下午4.22.39.png](../paper_resources/GIRAFFE/截圖_2022-01-26_下午4.22.39.png)
 
 ## 3.1. **Objects as Neural Feature Fields**
 
@@ -158,11 +158,11 @@ draft: false
     - positional encoding是預先定義好的
     - positional encoding函式如下
         
-        ![截圖 2022-01-27 上午1.39.21.png](./GIRAFFE/截圖_2022-01-27_上午1.39.21.png)
+        ![截圖 2022-01-27 上午1.39.21.png](../paper_resources/GIRAFFE/截圖_2022-01-27_上午1.39.21.png)
         
     - 使用positional encoding所帶來的效果
         
-        ![截圖 2022-01-27 上午1.40.50.png](./GIRAFFE/截圖_2022-01-27_上午1.40.50.png)
+        ![截圖 2022-01-27 上午1.40.50.png](../paper_resources/GIRAFFE/截圖_2022-01-27_上午1.40.50.png)
         
 - 透過MLP來建構$f$
 
@@ -174,12 +174,12 @@ draft: false
     - $z_s,z_a \sim N(0,I)$
     - 公式如下
         
-        ![截圖 2022-01-27 上午1.50.38.png](./GIRAFFE/截圖_2022-01-27_上午1.50.38.png)
+        ![截圖 2022-01-27 上午1.50.38.png](../paper_resources/GIRAFFE/截圖_2022-01-27_上午1.50.38.png)
         
     - $M_s,M_a$為shape和appearance經過encode出的維度
 - 此篇論文稍微改變GRAF的公式，把原本三維的顏色輸出$c$改成$M_f-$維的特徵$f$，並用以下公式來表達物件的Generative Neural Feature Fields
     
-    ![截圖 2022-01-27 上午1.55.58.png](./GIRAFFE/截圖_2022-01-27_上午1.55.58.png)
+    ![截圖 2022-01-27 上午1.55.58.png](../paper_resources/GIRAFFE/截圖_2022-01-27_上午1.55.58.png)
     
 
 ### Object Representation
@@ -247,9 +247,9 @@ draft: false
         - 3D體積渲染後 $I_V\in\mathbb{R}^{H_V\times W_V\times M_f}$
         - 2D神經渲染後 $\hat{I}\in \mathbb{R}^{H\times W\times 3}$
     
-    ![截圖 2022-02-12 上午12.29.24.png](./GIRAFFE/截圖_2022-02-12_上午12.29.24.png)
+    ![截圖 2022-02-12 上午12.29.24.png](../paper_resources/GIRAFFE/截圖_2022-02-12_上午12.29.24.png)
     
-    ![截圖 2022-02-12 上午12.30.11.png](./GIRAFFE/截圖_2022-02-12_上午12.30.11.png)
+    ![截圖 2022-02-12 上午12.30.11.png](../paper_resources/GIRAFFE/截圖_2022-02-12_上午12.30.11.png)
     
 
 ## **3.4. Training**
@@ -296,9 +296,9 @@ draft: false
         2. BlockGAN
         3. HoloGAN
         
-        ![v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png](./GIRAFFE/v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png)
+        ![v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png](../paper_resources/GIRAFFE/v2-31903c9629c149dc34d8d085fff22c59_1440w.jpg.png)
         
-        ![v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg](./GIRAFFE/v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg)
+        ![v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg](../paper_resources/GIRAFFE/v2-e67a92616f73185843f1cbd0dfbfdaa8_1440w.jpg)
         
     - radiance field-based
         - GRAF
@@ -314,19 +314,19 @@ draft: false
         - 對個別物件先進行渲染，並套上alpha值
     - 實驗發現模型在非監督式學習下可以將物件解耦合，且生成合理的背景
         
-        ![截圖 2022-02-13 下午2.15.10.png](./GIRAFFE/截圖_2022-02-13_下午2.15.10.png)
+        ![截圖 2022-02-13 下午2.15.10.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.15.10.png)
         
 - Controllable Scene Generation
     - 由於前實驗已證明物件可以成功地被解耦合，則現在著重的會是物件是否能被單獨的旋轉平疑惑改變外觀形狀
         
-        ![截圖 2022-02-13 下午2.24.30.png](./GIRAFFE/截圖_2022-02-13_下午2.24.30.png)
+        ![截圖 2022-02-13 下午2.24.30.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.24.30.png)
         
 
 - Generalize Beyond Training Data
     - 學習式的合成場景表示法可以讓模型更泛化，而非受限於資料集
     - 例如可以對物件逕行任意的平移或增加更多物件在一個場景中
 
-![截圖 2022-02-13 下午2.32.27.png](./GIRAFFE/截圖_2022-02-13_下午2.32.27.png)
+![截圖 2022-02-13 下午2.32.27.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.32.27.png)
 
 ## **4.2. Comparison to Baseline Methods**
 
@@ -334,9 +334,9 @@ draft: false
 - 儘管其他方法在有限的資料集複雜度下都能對圖片合成進行控制，但實驗發現當場景更為複雜時，其他方法較為不穩定，而此論文方法得以將個別物件從背景解耦合出來，因此物件和背景都能各自獨立處理
 ****
 
-![截圖 2022-02-13 下午2.29.43.png](./GIRAFFE/截圖_2022-02-13_下午2.29.43.png)
+![截圖 2022-02-13 下午2.29.43.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.29.43.png)
 
-![截圖 2022-02-13 下午2.29.55.png](./GIRAFFE/截圖_2022-02-13_下午2.29.55.png)
+![截圖 2022-02-13 下午2.29.55.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.29.55.png)
 
 ## **4.3. Ablation Studies**
 
@@ -345,7 +345,7 @@ draft: false
 - 資料集偏差
     - 從celebA-HQ資料集發現此資料集內圖片中的眼睛幾乎都是看向鏡頭，而和面向無關，因此在旋轉時會發現眼鏡並沒有隨著臉部的面向不同而感變，而是固定看向鏡頭
     
-    ![截圖 2022-02-13 下午2.51.39.png](./GIRAFFE/截圖_2022-02-13_下午2.51.39.png    )
+    ![截圖 2022-02-13 下午2.51.39.png](../paper_resources/GIRAFFE/截圖_2022-02-13_下午2.51.39.png    )
     
 - Object Transformation Distribution
     - 有時仍會發生解糾纏失敗，因為相機姿態假設的均勻分布和物件級轉換和真實分布不同

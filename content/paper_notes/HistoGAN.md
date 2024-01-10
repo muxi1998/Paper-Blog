@@ -116,7 +116,7 @@ draft: false
     - 差別在於在最後一個block，原本是將將風格圖轉成Style vector後再轉成latent code來使用，但本篇論文是本風格圖拿掉，換成Historgram圖，並使用一個projection network再轉成latent code
     - projected into a lower-dimentional representation是什麼意思？
     
-    ![Histo 截圖 2021-10-07 下午1.57.41.png](./HistoGAN/截圖_2021-10-07_下午1.57.41.png)
+    ![Histo 截圖 2021-10-07 下午1.57.41.png](../paper_resources/HistoGAN/截圖_2021-10-07_下午1.57.41.png)
     
 - 此網路架構有8個layer
     - 第一個layer有1024個神經元，其他7個則有512個神經元
@@ -139,12 +139,12 @@ draft: false
         - 會需要一直產生不同的target histogram是為了增加histogram的變異性，減少overfitting的可能並提高robustness
         - 雖然此方法不適用於多樣性domain的case，但實驗證明每次產生不同的target histogram仍能帶來較好的結果
     
-    ![截圖 2021-10-07 下午2.27.28.png](./HistoGAN/截圖_2021-10-07_下午2.27.28.png)
+    ![截圖 2021-10-07 下午2.27.28.png](../paper_resources/HistoGAN/截圖_2021-10-07_下午2.27.28.png)
     
 
 ## 2.3. Image Recoloring
 
-![截圖 2021-10-07 下午3.31.43.png](./HistoGAN/截圖_2021-10-07_下午3.31.43.png)
+![截圖 2021-10-07 下午3.31.43.png](../paper_resources/HistoGAN/截圖_2021-10-07_下午3.31.43.png)
 
 - 擴展HistoGAN的設計來對已知的input $I_i$ 進行著色
 - 並非想像中直觀，因為在HistoGAN中控制顏色的部分是隱含在model裡面的（HistoGAN的最後兩個block負責顏色）
@@ -152,7 +152,7 @@ draft: false
 
 ### 架構
 
-![截圖 2021-10-07 下午3.38.46.png](./HistoGAN/截圖_2021-10-07_下午3.38.46.png)
+![截圖 2021-10-07 下午3.38.46.png](../paper_resources/HistoGAN/截圖_2021-10-07_下午3.38.46.png)
 
 - 類似於U-net有個skip connections
 - 為了保存input的細節，因此會保留encoder前兩個block的latent feature並透過skip connections來傳到HistoGAN的頭作為細節input

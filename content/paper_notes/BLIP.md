@@ -68,7 +68,7 @@ draft: false
         - <details>
             <summary>employ <b>Vision Transformer</b></summary>
 
-            ![Vision Transformer Image](./BLIP/model.png)
+            ![Vision Transformer Image](../paper_resources/BLIP/model.png)
             </details>
 
             
@@ -76,7 +76,7 @@ draft: false
         - <details>
             <summary>employ <b>BERT</b></summary>
 
-            ![BERT Image](./BLIP/BERT.png)
+            ![BERT Image](../paper_resources/BLIP/BERT.png)
             </details>
             
 2. Image-grounded text encoder

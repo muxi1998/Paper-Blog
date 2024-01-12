@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Style-based Encoder Pre-training for Multi-modal Image Synthesis - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -106,24 +106,24 @@ Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採�
   
   
   
-  <meta itemprop="name" content="">
+  <meta itemprop="name" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis">
 <meta itemprop="description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
-Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1.">
-
+Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1."><meta itemprop="datePublished" content="2021-10-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-10-06T00:00:00+00:00" />
 <meta itemprop="wordCount" content="529">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis" />
 <meta property="og:description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
 Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/step/" /><meta property="article:section" content="paper_notes" />
-
-
+<meta property="article:published_time" content="2021-10-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-06T00:00:00+00:00" />
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis"/>
 <meta name="twitter:description" content="Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換
 Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1."/>
 
@@ -219,10 +219,12 @@ Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採�
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Style-based Encoder Pre-training for Multi-modal Image Synthesis</h1>
 
     
     <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 6, 2021</time>
       
       
       
@@ -690,14 +692,14 @@ VAE的robust和latent space對於風格的表達力是一個tradeoff</li>
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/self-attention-temporal-convolutional-network-for-long-term-daily-living-activity-detection/"
-      ><span class="mr-1.5">←</span><span></span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/"
+      ><span class="mr-1.5">←</span><span>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/"
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/"
       ><span></span><span class="ml-1.5">→</span></a
     >
     

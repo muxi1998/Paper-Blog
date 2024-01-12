@@ -23,11 +23,25 @@
       <description>Abstract 目前的VLP模型性能提升的方式主要是靠擴大資料集⇒ 目前是以網路上的image-text pair 訓練 網路上的data很大的可能存在noise 此論文提出一個標題產生器和去噪器來處理網路資料集所存在的噪音問題 1. Introduction 🎯 目標： 提出一個更強大的VLP架構&#xA;🕰️ 過去方法&#xA;在過去的VLP(Vision -anguage Pretraining) 方法中有兩大層面的限制 模型層面 針對不同的下游應用目前還是有各自適合的架構，還沒有一個能完全統一個的模型 生成任務（e.g. 文字生成）⇒ Encoder-Decoder 理解任務（e.g. 檢索）⇒ Encoder 資料層面 過去方法的訓練資料多來自網路爬蟲所得，存在noise資料未被清理乾淨，且noise帶來的負面影響尚未被適當解決 💡 本篇方法&#xA;針對上述提到的兩大層面問題進行研究 模型層面 提出一個多模態混合（Multimodal mixture）的Encoder-Decoder架構 (MED) 可以在後續應用在更多的下游任務中 保持預訓練時的效率 資料層面 提出一個引導（Bootstrapping）方法來避免noisy image-text pair Finetune一個pre-trained MED成兩個子模組 Cap (Captioner) ⇒ 生成合成字幕 Filt (Filter)⇒ 過濾掉noisy字幕 🔥 研究成果&#xA;引導字幕可以提升下游任務的效能，且字幕多樣性越高越好 BLIP不僅在Vision-language tasks中有SOTA的效能，在轉移至Video-language tasks中也達到的SOTA且zero-shot的效能 2. Related Work 2.1 Vision-language Pre-training 過去方法的dataset來源多是網路爬蟲，因此存在噪音(noisy)問題，且噪音問題被模型帶來的效果掩蔽 ⇒ 因此提出CapFilt 不同性質的任務背後的backbone會不同 ⇒ 提出多模態混合encoder-decoder understanding-base tasks ⇒ encoder generation-base tasks ⇒ encoder-decoder 2.</description>
     </item>
     <item>
+      <title>Alias-Free Generative Adversarial Networks</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/</link>
+      <pubDate>Wed, 24 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/</guid>
+      <description>Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面&#xA;解決概念&#xA;將網路中的信息都是為連續的&#xA;解決方法&#xA;小幅度修改原本模型架構，達到普遍適用性高且能避免不需要知資訊洩漏至分層融合的過程&#xA;結果成效&#xA;對動態影像的合成有很大的幫助&#xA;1 Introduction 目前最大問題 在現實中不同尺度的細節往往是分層轉換的，而GAN並沒有做到自然的分層 細節特徵的位置應該繼承較上層粗略的特徵，彼此應該有繼承關係&#xA;猜測與發現 目前的網路會參考隱藏層中洩漏出的位置訊息來畫上細節，但如此的分層結構並不自然 image border&#xA;在進行卷積運算時常常會使用到zero-padding，而此舉動會不經意的洩漏出絕對位置的訊息&#xA;參考資訊 HOW MUCH POSITION INFORMATION DO CONVOLUTIONAL NEURAL NETWORKS ENCODE?&#xA;猜測在CNN各層卷積中隱含著絕對位置的資訊 zero-padding造成模型在無意間學習的特徵的絕對位置 per-pixel noise inputs&#xA;positional encoding&#xA;aliasing&#xA;可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs.</description>
+    </item>
+    <item>
       <title>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</link>
       <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</guid>
       <description>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留&#xA;Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）&#xA;Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1.</description>
+    </item>
+    <item>
+      <title>Style-based Encoder Pre-training for Multi-modal Image Synthesis</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/step/</link>
+      <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/step/</guid>
+      <description>Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換&#xA;Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1.</description>
     </item>
     <item>
       <title></title>
@@ -66,13 +80,6 @@
     </item>
     <item>
       <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/step/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/step/</guid>
-      <description>Style-based Encoder Pre-training for Multi-modal Image Synthesis Main idea Scheme 對圖片作一對多的樣態轉換&#xA;Problems (motivation) 為了讓模型能將輸入轉成不同樣態，可能採用複雜的模型來記住輸入與不同樣態間的關聯性 （暴力法） Mode collapse問題 遇到沒看過的風格可能轉換的效果就不如預期（模型轉換不同樣態的成果好壞取決於訓練時的訓練資料集） Relative work VAE BicycleGAN MUNIT-p Method 預訓練一個不錯的風格encoder來將輸入的風格encode成latent code 調整並尋找適合的loss function (loss terms越少越好) Result 合成的結果最好 模型成效不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達風格特徵（latent code），對風格的保真度提高 簡化訓練目標並加快訓練速度 Abstract 過去I2I遇到的問題 輸入輸出的一對多對應關係 Mode collapses problem 過去解決方法 針對多種樣態的輸出使用複雜的模型進行訓練，來因應多樣的輸出範疇 看著結果來訓練 暴力法 本論文的解決方法 強化圖像Encoder的能力（對風格作更進階的分析）來學習更潛在的空間特徵 對輸入本質訓練 本論文的方法概念 將 I2I 轉換的行為分成兩個工作 pre-trained generic style encoder ( proxy task ) 學習圖片的嵌入資訊 任意domain的image → 低維度的風格空間資訊 圖片合成 本論文的優勢 模型不依賴目標訓練資料集（泛用度更廣） 更有效更有能力表達空間特徵，對風格的保真度提高 簡化訓練目標並加快訓練速度 不同loss term對multi-modal I2I的影響 提出VAEs的替代方案來對未受限制的空間特徵進行採樣 跟六個對照組相比結果最好 1.</description>
-    </item>
-    <item>
-      <title></title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/</guid>
@@ -84,13 +91,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/</guid>
       <description></description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/</guid>
-      <description>Alias-Free Generative Adversarial Networks Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面&#xA;解決概念&#xA;將網路中的信息都是為連續的&#xA;解決方法&#xA;小幅度修改原本模型架構，達到普遍適用性高且能避免不需要知資訊洩漏至分層融合的過程&#xA;結果成效&#xA;對動態影像的合成有很大的幫助&#xA;1 Introduction 目前最大問題 在現實中不同尺度的細節往往是分層轉換的，而GAN並沒有做到自然的分層 細節特徵的位置應該繼承較上層粗略的特徵，彼此應該有繼承關係&#xA;猜測與發現 目前的網路會參考隱藏層中洩漏出的位置訊息來畫上細節，但如此的分層結構並不自然 image border&#xA;在進行卷積運算時常常會使用到zero-padding，而此舉動會不經意的洩漏出絕對位置的訊息&#xA;參考資訊 HOW MUCH POSITION INFORMATION DO CONVOLUTIONAL NEURAL NETWORKS ENCODE?&#xA;猜測在CNN各層卷積中隱含著絕對位置的資訊 zero-padding造成模型在無意間學習的特徵的絕對位置 per-pixel noise inputs&#xA;positional encoding&#xA;aliasing&#xA;可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs.</description>
     </item>
     <item>
       <title></title>

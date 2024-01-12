@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Alias-Free Generative Adversarial Networks - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,7 @@
   
   
   
-  <meta name="description" content="Alias-Free Generative Adversarial Networks Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
+  <meta name="description" content="Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
 解決概念
 將網路中的信息都是為連續的
 解決方法
@@ -119,8 +119,8 @@ aliasing
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="Alias-Free Generative Adversarial Networks Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
+  <meta itemprop="name" content="Alias-Free Generative Adversarial Networks">
+<meta itemprop="description" content="Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
 解決概念
 將網路中的信息都是為連續的
 解決方法
@@ -134,13 +134,13 @@ aliasing
 猜測在CNN各層卷積中隱含著絕對位置的資訊 zero-padding造成模型在無意間學習的特徵的絕對位置 per-pixel noise inputs
 positional encoding
 aliasing
-可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs.">
-
-<meta itemprop="wordCount" content="373">
+可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs."><meta itemprop="datePublished" content="2021-11-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-11-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="369">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="Alias-Free Generative Adversarial Networks Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
+  <meta property="og:title" content="Alias-Free Generative Adversarial Networks" />
+<meta property="og:description" content="Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
 解決概念
 將網路中的信息都是為連續的
 解決方法
@@ -157,13 +157,13 @@ aliasing
 可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/" /><meta property="article:section" content="paper_notes" />
-
-
+<meta property="article:published_time" content="2021-11-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-11-24T00:00:00+00:00" />
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="Alias-Free Generative Adversarial Networks Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Alias-Free Generative Adversarial Networks"/>
+<meta name="twitter:description" content="Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面
 解決概念
 將網路中的信息都是為連續的
 解決方法
@@ -271,10 +271,12 @@ aliasing
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Alias-Free Generative Adversarial Networks</h1>
 
     
     <div class="text-sm antialiased opacity-60">
+      
+      <time>Nov 24, 2021</time>
       
       
       
@@ -283,8 +285,7 @@ aliasing
     
   </header>
 
-  <section><h1 id="alias-free-generative-adversarial-networks">Alias-Free Generative Adversarial Networks</h1>
-<h1 id="abstract">Abstract</h1>
+  <section><h1 id="abstract">Abstract</h1>
 <p><strong>問題發現</strong>
 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面</p>
 <p><strong>解決概念</strong></p>
@@ -648,15 +649,15 @@ $z_0:g(t[z_0];w)=t[g(z_0;w)]$</li>
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/"
-      ><span class="mr-1.5">←</span><span></span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/blip/"
+      ><span class="mr-1.5">←</span><span>BLIP</span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/"
-      ><span></span><span class="ml-1.5">→</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/"
+      ><span>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</span><span class="ml-1.5">→</span></a
     >
     
   </nav>

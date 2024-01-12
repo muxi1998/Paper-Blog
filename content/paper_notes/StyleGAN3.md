@@ -1,4 +1,8 @@
-# Alias-Free Generative Adversarial Networks
+---
+title: "Alias-Free Generative Adversarial Networks"
+date: 2021-11-24
+draft: false
+---
 
 # Abstract
 

@@ -1,4 +1,7 @@
-# Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding
+---
+title: "Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding"
+draft: false
+---
 
 # Abstract
 

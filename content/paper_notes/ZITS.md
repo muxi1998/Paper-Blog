@@ -1,5 +1,6 @@
 ---
 title: "Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding"
+date: 2022-8-9
 draft: false
 ---
 

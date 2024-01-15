@@ -1,6 +1,6 @@
 ---
 title: "GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"
-date: 2024-01-09
+date: 2022-01-10
 draft: false
 ---
 

@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,7 @@
   
   
   
-  <meta name="description" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3." />
+  <meta name="description" content="Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3." />
   <meta name="author" content="My Paper note site" />
   
 
@@ -105,14 +105,14 @@
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3.">
+  <meta itemprop="name" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding">
+<meta itemprop="description" content="Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3.">
 
-<meta itemprop="wordCount" content="355">
+<meta itemprop="wordCount" content="345">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3." />
+  <meta property="og:title" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding" />
+<meta property="og:description" content="Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/zits/" /><meta property="article:section" content="paper_notes" />
 
@@ -120,8 +120,8 @@
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3."/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding"/>
+<meta name="twitter:description" content="Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3."/>
 
   
   
@@ -215,7 +215,7 @@
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding</h1>
 
     
     <div class="text-sm antialiased opacity-60">
@@ -227,8 +227,7 @@
     
   </header>
 
-  <section><h1 id="incremental-transformer-structure-enhanced-image-inpainting-with-masking-positional-encoding">Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding</h1>
-<h1 id="abstract">Abstract</h1>
+  <section><h1 id="abstract">Abstract</h1>
 <h1 id="1-introduction">1. Introduction</h1>
 <ul>
 <li>Inpainting的重點

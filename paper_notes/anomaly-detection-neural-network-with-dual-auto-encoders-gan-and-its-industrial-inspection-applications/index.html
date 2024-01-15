@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,22 @@
   
   
   
-  <meta name="description" content="" />
+  <meta name="description" content="Abstract 現在越來越多研究著重於使用深度學習來進行工業上的自動光學檢測，而在使用深度學習方法的過程中遇到其中一個大挑戰是樣本不平均的問題
+因此，此篇論文提出的異常偵測神經網路架構，dual auto-encoder generative adversarial network (DAGAN)，有很好的圖片生成能力以及訓練穩定性。而使用到的三個資料集
+MVTec AD mobile phone screen glass wood defect detection dataset 用來驗證DAGAN的檢測能力，提出skip-connection以及dual auto-encoder架構，並且展現了優秀的圖片重構能力以及訓練穩定度
+結果 在所有測試資料集中的17個類別，其中13個類別都由此論文提出的模型勝出，尤其是在變異性高的資料集中效果更好
+其他優勢
+比U-net有更好的偵測能力 驗證discriminator的重要性 在訓練集少的情況下也有很好的結果 Introduction 使用情境
+近期CNN發展的蓬勃，也協助提升AOI上的發展，在許多影像偵測的應用中CNN也做出許多貢獻，因此現在許多工業上的應用也都借助於CNN的能力來提升AOI的效能
+遇到困難
+在瑕疵偵測的相關應用中很常會碰到不正常樣本不足的情況，儘管目前有多樣的data augmentation方法，但CNN在少樣本下的訓練效果仍有限
+過去方法
+樣本數問題
+使用GAN來生成與原始資料集分佈相似的不正常樣本，因此開始有了以下幾種GAN
+AnoGAN GANomaly Skip-GANomaly GAN生成圖的能力問題 BEGAN 1. 2. CNN 和batch normalization 3. Wassertein loss 4. dual auto-encoder
+提出方法
+GAN-based雙自動編碼器的異常檢測神經網路
+使用公用的工業檢測資料集MCTec AD來與過去的方法比較 使用真實產線中的兩個資料集(Surface glass of mobile phone和wood defect capability)來驗證DCGAN的檢測能力 使用較少的資料集來驗證DAGAN的檢測能力是否被受影響 Related Works 2.1. Generative Adversarial Network (GAN) GAN是一個非監督式學習的神經網路，目標是學習找出一個相似於訓練資料集的機率分佈，來從此分佈中生成不存在的圖，利用generator和discriminator互相競爭的方式來訓練模型" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -105,23 +120,68 @@
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="">
-
-<meta itemprop="wordCount" content="0">
+  <meta itemprop="name" content="Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications">
+<meta itemprop="description" content="Abstract 現在越來越多研究著重於使用深度學習來進行工業上的自動光學檢測，而在使用深度學習方法的過程中遇到其中一個大挑戰是樣本不平均的問題
+因此，此篇論文提出的異常偵測神經網路架構，dual auto-encoder generative adversarial network (DAGAN)，有很好的圖片生成能力以及訓練穩定性。而使用到的三個資料集
+MVTec AD mobile phone screen glass wood defect detection dataset 用來驗證DAGAN的檢測能力，提出skip-connection以及dual auto-encoder架構，並且展現了優秀的圖片重構能力以及訓練穩定度
+結果 在所有測試資料集中的17個類別，其中13個類別都由此論文提出的模型勝出，尤其是在變異性高的資料集中效果更好
+其他優勢
+比U-net有更好的偵測能力 驗證discriminator的重要性 在訓練集少的情況下也有很好的結果 Introduction 使用情境
+近期CNN發展的蓬勃，也協助提升AOI上的發展，在許多影像偵測的應用中CNN也做出許多貢獻，因此現在許多工業上的應用也都借助於CNN的能力來提升AOI的效能
+遇到困難
+在瑕疵偵測的相關應用中很常會碰到不正常樣本不足的情況，儘管目前有多樣的data augmentation方法，但CNN在少樣本下的訓練效果仍有限
+過去方法
+樣本數問題
+使用GAN來生成與原始資料集分佈相似的不正常樣本，因此開始有了以下幾種GAN
+AnoGAN GANomaly Skip-GANomaly GAN生成圖的能力問題 BEGAN 1. 2. CNN 和batch normalization 3. Wassertein loss 4. dual auto-encoder
+提出方法
+GAN-based雙自動編碼器的異常檢測神經網路
+使用公用的工業檢測資料集MCTec AD來與過去的方法比較 使用真實產線中的兩個資料集(Surface glass of mobile phone和wood defect capability)來驗證DCGAN的檢測能力 使用較少的資料集來驗證DAGAN的檢測能力是否被受影響 Related Works 2.1. Generative Adversarial Network (GAN) GAN是一個非監督式學習的神經網路，目標是學習找出一個相似於訓練資料集的機率分佈，來從此分佈中生成不存在的圖，利用generator和discriminator互相競爭的方式來訓練模型"><meta itemprop="datePublished" content="2021-10-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-10-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="353">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="" />
+  <meta property="og:title" content="Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications" />
+<meta property="og:description" content="Abstract 現在越來越多研究著重於使用深度學習來進行工業上的自動光學檢測，而在使用深度學習方法的過程中遇到其中一個大挑戰是樣本不平均的問題
+因此，此篇論文提出的異常偵測神經網路架構，dual auto-encoder generative adversarial network (DAGAN)，有很好的圖片生成能力以及訓練穩定性。而使用到的三個資料集
+MVTec AD mobile phone screen glass wood defect detection dataset 用來驗證DAGAN的檢測能力，提出skip-connection以及dual auto-encoder架構，並且展現了優秀的圖片重構能力以及訓練穩定度
+結果 在所有測試資料集中的17個類別，其中13個類別都由此論文提出的模型勝出，尤其是在變異性高的資料集中效果更好
+其他優勢
+比U-net有更好的偵測能力 驗證discriminator的重要性 在訓練集少的情況下也有很好的結果 Introduction 使用情境
+近期CNN發展的蓬勃，也協助提升AOI上的發展，在許多影像偵測的應用中CNN也做出許多貢獻，因此現在許多工業上的應用也都借助於CNN的能力來提升AOI的效能
+遇到困難
+在瑕疵偵測的相關應用中很常會碰到不正常樣本不足的情況，儘管目前有多樣的data augmentation方法，但CNN在少樣本下的訓練效果仍有限
+過去方法
+樣本數問題
+使用GAN來生成與原始資料集分佈相似的不正常樣本，因此開始有了以下幾種GAN
+AnoGAN GANomaly Skip-GANomaly GAN生成圖的能力問題 BEGAN 1. 2. CNN 和batch normalization 3. Wassertein loss 4. dual auto-encoder
+提出方法
+GAN-based雙自動編碼器的異常檢測神經網路
+使用公用的工業檢測資料集MCTec AD來與過去的方法比較 使用真實產線中的兩個資料集(Surface glass of mobile phone和wood defect capability)來驗證DCGAN的檢測能力 使用較少的資料集來驗證DAGAN的檢測能力是否被受影響 Related Works 2.1. Generative Adversarial Network (GAN) GAN是一個非監督式學習的神經網路，目標是學習找出一個相似於訓練資料集的機率分佈，來從此分佈中生成不存在的圖，利用generator和discriminator互相競爭的方式來訓練模型" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/" /><meta property="article:section" content="paper_notes" />
-
-
+<meta property="article:published_time" content="2021-10-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-20T00:00:00+00:00" />
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications"/>
+<meta name="twitter:description" content="Abstract 現在越來越多研究著重於使用深度學習來進行工業上的自動光學檢測，而在使用深度學習方法的過程中遇到其中一個大挑戰是樣本不平均的問題
+因此，此篇論文提出的異常偵測神經網路架構，dual auto-encoder generative adversarial network (DAGAN)，有很好的圖片生成能力以及訓練穩定性。而使用到的三個資料集
+MVTec AD mobile phone screen glass wood defect detection dataset 用來驗證DAGAN的檢測能力，提出skip-connection以及dual auto-encoder架構，並且展現了優秀的圖片重構能力以及訓練穩定度
+結果 在所有測試資料集中的17個類別，其中13個類別都由此論文提出的模型勝出，尤其是在變異性高的資料集中效果更好
+其他優勢
+比U-net有更好的偵測能力 驗證discriminator的重要性 在訓練集少的情況下也有很好的結果 Introduction 使用情境
+近期CNN發展的蓬勃，也協助提升AOI上的發展，在許多影像偵測的應用中CNN也做出許多貢獻，因此現在許多工業上的應用也都借助於CNN的能力來提升AOI的效能
+遇到困難
+在瑕疵偵測的相關應用中很常會碰到不正常樣本不足的情況，儘管目前有多樣的data augmentation方法，但CNN在少樣本下的訓練效果仍有限
+過去方法
+樣本數問題
+使用GAN來生成與原始資料集分佈相似的不正常樣本，因此開始有了以下幾種GAN
+AnoGAN GANomaly Skip-GANomaly GAN生成圖的能力問題 BEGAN 1. 2. CNN 和batch normalization 3. Wassertein loss 4. dual auto-encoder
+提出方法
+GAN-based雙自動編碼器的異常檢測神經網路
+使用公用的工業檢測資料集MCTec AD來與過去的方法比較 使用真實產線中的兩個資料集(Surface glass of mobile phone和wood defect capability)來驗證DCGAN的檢測能力 使用較少的資料集來驗證DAGAN的檢測能力是否被受影響 Related Works 2.1. Generative Adversarial Network (GAN) GAN是一個非監督式學習的神經網路，目標是學習找出一個相似於訓練資料集的機率分佈，來從此分佈中生成不存在的圖，利用generator和discriminator互相競爭的方式來訓練模型"/>
 
   
   
@@ -215,10 +275,12 @@
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications</h1>
 
     
     <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 20, 2021</time>
       
       
       
@@ -227,7 +289,358 @@
     
   </header>
 
-  <section></section>
+  <section><h1 id="abstract">Abstract</h1>
+<p>現在越來越多研究著重於使用深度學習來進行工業上的自動光學檢測，而在使用深度學習方法的過程中遇到其中一個大挑戰是<strong>樣本不平均</strong>的問題</p>
+<p>因此，此篇論文提出的異常偵測神經網路架構，<strong>dual auto-encoder generative adversarial network (DAGAN)</strong>，有很好的圖片生成能力以及訓練穩定性。而使用到的三個資料集</p>
+<ol>
+<li>MVTec AD</li>
+<li>mobile phone screen glass</li>
+<li>wood defect detection dataset</li>
+</ol>
+<p>用來驗證DAGAN的檢測能力，提出skip-connection以及dual auto-encoder架構，並且展現了優秀的圖片重構能力以及訓練穩定度</p>
+<p><strong>結果</strong>
+在所有測試資料集中的17個類別，其中13個類別都由此論文提出的模型勝出，尤其是在變異性高的資料集中效果更好</p>
+<p><strong>其他優勢</strong></p>
+<ul>
+<li>比U-net有更好的偵測能力 驗證discriminator的重要性</li>
+<li>在訓練集少的情況下也有很好的結果</li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<p>使用情境</p>
+<p>近期CNN發展的蓬勃，也協助提升AOI上的發展，在許多影像偵測的應用中CNN也做出許多貢獻，因此現在許多工業上的應用也都借助於CNN的能力來提升AOI的效能</p>
+<p>遇到困難</p>
+<p>在瑕疵偵測的相關應用中很常會碰到不正常樣本不足的情況，儘管目前有多樣的data augmentation方法，但CNN在少樣本下的訓練效果仍有限</p>
+<p>過去方法</p>
+<ol>
+<li>
+<p><strong>樣本數問題</strong></p>
+<p>使用GAN來生成與原始資料集分佈相似的不正常樣本，因此開始有了以下幾種GAN</p>
+<ul>
+<li>AnoGAN</li>
+<li>GANomaly</li>
+<li>Skip-GANomaly</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-28_%E4%B8%8B%E5%8D%884.41.01.png" alt="截圖 2021-10-28 下午4.41.01.png"></p>
+</li>
+<li>
+<p><strong>GAN生成圖的能力問題 BEGAN</strong>
+1.
+2. CNN 和batch normalization
+3. Wassertein loss
+4. dual auto-encoder</p>
+</li>
+</ol>
+<p>提出方法</p>
+<p>GAN-based雙自動編碼器的異常檢測神經網路</p>
+<ol>
+<li>使用公用的工業檢測資料集MCTec AD來與過去的方法比較</li>
+<li>使用真實產線中的兩個資料集(Surface glass of mobile phone和wood defect capability)來驗證DCGAN的檢測能力</li>
+<li>使用較少的資料集來驗證DAGAN的檢測能力是否被受影響</li>
+</ol>
+<h1 id="related-works">Related Works</h1>
+<h2 id="21-generative-adversarial-network-gan">2.1. Generative Adversarial Network (GAN)</h2>
+<p>GAN是一個非監督式學習的神經網路，目標是學習找出一個相似於訓練資料集的機率分佈，來從此分佈中生成不存在的圖，利用generator和discriminator互相競爭的方式來訓練模型</p>
+<h2 id="22-boundary-equilibrium-generative-adversarial-network-began">2.2. Boundary Equilibrium Generative Adversarial Network (BEGAN)</h2>
+<ul>
+<li>Google推出的GAN模型</li>
+<li>generator和discriminator都是個auto-encoder
+提升訓練的穩定度且更好收斂</li>
+<li>照片重構的效果比普通的GAN還好</li>
+<li>不用考慮model collapse和訓練不平衡的問題
+為啥？</li>
+</ul>
+<p>特色</p>
+<ol>
+<li>不是找到資料的分佈，而是找到error的分佈</li>
+</ol>
+<h2 id="23-anogan">2.3. AnoGAN</h2>
+<ul>
+<li>
+<p>DCGAN</p>
+<ul>
+<li>Deep Convolutional Generative Adversarial Networks</li>
+<li>CNN+GAN
+<ul>
+<li>判別器就是一個CNN網路，輸入一張照片然後輸出yes或no的概率</li>
+<li>生成器剛好是卷積的相反（反摺積），從一個噪聲通過layer逐漸變大</li>
+</ul>
+</li>
+<li>特點
+<ul>
+<li>取消所有pooling層
+<ul>
+<li>生成器 pooling→轉置卷</li>
+<li>判別器 pooling→stride</li>
+</ul>
+</li>
+<li>除了生成器的輸出層和判別器的輸入層，其他層都使用batch normalization來穩定學習，處理初始化不良導致的訓練問題</li>
+<li>生成器使用ReLu激活，最後一層使用tanh</li>
+<li>判別器使用LeakyReLU激活</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://iter01.com/515554.html">GAN網路之入門教程（三）之DCGAN原理</a></p>
+</li>
+<li>
+<p>運作原理</p>
+<ul>
+<li>拿一張異常的圖，找到在DCGAN中最接近的latent code</li>
+<li>因為DCGAN只能生成正常的圖</li>
+<li>比較DCGAN參考異常圖latent code生成的圖和原始異常圖的差距</li>
+<li>當差距超過某個threshold則判斷輸入為異常圖 （和正常差太多就是異常）</li>
+</ul>
+</li>
+<li>
+<p>缺點：運算資源消耗大！！！</p>
+</li>
+</ul>
+<p><a href="https://www.twblogs.net/a/5db45bd8bd9eee310da0749d">深度學習論文筆記（異常檢測）&ndash; Generative Adversarial Networks to Guide Marker Discovery</a></p>
+<h2 id="24-ganomaly">2.4. GANomaly</h2>
+<ul>
+<li>
+<p>不是比較圖像分佈，而是在latent space中比較差別</p>
+</li>
+<li>
+<p>Latent space下的比較方法</p>
+<ul>
+<li>編碼解碼兩次</li>
+<li>由正常資料集訓練出的AE在對正常輸入進行編碼解碼再編碼後的結果，兩次latent code差距應該不大</li>
+<li>異常資料因為AE沒看過，因此兩次的編碼解碼latent code差距會很大</li>
+<li>設定一個threshold，當兩次的latent code差距超過一定值就認為該輸入是異常資料</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/1ehTJf1_jEU87dzyZNFFXSA.png" alt="1*ehTJf1_jEU87dzyZNFFXSA.png"></p>
+</li>
+</ul>
+<p><a href="https://read01.com/zh-tw/GPaM2oG.html#.YXwEaC3RZQI"></a></p>
+<h2 id="25-skip-ganomaly">2.5. Skip-GANomaly</h2>
+<ul>
+<li>GANormaly的加強版</li>
+<li>受到U-net啟發，在GANormaly中加入skip-connection的結構</li>
+</ul>
+<p>優勢 有很好的圖片重構能力，skip-connection比較能保留原圖細節</p>
+<p>劣勢 不適合所有資料集，有可能會遇到模態崩潰</p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-29_%E4%B8%8B%E5%8D%8810.38.19.png" alt="截圖 2021-10-29 下午10.38.19.png"></p>
+<h1 id="3-proposed-method">3. Proposed Method</h1>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-29_%E4%B8%8B%E5%8D%8810.39.56.png" alt="截圖 2021-10-29 下午10.39.56.png"></p>
+<h2 id="31-pipeline">3.1. Pipeline</h2>
+<ul>
+<li><strong>Generator</strong>
+<ul>
+<li>受到Skip-GANormaly和U-net啟發，以autoencoder+skip-connection的方式實作</li>
+<li>對輸入圖片 $x$，找到一個最接近的機率分佈生成假圖片 $x^\prime$</li>
+</ul>
+</li>
+<li><strong>Discriminator</strong>
+<ul>
+<li>受到BEGAN的啟發</li>
+<li>分辨出$x$和$x^\prime$間的差距</li>
+</ul>
+</li>
+<li>概念
+<ul>
+<li>只使用正常資料做為訓練，所以模型理所應當對正常樣本的重構能力較好，異常樣本重構出的結果較差</li>
+<li>因此可以透過residual score來當作輸入$x$和生成圖$x^\prime$間的差距</li>
+</ul>
+</li>
+</ul>
+<h2 id="32-training-objective">3.2. Training Objective</h2>
+<p>為了提升異常偵測的目標，此篇論文改善Skip-anormaly和BEGAN的loss function，其中包含三項</p>
+<ol>
+<li>Adversarial loss
+<ul>
+<li>目標降低輸入圖片 $x$  和生成圖片$G(x)$間的差距</li>
+<li>而判別器必須訓練成盡量將 $x$ 和$G(x)$區分出來</li>
+<li>$L_{adv}=\mathbb{E}_{x\sim p_x}[\parallel D(x)-D(G(x)) \parallel_2]$</li>
+</ul>
+</li>
+<li>Generator loss
+<ul>
+<li>提升生成器的圖片重構能力 → 生成的圖片要越逼真越好</li>
+<li>使用$L2$ distance來表達原始圖片$x$和生成圖片$G(x)$間的差異</li>
+<li>$L_{G_{con}}=\mathbb{E}_{x\sim P_x}[\parallel x-G(x) \parallel_2]$</li>
+</ul>
+</li>
+<li>Discriminator loss
+<ul>
+<li>目標是讓原圖$x$和二次生成圖$D(x)$越像越好</li>
+<li>使用$L2$ distance來表達兩者間的差異</li>
+<li>$L_{D_{con}}=\mathbb{E}_{x\sim p_x}[\parallel x-D(x) \parallel_2]$</li>
+</ul>
+</li>
+<li>整體DCGAN的loss function為
+$L=\lambda_{adv}L_{adv}+\lambda_{G_{con}}L_{G_{con}}+\lambda_{D_{con}}L_{D_{con}}$</li>
+</ol>
+<h2 id="33-detection-process">3.3. Detection Process</h2>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.07.27.png" alt="截圖 2021-10-30 上午11.07.27.png"></p>
+<ul>
+<li>
+<p>Step1. 待被測試的圖片 $x$ 會送進$G(\cdot)$ 作為輸入</p>
+</li>
+<li>
+<p>Step2. $G(\cdot)$ 重構一張$x$ 的圖 (fake images)</p>
+</li>
+<li>
+<p>Step3. 計算$x$和$G(x)$間的殘差，$R(x,G(x))=\parallel x-G(x) \parallel_2$
+此殘差值會被線性轉換至$0\sim1$的範圍，來設定threshold</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>Step4. 當$R(x,G(x))\ge \theta$ 則判斷此測試樣本為異常樣本</p>
+</li>
+</ul>
+<h1 id="4-experimental-setup">4. Experimental Setup</h1>
+<h2 id="41-datasets">4.1. Datasets</h2>
+<p>使用三種資料集來做訓練及驗證</p>
+<h3 id="411-mvtec-ad">4.1.1. MVTec AD</h3>
+<ul>
+<li>包含15種常見的工業檢測類別
+<ul>
+<li>5種材質</li>
+<li>10種物件</li>
+</ul>
+</li>
+<li>此資料集常被工業界用來驗證深度學習的檢測效能</li>
+<li>細節
+<ul>
+<li>3629張訓練資料+1725張驗證資料</li>
+<li>大小為$700\times700$和$1024\times 1024$</li>
+</ul>
+</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.19.28.png" alt="截圖 2021-10-30 上午11.19.28.png"></p>
+<h3 id="412-production-line-mobile-phone-screen-glass-dataset">4.1.2. Production Line Mobile Phone Screen Glass Dataset</h3>
+<ul>
+<li>使用線掃描器來掃描手機螢幕玻璃</li>
+<li>細節
+<ul>
+<li>329張訓練資料集＋54張驗證資料</li>
+<li>分成正常及異常資料</li>
+<li>大小為$128\times128$</li>
+</ul>
+</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.22.04.png" alt="截圖 2021-10-30 上午11.22.04.png"></p>
+<h3 id="413-production-line-wood-surface-dataset">4.1.3. Production Line Wood Surface Dataset</h3>
+<ul>
+<li>使用線型掃描機器來掃描樹木表面</li>
+<li>包含正常及異常資料集</li>
+<li>此資料集有6個label （正常、白堊、等等）</li>
+<li>細節
+<ul>
+<li>3075張訓練資料+740張驗證資料</li>
+<li>大小為$256\times256$</li>
+</ul>
+</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.48.50.png" alt="截圖 2021-10-30 上午11.48.50.png"></p>
+<h2 id="42-training-detail">4.2. Training Detail</h2>
+<ul>
+<li>Adam optimizer</li>
+<li>learning rate = 0.001</li>
+<li>loss function: $L=\lambda_{adv}L_{adv}+\lambda_{G_{con}}L_{G_{con}}+\lambda_{D_{con}}L_{D_{con}}$</li>
+<li>$\lambda_{adv}=1,\ \lambda_{G_{con}}=40,\ \lambda_{D_{con}}=1$</li>
+<li>training step = 20,000</li>
+<li>使用純U-net檢測來驗證DCGAN中discriminator的重要性</li>
+</ul>
+<h2 id="43-evaluation">4.3. Evaluation</h2>
+<ul>
+<li>使用AUC-ROC來評分
+<ul>
+<li>
+<p>常被用來分析二元分類模型</p>
+</li>
+<li>
+<p>預測結果通常有四個</p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.39.31.png" alt="截圖 2021-10-30 上午11.39.31.png"></p>
+</li>
+<li>
+<p>ROC的 X軸為偽陽性率（FPR）, y軸為真陽性率（TPR）</p>
+<ul>
+<li>$TPR=\frac{TP}{TP+FN}$</li>
+<li>$FPR=\frac{FP}{FP+TN}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-experiment-results">5. Experiment Results</h1>
+<h2 id="51-mvtec-ad-dataset">5.1. MVTec AD Dataset</h2>
+<ul>
+<li>
+<p>在15個類別中，有9個類別DCGAN都是最高分，其餘6項雖然不是最高但也不會差很多</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.49.15.png" alt="截圖 2021-10-30 上午11.49.15.png"></p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.57.51.png" alt="截圖 2021-10-30 上午11.57.51.png"></p>
+<ul>
+<li>
+<p>其中在四個類別中DAGAN或的壓倒性的高分</p>
+<ul>
+<li>地毯：不規則紋路</li>
+<li>磁磚：不規則紋路</li>
+<li>榛樹：不一致的樣本</li>
+<li>牙刷：顏色太多樣</li>
+</ul>
+</li>
+<li>
+<p>訓練樣本變異性高的資料集時</p>
+<ul>
+<li>AnoGAN和GANormaly都沒辦法很好的重構圖片</li>
+</ul>
+</li>
+<li>
+<p>DAGAN在上述四種較複雜類別中的分數也明顯高於U-net架構</p>
+<ul>
+<li>因為U-net的目標只是很好的還原圖片，但還原得太好導致後面再判斷殘差分數時會誤認</li>
+</ul>
+</li>
+<li>
+<p>也能畫出熱向圖</p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8A%E5%8D%8811.59.04.png" alt="截圖 2021-10-30 上午11.59.04.png"></p>
+</li>
+</ul>
+<h2 id="52-production-line-mobile-phone-screen-glass-and-wood-surface-dataset">5.2. Production Line Mobile Phone Screen Glass and Wood Surface Dataset</h2>
+<ul>
+<li>這兩個資料集的變異性高，因此需要較好的圖片重構能力避免魔太崩潰</li>
+<li>Discriminator是必要的</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8B%E5%8D%8812.01.40.png" alt="截圖 2021-10-30 下午12.01.40.png"></p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8B%E5%8D%8812.01.58.png" alt="截圖 2021-10-30 下午12.01.58.png"></p>
+<h2 id="53-training-with-few-data">5.3. Training with Few Data</h2>
+<ul>
+<li>
+<p>使用四種資料集來測試</p>
+<ul>
+<li>材質：
+<ul>
+<li>木頭表面</li>
+<li>磁磚</li>
+</ul>
+</li>
+<li>物件：
+<ul>
+<li>瓶子</li>
+<li>手機玻璃灰塵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>測試資料集的數量 $2^n(0\ge n \ge 7)$，可以看到在少樣本的測資下影響不大</p>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8B%E5%8D%8812.05.21.png" alt="截圖 2021-10-30 下午12.05.21.png"></p>
+</li>
+</ul>
+<p><img src="../paper_resources/Anomaly%20Detection%20Neural%20Network%20with%20Dual%20Auto-Encoders%20GAN%20and%20Its%20Industrial%20Inspection%20Applications/%E6%88%AA%E5%9C%96_2021-10-30_%E4%B8%8B%E5%8D%8812.05.35.png" alt="截圖 2021-10-30 下午12.05.35.png"></p>
+<h1 id="6-conclusions">6. Conclusions</h1>
+<ul>
+<li>DCGAN有很好的圖片重構能力，在訓練過程中更加穩定（雙自動編碼器）</li>
+<li>在變異性高的資料集下，效果明顯優於其他方法</li>
+<li>驗證在少量的訓練資料下，此架構也能很好的重構不熟悉的正常資料</li>
+</ul>
+</section>
 
   
   
@@ -240,15 +653,15 @@
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/step/"
-      ><span class="mr-1.5">←</span><span>Style-based Encoder Pre-training for Multi-modal Image Synthesis</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/"
+      ><span class="mr-1.5">←</span><span>Alias-Free Generative Adversarial Networks</span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/deep-image-compositing/"
-      ><span></span><span class="ml-1.5">→</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/"
+      ><span>HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</span><span class="ml-1.5">→</span></a
     >
     
   </nav>

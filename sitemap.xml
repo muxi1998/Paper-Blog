@@ -2,16 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/</loc>
-    <lastmod>2024-01-09T00:00:00+00:00</lastmod>
+    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/blip/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/</loc>
-    <lastmod>2024-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/</loc>
-    <lastmod>2024-01-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/blip/</loc>
     <lastmod>2024-01-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/post/hello-hugo/</loc>
@@ -20,16 +17,20 @@
     <loc>https://muxi1998.github.io/Paper-Blog/post/</loc>
     <lastmod>2024-01-05T21:08:49+08:00</lastmod>
   </url><url>
+    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/</loc>
+    <lastmod>2022-01-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/</loc>
     <lastmod>2021-11-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/</loc>
+    <lastmod>2021-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/</loc>
     <lastmod>2021-10-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/step/</loc>
     <lastmod>2021-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/</loc>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/deep-image-compositing/</loc>
   </url><url>
@@ -45,9 +46,9 @@
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/</loc>
   </url><url>
-    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/zits/</loc>
-  </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/categories/</loc>
+  </url><url>
+    <loc>https://muxi1998.github.io/Paper-Blog/paper_notes/zits/</loc>
   </url><url>
     <loc>https://muxi1998.github.io/Paper-Blog/tags/</loc>
   </url>

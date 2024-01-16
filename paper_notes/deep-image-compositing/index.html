@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Deep Image Compositing - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,35 @@
   
   
   
-  <meta name="description" content="" />
+  <meta name="description" content="Question List
+Abstract 研究情境
+合成照片(常使用於替換背景)，將一個肖像圖合成在其他背景中 並預期做到合成品質更好（邊界不模糊）的圖
+過去問題
+耗時，為獲得高品質的合成結果，在使用複雜的工具時通常要經過許多步驟才能將照片合成，門檻高 分割 去背 前景去汙 光暈 (合成邊界明顯) 前景汙染 提出方法
+不需要其他使用者輸入資料即可生成高品質的合成照片 進行End-to-end訓練，優化上下文及顏色信息的使用 引入自學策略，由易至難逐步訓練，減輕資料集不足對訓練的影響 [[Note]Laplacian pyramid blending](https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21)
+實驗結果
+可自動生成高品質的合成照片
+比已知的所有方法擁有更好的質與量
+質哪裡比較好?
+邊界幾乎沒有偽影，細節也比較清楚，從PSNR測試及使用者測試中可以得到品質比較好的結論
+量哪裡比較好?
+訓練集的量因為有自己發明的data augmentation演算法，因此訓練資料較多 1.Introduction 研究動機
+過去在合成圖片時，若想得到高品質的合成結果通常耗時耗力且需要一定的經驗與技術（門檻高），因此此研究提出一個全自動且高品質的合成機制
+過去經驗
+採用salient object segmentation model分割前景，會有偽影的問題
+Why偽影？
+因為在邊界融合時使用較低階的融合方法 e.g.Poisson融合，Laplacian融合，羽化
+直覺的copy-past不再適用（邊界問題）
+GT mask 概念
+因此有人提出從前景中提取物件遮罩的概念，著重在alpha channel（透明度），即為Ground truth matte
+利用GT matte訓練一個可以預測image matte的模型
+若模型預測極盡正確的物件遮罩，就可以協助合成圖片
+缺點
+需要人為準備training data（trimap: 前景、後景、不確定區域） 儘管有高品質的物件遮罩，在合成圖片還是有光暈問題 Harmonization 概念 改善前後景融合的交界顏色 缺點 需要使用者先提供無光暈的完美物件遮罩才能進行 提出解法
+全自動的end-to-end深度學習模型
+新的multi-stream fusion模型，可以融合不同尺度的圖片
+在提取肖像遮罩時使用兩個network
+Foreground segmentation network refinement network 易至難的data augmentation來建立自學合成的機制" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -105,14 +133,70 @@
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="">
+  <meta itemprop="name" content="Deep Image Compositing">
+<meta itemprop="description" content="Question List
+Abstract 研究情境
+合成照片(常使用於替換背景)，將一個肖像圖合成在其他背景中 並預期做到合成品質更好（邊界不模糊）的圖
+過去問題
+耗時，為獲得高品質的合成結果，在使用複雜的工具時通常要經過許多步驟才能將照片合成，門檻高 分割 去背 前景去汙 光暈 (合成邊界明顯) 前景汙染 提出方法
+不需要其他使用者輸入資料即可生成高品質的合成照片 進行End-to-end訓練，優化上下文及顏色信息的使用 引入自學策略，由易至難逐步訓練，減輕資料集不足對訓練的影響 [[Note]Laplacian pyramid blending](https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21)
+實驗結果
+可自動生成高品質的合成照片
+比已知的所有方法擁有更好的質與量
+質哪裡比較好?
+邊界幾乎沒有偽影，細節也比較清楚，從PSNR測試及使用者測試中可以得到品質比較好的結論
+量哪裡比較好?
+訓練集的量因為有自己發明的data augmentation演算法，因此訓練資料較多 1.Introduction 研究動機
+過去在合成圖片時，若想得到高品質的合成結果通常耗時耗力且需要一定的經驗與技術（門檻高），因此此研究提出一個全自動且高品質的合成機制
+過去經驗
+採用salient object segmentation model分割前景，會有偽影的問題
+Why偽影？
+因為在邊界融合時使用較低階的融合方法 e.g.Poisson融合，Laplacian融合，羽化
+直覺的copy-past不再適用（邊界問題）
+GT mask 概念
+因此有人提出從前景中提取物件遮罩的概念，著重在alpha channel（透明度），即為Ground truth matte
+利用GT matte訓練一個可以預測image matte的模型
+若模型預測極盡正確的物件遮罩，就可以協助合成圖片
+缺點
+需要人為準備training data（trimap: 前景、後景、不確定區域） 儘管有高品質的物件遮罩，在合成圖片還是有光暈問題 Harmonization 概念 改善前後景融合的交界顏色 缺點 需要使用者先提供無光暈的完美物件遮罩才能進行 提出解法
+全自動的end-to-end深度學習模型
+新的multi-stream fusion模型，可以融合不同尺度的圖片
+在提取肖像遮罩時使用兩個network
+Foreground segmentation network refinement network 易至難的data augmentation來建立自學合成的機制">
 
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="482">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="" />
+  <meta property="og:title" content="Deep Image Compositing" />
+<meta property="og:description" content="Question List
+Abstract 研究情境
+合成照片(常使用於替換背景)，將一個肖像圖合成在其他背景中 並預期做到合成品質更好（邊界不模糊）的圖
+過去問題
+耗時，為獲得高品質的合成結果，在使用複雜的工具時通常要經過許多步驟才能將照片合成，門檻高 分割 去背 前景去汙 光暈 (合成邊界明顯) 前景汙染 提出方法
+不需要其他使用者輸入資料即可生成高品質的合成照片 進行End-to-end訓練，優化上下文及顏色信息的使用 引入自學策略，由易至難逐步訓練，減輕資料集不足對訓練的影響 [[Note]Laplacian pyramid blending](https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21)
+實驗結果
+可自動生成高品質的合成照片
+比已知的所有方法擁有更好的質與量
+質哪裡比較好?
+邊界幾乎沒有偽影，細節也比較清楚，從PSNR測試及使用者測試中可以得到品質比較好的結論
+量哪裡比較好?
+訓練集的量因為有自己發明的data augmentation演算法，因此訓練資料較多 1.Introduction 研究動機
+過去在合成圖片時，若想得到高品質的合成結果通常耗時耗力且需要一定的經驗與技術（門檻高），因此此研究提出一個全自動且高品質的合成機制
+過去經驗
+採用salient object segmentation model分割前景，會有偽影的問題
+Why偽影？
+因為在邊界融合時使用較低階的融合方法 e.g.Poisson融合，Laplacian融合，羽化
+直覺的copy-past不再適用（邊界問題）
+GT mask 概念
+因此有人提出從前景中提取物件遮罩的概念，著重在alpha channel（透明度），即為Ground truth matte
+利用GT matte訓練一個可以預測image matte的模型
+若模型預測極盡正確的物件遮罩，就可以協助合成圖片
+缺點
+需要人為準備training data（trimap: 前景、後景、不確定區域） 儘管有高品質的物件遮罩，在合成圖片還是有光暈問題 Harmonization 概念 改善前後景融合的交界顏色 缺點 需要使用者先提供無光暈的完美物件遮罩才能進行 提出解法
+全自動的end-to-end深度學習模型
+新的multi-stream fusion模型，可以融合不同尺度的圖片
+在提取肖像遮罩時使用兩個network
+Foreground segmentation network refinement network 易至難的data augmentation來建立自學合成的機制" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/deep-image-compositing/" /><meta property="article:section" content="paper_notes" />
 
@@ -120,8 +204,36 @@
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Deep Image Compositing"/>
+<meta name="twitter:description" content="Question List
+Abstract 研究情境
+合成照片(常使用於替換背景)，將一個肖像圖合成在其他背景中 並預期做到合成品質更好（邊界不模糊）的圖
+過去問題
+耗時，為獲得高品質的合成結果，在使用複雜的工具時通常要經過許多步驟才能將照片合成，門檻高 分割 去背 前景去汙 光暈 (合成邊界明顯) 前景汙染 提出方法
+不需要其他使用者輸入資料即可生成高品質的合成照片 進行End-to-end訓練，優化上下文及顏色信息的使用 引入自學策略，由易至難逐步訓練，減輕資料集不足對訓練的影響 [[Note]Laplacian pyramid blending](https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21)
+實驗結果
+可自動生成高品質的合成照片
+比已知的所有方法擁有更好的質與量
+質哪裡比較好?
+邊界幾乎沒有偽影，細節也比較清楚，從PSNR測試及使用者測試中可以得到品質比較好的結論
+量哪裡比較好?
+訓練集的量因為有自己發明的data augmentation演算法，因此訓練資料較多 1.Introduction 研究動機
+過去在合成圖片時，若想得到高品質的合成結果通常耗時耗力且需要一定的經驗與技術（門檻高），因此此研究提出一個全自動且高品質的合成機制
+過去經驗
+採用salient object segmentation model分割前景，會有偽影的問題
+Why偽影？
+因為在邊界融合時使用較低階的融合方法 e.g.Poisson融合，Laplacian融合，羽化
+直覺的copy-past不再適用（邊界問題）
+GT mask 概念
+因此有人提出從前景中提取物件遮罩的概念，著重在alpha channel（透明度），即為Ground truth matte
+利用GT matte訓練一個可以預測image matte的模型
+若模型預測極盡正確的物件遮罩，就可以協助合成圖片
+缺點
+需要人為準備training data（trimap: 前景、後景、不確定區域） 儘管有高品質的物件遮罩，在合成圖片還是有光暈問題 Harmonization 概念 改善前後景融合的交界顏色 缺點 需要使用者先提供無光暈的完美物件遮罩才能進行 提出解法
+全自動的end-to-end深度學習模型
+新的multi-stream fusion模型，可以融合不同尺度的圖片
+在提取肖像遮罩時使用兩個network
+Foreground segmentation network refinement network 易至難的data augmentation來建立自學合成的機制"/>
 
   
   
@@ -215,7 +327,7 @@
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Deep Image Compositing</h1>
 
     
     <div class="text-sm antialiased opacity-60">
@@ -227,7 +339,654 @@
     
   </header>
 
-  <section></section>
+  <section><p><a href="../paper_resources/Deep%20Image%20Compositing/Question%20List%2088039fe1ec614558bb654b5491141a56.csv">Question List</a></p>
+<h1 id="abstract">Abstract</h1>
+<ul>
+<li>
+<p><strong>研究情境</strong></p>
+<p>合成照片(常使用於替換背景)，將一個肖像圖合成在其他背景中
+並預期做到合成品質更好（邊界不模糊）的圖</p>
+</li>
+<li>
+<p><strong>過去問題</strong></p>
+<ol>
+<li>耗時，為獲得高品質的合成結果，在使用複雜的工具時通常要經過許多步驟才能將照片合成，門檻高
+<ul>
+<li>分割</li>
+<li>去背</li>
+<li>前景去汙</li>
+</ul>
+</li>
+<li>光暈 (合成邊界明顯)</li>
+<li>前景汙染</li>
+</ol>
+</li>
+<li>
+<p><strong>提出方法</strong></p>
+<ul>
+<li>不需要其他使用者輸入資料即可生成高品質的合成照片</li>
+<li>進行<a href="https://www.itread01.com/content/1546712649.html">End-to-end</a>訓練，優化<strong>上下文</strong>及<strong>顏色信息</strong>的使用</li>
+<li>引入<strong>自學策略</strong>，由易至難逐步訓練，減輕資料集不足對訓練的影響</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[[Note]<a href="https://www.gushiciku.cn/pl/gWe0/zh-tw">Laplacian pyramid blending</a>](<a href="https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21">https://www.notion.so/Note-Laplacian-pyramid-blending-6938543340bb46218cafc61d63d79079?pvs=21</a>)</p>
+</li>
+<li>
+<p>實驗結果</p>
+<ul>
+<li>
+<p>可自動生成高品質的合成照片</p>
+</li>
+<li>
+<p>比已知的所有方法擁有更好的<strong>質</strong>與<strong>量</strong></p>
+</li>
+<li>
+<p>質哪裡比較好?</p>
+<p>邊界幾乎沒有偽影，細節也比較清楚，從PSNR測試及使用者測試中可以得到品質比較好的結論</p>
+</li>
+<li>
+<p>量哪裡比較好?</p>
+<ul>
+<li>訓練集的量因為有自己發明的data augmentation演算法，因此訓練資料較多</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="1introduction">1.Introduction</h1>
+<ul>
+<li>
+<p>研究動機</p>
+<p>過去在合成圖片時，若想得到高品質的合成結果通常<strong>耗時耗力</strong>且需要一定的經驗與技術（<strong>門檻高</strong>），因此此研究提出一個<strong>全自動且高品質</strong>的合成機制</p>
+</li>
+<li>
+<p>過去經驗</p>
+<ol>
+<li>
+<p>採用salient object segmentation model分割前景，會有<strong>偽影的問題</strong></p>
+<ul>
+<li>
+<p>Why偽影？</p>
+<p>因為在邊界融合時使用較低階的融合方法 e.g.Poisson融合，Laplacian融合，羽化</p>
+</li>
+</ul>
+</li>
+<li>
+<p>直覺的copy-past不再適用（邊界問題）</p>
+<ul>
+<li>GT mask
+<ul>
+<li>
+<p><strong>概念</strong></p>
+<ul>
+<li>
+<p>因此有人提出從前景中提取<strong>物件遮罩</strong>的概念，著重在alpha channel（透明度），即為Ground truth matte</p>
+</li>
+<li>
+<p>利用GT matte訓練一個可以預測image matte的模型</p>
+<p>若模型預測極盡正確的物件遮罩，就可以協助合成圖片</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>缺點</strong></p>
+<ul>
+<li>需要人為準備training data（trimap: 前景、後景、不確定區域）</li>
+<li>儘管有高品質的物件遮罩，在合成圖片<strong>還是有光暈問題</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Harmonization
+<ul>
+<li><strong>概念</strong>
+<ul>
+<li>改善前後景融合的交界顏色</li>
+</ul>
+</li>
+<li><strong>缺點</strong>
+<ul>
+<li>需要使用者先提供無光暈的完美物件遮罩才能進行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>提出解法</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>全自動的end-to-end深度學習模型</p>
+</li>
+<li>
+<p>新的multi-stream fusion模型，<strong>可以融合不同尺度</strong>的圖片</p>
+<p>在提取肖像遮罩時使用兩個network</p>
+<ol>
+<li>Foreground segmentation network</li>
+<li>refinement network</li>
+</ol>
+</li>
+<li>
+<p>易至難的data augmentation來建立自學合成的機制</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2related-works">2.Related Works</h1>
+<h2 id="21-image-compositing">2.1. Image Compositing</h2>
+<ul>
+<li><strong>過去技術</strong>
+<ul>
+<li><strong>著重於個別範疇</strong>
+<ul>
+<li>image harmonization</li>
+<li>image matting</li>
+<li>image blending</li>
+</ul>
+</li>
+<li><strong>經典的圖片合成方法 (著重於合成邊界的處理)</strong>
+<ol>
+<li>
+<p>Alpha blending</p>
+<ul>
+<li>
+<p>最簡單直覺的方法</p>
+</li>
+<li>
+<p>依據前景的不透明度合成背景</p>
+</li>
+<li>
+<p>造成細節模糊或光暈偽影的問題</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+<li>
+<p>Laplacian pyramid blending</p>
+<ul>
+<li>可以處理不同尺寸的圖片融合</li>
+<li>不同scale會有甚麼問題
+<ol>
+<li>放大縮小倍數</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>提出技術</strong>
+<ul>
+<li>將圖片和成的各個範疇統合成一個模型</li>
+<li>且目標放在提升合成的結果是否擬真</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-data-augmentation">2.2. Data Augmentation</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>常見的data augmentation方法 ( e.g. 剪裁, 翻轉, 顏色變換 )不適用於此研究的資料集</p>
+<p>因為重點不在單張圖的多樣化，而是一組三張關聯性圖的生成</p>
+</li>
+<li>
+<p>此研究提出一個方法可以自動生成以 <strong>前景，背景，合成結果</strong> 一組為單位的資料</p>
+</li>
+</ul>
+<h1 id="3-deep-image-compositing">3. Deep Image Compositing</h1>
+<ul>
+<li>
+<p><strong>輸入</strong>( x2 )：前景圖、背景圖</p>
+</li>
+<li>
+<p>輸出 ( x1 ) : 高品質合成圖</p>
+</li>
+<li>
+<p><strong>整體模型架構圖</strong></p>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561.png" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561.png"></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+</ul>
+<h2 id="31-multi-stream-fusion-network-for-compositing-mlf">3.1. Multi-stream Fusion Network for Compositing (MLF)</h2>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/IMG_464D46507A49-1.jpeg" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561/IMG_464D46507A49-1.jpeg"></p>
+<ul>
+<li>
+<p>獨立的模組
+可與其他現成的Segmentation Network和matting model銜接使用</p>
+</li>
+<li>
+<p>目標：</p>
+<ol>
+<li>將前景切割下來融合至背景圖中 並看起來自然</li>
+<li>減少融合的假影（顏色污染等）</li>
+</ol>
+</li>
+<li>
+<p>參考Laplacian blending method多層融合並優化的概念</p>
+<ul>
+<li>元素：
+<ul>
+<li>編碼器 x2 ( 前景/背景各一個)</li>
+<li>解碼器 x1 (分層融合)</li>
+<li>編碼器解碼器架構</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Loss function選用</p>
+<ul>
+<li>L1 loss和perceptual loss</li>
+<li>$L_{all}=L_1+\lambda_PL_P$</li>
+</ul>
+<p><a href="https://www.notion.so/L1-Loss-38ea268c84454270bb1674ca0e9324b9?pvs=21">L1 Loss</a></p>
+<p><a href="https://www.notion.so/Perceptual-loss-79f80ebbdf0448918d9054fd61d0497b?pvs=21">Perceptual loss</a></p>
+</li>
+</ul>
+<h2 id="32-segmentation-and-mask-refinement-networks">3.2. Segmentation and Mask Refinement Networks</h2>
+<ul>
+<li>
+<p><strong>Segmentation</strong>
+可被替換成下列model</p>
+<ul>
+<li>Salient object segmentation model</li>
+<li>Portrait segmentation model</li>
+</ul>
+</li>
+<li>
+<p><strong>Mask Refinement Network</strong></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>和Segmentation model的架構大致是一樣的</li>
+<li>差在此模型的input有RGB-A其中的A通道就是前一個模型輸出的Raw mask</li>
+<li><strong>訓練過程</strong>
+<ul>
+<li>輸入
+<ol>
+<li>經<strong>裁剪</strong>後的圖片</li>
+<li>Raw mask</li>
+</ol>
+</li>
+<li>輸出
+<ul>
+<li>一個 <strong>Local</strong> refined mask</li>
+</ul>
+</li>
+<li>訓練資料集與Cross entropy loss function都是和Segmentation model一樣
+<ul>
+<li>訓練的時候加入一些補丁處，讓模型能專注於特定的點
+<ul>
+<li>那些特定的點?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>測試過程</strong>
+<ul>
+<li>輸入為整張完整的圖以及其Raw mask</li>
+</ul>
+</li>
+<li><strong>實作部分  兩階段架構</strong>
+<ul>
+<li>第一階段
+<ul>
+<li>將原始圖片及其Raw mask設為$320 \times320$</li>
+<li>生成此解析度的Refine mask</li>
+</ul>
+</li>
+<li>第二階段
+<ul>
+<li>將原始圖片resize為$640 \times640$</li>
+<li>Upsample前一個階段的refine mask至$640 \times640$</li>
+<li>再生成一個此解析度的raw mask</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-easy-to-hard-data-augmentation">4. Easy-to-Hard Data Augmentation</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>🔑   善用已訓練好的模型自行生成更多資料</p>
+<ul>
+<li><strong>MLF 模型訓練過程</strong>
+<ul>
+<li><strong>第一階段</strong>
+<ul>
+<li>
+<p><strong>預處理</strong></p>
+<ol>
+<li>
+<p>簡單的前景圖（透過Deep Image Matting發表的matting方法來取得mat）</p>
+</li>
+<li>
+<p>上網抓背景圖</p>
+</li>
+<li>
+<p><strong>手動</strong>將前背景圖融合（善用alpha channel的資訊）</p>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/GenerateEasyTrainingTriplet.png" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561/GenerateEasyTrainingTriplet.png"></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>訓練</strong></p>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/traingingMLF_v1.png" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561/traingingMLF_v1.png"></p>
+</li>
+<li>
+<p>模型目前能力：可以融合<strong>簡單的前景</strong>與<strong>隨機背景</strong></p>
+</li>
+</ul>
+</li>
+<li><strong>第二階段</strong>
+<ul>
+<li>
+<p><strong>預處理</strong></p>
+<ol>
+<li>簡單的背景圖（上網任意抓）</li>
+<li>上網抓背景圖</li>
+<li>使用第一個版本的<strong>MLF生成</strong>之後訓練所需的資料集</li>
+<li>$C&rsquo;=EasyFG\oplus BG2=FG&rsquo;\oplus BG'$</li>
+</ol>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/IMG_031733EEBB19-1.jpeg" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561/IMG_031733EEBB19-1.jpeg"></p>
+</li>
+<li>
+<p>模型目前能力：可以融合複雜前景與隨機背景</p>
+<p><img src="../paper_resources/Deep%20Image%20Compositing/trainingMLF_v2.png" alt="Deep%20Image%20Compositing%2042fb3e698f074a26b56d2a019b452561/trainingMLF_v2.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-experiments">5. Experiments</h1>
+<ul>
+<li>
+<p>評價此MLF架構的角度</p>
+<ul>
+<li><strong>結果</strong>
+<ol>
+<li>定量分析 (PSNR客觀數值)</li>
+<li>感知評價 (視覺上感受)
+<ul>
+<li>參與評比的方法
+<ol>
+<li>Laplacian Pyramid Blending</li>
+<li>Matting based</li>
+<li>Information-flow</li>
+<li>DIM</li>
+<li>Index-net</li>
+<li>MLF的Sigle-stream版</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>受測者44位</li>
+<li>14組測試資料
+<ul>
+<li>各組2張照片
+<ol>
+<li>前景</li>
+<li>融合成果</li>
+</ol>
+</li>
+<li>每組都有所有比較方法的結果</li>
+</ul>
+</li>
+<li>受測者在每組測資中選出前三名喜歡的結果(依序給1-3, 其餘皆給8)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>架構</strong>
+<ol>
+<li>簡化架構</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>主要比較方法</p>
+<ul>
+<li>Laplacian pyramid blending 傳統混合法(非基於matting)</li>
+<li>Closed-Form Matting based</li>
+<li>KNN  Matting based</li>
+<li>Information-flow  Matting based</li>
+<li>Deep Image Matting  Matting based</li>
+<li>Index-net  Matting based</li>
+<li>Copy-past Baseline</li>
+</ul>
+</li>
+<li>
+<p>資料集來源</p>
+<ul>
+<li>Segmentation和Refinement network
+<ul>
+<li>
+<p>**DUTS (**10553+ 5019張)</p>
+<ul>
+<li>共10553張</li>
+<li>兩個資料夾(分別為<strong>原始圖</strong>與其<strong>對應遮罩</strong>)</li>
+</ul>
+<p><a href="http://saliencydetection.net/duts/#org0602ffb">The DUTS Image Dataset</a></p>
+</li>
+<li>
+<p><strong>MSRA-10K</strong> (10000張)</p>
+<p><a href="https://mmcheng.net/msra10k/">MSRA10K Salient Object Database</a></p>
+</li>
+<li>
+<p><strong>Portrait segmentation</strong> (4632張)</p>
+<ul>
+<li>
+<p><strong>Deep Automatic Portrait Matting</strong> (1700+300張)</p>
+<p><a href="http://xiaoyongshen.me/webpages/webpage_automatting/">Deep Automatic Portrait Matting</a></p>
+</li>
+<li>
+<p><strong>Automatic portrait segmentation for image stylization</strong> (2632張)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Multi-fusion compositing network
+<ul>
+<li>Training
+<ul>
+<li>matting-based 合成資料集(手動)
+<ul>
+<li>30000張圖</li>
+<li>使用GT遮罩來合成前景與背景</li>
+</ul>
+</li>
+<li>self-taught data augmentation資料集(自動)</li>
+</ul>
+</li>
+<li>Testing
+<ul>
+<li>
+<p>SynTest</p>
+<p>使用self-taught data augmentation生成的測試資料</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>實作細節</p>
+<ul>
+<li>Segmentation和Refinement network
+<ul>
+<li>Input size: $256 \times 256$</li>
+<li>Adam更新方法learning rate為$2\times 10^{-3}$</li>
+<li>batch size: 8</li>
+</ul>
+</li>
+<li>Multi-fusion compositing network
+<ul>
+<li>
+<p>Input size:</p>
+<ul>
+<li>Training: $384 \times 384$</li>
+<li>Testing: $768 \times 768$</li>
+</ul>
+</li>
+<li>
+<p>Adam更新方法learning rate為$2\times 10^{-3}$</p>
+</li>
+<li>
+<p>batch size: 8</p>
+</li>
+<li>
+<p>iteration: 200000</p>
+</li>
+<li>
+<p>$L_{all}=L_1+$$0.8$$L_P$</p>
+<p>$L_{all}=L_1+\lambda_PL_P$</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="51-results">5.1. Results</h2>
+<p>融合品質的評估主要由兩個層面</p>
+<ol>
+<li><strong>PSNR(客觀數值數據比較)</strong>
+<ul>
+<li>
+<p><strong>什麼是PSNR(峰值訊噪比)</strong></p>
+<p>Peak signal-to-noise ratio</p>
+<ul>
+<li>
+<p>拿原始圖$I$與壓縮圖$K$進行比較</p>
+</li>
+<li>
+<p>使用MSE均方差進行定義</p>
+<p>$MSE=\frac{1}{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$</p>
+<p>$PSNR=20\cdot\log_{10}(\frac{MAX_I}{\sqrt{MSE}})$
+$PSNR_{RGB}=10\cdot\log_{10}(\frac{MAX_I^2}{\frac{1}{3mn}\sum_{R,G,B}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I_{color}(i,j)-K_{color}(i,j)]^2})$</p>
+</li>
+<li>
+<p>評分標準</p>
+<ul>
+<li>PSNR接近 50dB ，代表壓縮後的圖像僅有些許非常小的誤差。</li>
+<li>PSNR大於 30dB ，人眼很難察覺壓縮後和原始影像的差異。</li>
+<li>PSNR介於 20dB 到 30dB 之間，人眼就可以察覺出圖像的差異。</li>
+<li>PSNR介於 10dB 到 20dB 之間，人眼還是可以用肉眼看出這個圖像原始的結構，且直觀上會判斷兩張圖像不存在很大的差異。</li>
+<li>PSNR低於 10dB，人類很難用肉眼去判斷兩個圖像是否為相同，一個圖像是否為另一個圖像的壓縮結果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>各方法比較結果</strong></p>
+<ul>
+<li>羽化和Laplacian pyramid方法
+<ol>
+<li>模糊邊界</li>
+<li>遠看效果還不錯，近看細節消失太多</li>
+<li>會有光暈假影（糊化的關係）</li>
+</ol>
+</li>
+<li>遮罩相關方法
+<ol>
+<li>細節還不錯</li>
+<li>合成品質好壞高度依賴遮罩的完整度</li>
+</ol>
+</li>
+<li>本研究方法
+<ol>
+<li>遮罩容錯率高(segmentation model若切割的不是很完美還是會有refine network補救)</li>
+<li>邊界細節保留最完整(因為遮罩有refine過)</li>
+<li>補足matte不足的部分</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>人為主觀測試</strong>
+<ul>
+<li>
+<p>總共44位受測者</p>
+</li>
+<li>
+<p>每人測試14組合成圖片</p>
+</li>
+<li>
+<p>規則
+受測者在每組測試圖片中選出最喜歡的前三名並給予1-3分(越低越好)，其餘直接給8</p>
+</li>
+<li>
+<p>必較結果</p>
+<ol>
+<li>本研究方法
+9/14中排名第一</li>
+<li>Index-net
+4/14中排名第一</li>
+<li>DIM
+1/14中排名第一</li>
+</ol>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="52-ablation-study">5.2. Ablation Study</h2>
+<p>為了檢測MLF整體架構的必要性與效能，在此部分嘗試將MLF與抽掉部分架構的MLF進行結果比較</p>
+<ul>
+<li><strong>Data augmentation</strong>
+<ul>
+<li>重新訓練MLF模型，但訓<strong>練資料僅有原本使用matting-based合成的測資</strong></li>
+<li>訓練資料明顯不足，造成合成後的前景可能會混到背景的顏色</li>
+</ul>
+</li>
+<li><strong>Two-stream</strong>
+<ul>
+<li>拿掉前背景各一個encoder-decoder的架構，而是將前景、背景、遮罩全部連接再一起當作輸入，並調整參數量勁量與之前的相符</li>
+<li>造成前景小部分遺失及邊界假影較為明顯</li>
+</ul>
+</li>
+<li><strong>Mask-refinement</strong>
+<ul>
+<li>Segmentation network產出的matte不進行refine，直接使用raw matte進行合成</li>
+<li>合成後的物件邊界會殘留些許舊背景的顏色(遮罩誤差)</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-conclusion">6. Conclusion</h1>
+<ul>
+<li>End-to-end圖片融合架構</li>
+<li>Multi-stream fusion網路</li>
+<li>自學的data-augmentation演算法</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h1 id="more-reference">More Reference</h1>
+<ul>
+<li>
+<p>Deep Image Matting</p>
+<p><a href="https://arxiv.org/pdf/1703.03872.pdf"></a></p>
+</li>
+</ul>
+</section>
 
   
   
@@ -240,15 +999,15 @@
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/step/"
-      ><span class="mr-1.5">←</span><span>Style-based Encoder Pre-training for Multi-modal Image Synthesis</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/"
+      ><span class="mr-1.5">←</span><span></span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/fuseformer-fusing-fine-grained-information-in-transformers-for-video-inpainting/"
-      ><span></span><span class="ml-1.5">→</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/zits/"
+      ><span>Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding</span><span class="ml-1.5">→</span></a
     >
     
   </nav>

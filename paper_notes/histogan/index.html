@@ -51,9 +51,10 @@
   
   
   
-  <meta name="description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+  <meta name="description" content="方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
 Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
-Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1." />
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1. Motivation and Related work 顏色直方圖是個很好用來表達圖片顏色的方法，有許多種不同的顏色直方圖來表達顏色分佈
+3D histogram 2D histogram color palette color triad 動機" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -108,17 +109,19 @@ Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能�
   
   
   <meta itemprop="name" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms">
-<meta itemprop="description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+<meta itemprop="description" content="方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
 Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
-Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1."><meta itemprop="datePublished" content="2021-10-06T00:00:00+00:00" />
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1. Motivation and Related work 顏色直方圖是個很好用來表達圖片顏色的方法，有許多種不同的顏色直方圖來表達顏色分佈
+3D histogram 2D histogram color palette color triad 動機"><meta itemprop="datePublished" content="2021-10-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-10-06T00:00:00+00:00" />
-<meta itemprop="wordCount" content="265">
+<meta itemprop="wordCount" content="254">
 <meta itemprop="keywords" content="" />
   
   <meta property="og:title" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms" />
-<meta property="og:description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+<meta property="og:description" content="方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
 Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
-Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1." />
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1. Motivation and Related work 顏色直方圖是個很好用來表達圖片顏色的方法，有許多種不同的顏色直方圖來表達顏色分佈
+3D histogram 2D histogram color palette color triad 動機" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/histogan/" /><meta property="article:section" content="paper_notes" />
 <meta property="article:published_time" content="2021-10-06T00:00:00+00:00" />
@@ -127,9 +130,10 @@ Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能�
 
   
   <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms"/>
-<meta name="twitter:description" content="HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
+<meta name="twitter:description" content="方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
 Main idea Scheme 在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）
-Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1."/>
+Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能會影響到被轉換的內容細節（紋理、色調） 轉換的品質好壞非常依賴input和target圖片間語意相似性（是否在同一個domain） 想要有好的風格轉換效果就必須在同一個domain下 Method 只藉由color histogram來協助deep network的效果 由此就可以從任意的domain中提取色彩 Result Abstract HistoGAN based on StyleGAN architecture control the GAN-generated images specified by a target color histogram feature ReHistoGAN expend HistoGAN to recolor the generated image encoder unsupervised keep the original images content while changing the colors based on the given target histogram 1. Motivation and Related work 顏色直方圖是個很好用來表達圖片顏色的方法，有許多種不同的顏色直方圖來表達顏色分佈
+3D histogram 2D histogram color palette color triad 動機"/>
 
   
   
@@ -237,8 +241,7 @@ Previous work Problems (motivation) 基於一張風格目標圖做轉換 可能�
     
   </header>
 
-  <section><h1 id="histogan-controlling-colors-of-gan-generated-and-real-images-via-color-histograms">HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms</h1>
-<p>方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留</p>
+  <section><p>方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留</p>
 <h1 id="main-idea">Main idea</h1>
 <h2 id="scheme">Scheme</h2>
 <p>在做圖片的風格轉換時，特別關注於對顏色的控制（可以視為Style transfer的一個sub-category）</p>

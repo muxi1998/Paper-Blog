@@ -51,7 +51,7 @@
   
   
   
-  <meta name="description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+  <meta name="description" content="Abstract 問題情境
 除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
 過去解法
 研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
@@ -64,7 +64,9 @@
 將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
 2. Related work GAN-based Image Synthesis 目前情況
 已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
-傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變" />
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變
+撇開在2D空間的思維，將所有運算轉成在3D空間進行 發現能夠達到更好的解耦合且更可控的合成 Implicit Functions 目前情況
+重塑3D幾何結構，目前也使用重構場景 傳統3D的重構是需要大量的人力監督來完成，因此有人提出微分渲染 有人提出重要的NeRFs，可以達到在複雜場景下仍能以不同視角的合成 隱涵神經網路模型 體渲染技術 遇到挑戰" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -119,7 +121,7 @@
   
   
   <meta itemprop="name" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields">
-<meta itemprop="description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+<meta itemprop="description" content="Abstract 問題情境
 除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
 過去解法
 研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
@@ -132,13 +134,15 @@
 將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
 2. Related work GAN-based Image Synthesis 目前情況
 已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
-傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變"><meta itemprop="datePublished" content="2022-01-10T00:00:00+00:00" />
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變
+撇開在2D空間的思維，將所有運算轉成在3D空間進行 發現能夠達到更好的解耦合且更可控的合成 Implicit Functions 目前情況
+重塑3D幾何結構，目前也使用重構場景 傳統3D的重構是需要大量的人力監督來完成，因此有人提出微分渲染 有人提出重要的NeRFs，可以達到在複雜場景下仍能以不同視角的合成 隱涵神經網路模型 體渲染技術 遇到挑戰"><meta itemprop="datePublished" content="2022-01-10T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-01-10T00:00:00+00:00" />
-<meta itemprop="wordCount" content="351">
+<meta itemprop="wordCount" content="342">
 <meta itemprop="keywords" content="" />
   
   <meta property="og:title" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields" />
-<meta property="og:description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+<meta property="og:description" content="Abstract 問題情境
 除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
 過去解法
 研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
@@ -151,7 +155,9 @@
 將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
 2. Related work GAN-based Image Synthesis 目前情況
 已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
-傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變" />
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變
+撇開在2D空間的思維，將所有運算轉成在3D空間進行 發現能夠達到更好的解耦合且更可控的合成 Implicit Functions 目前情況
+重塑3D幾何結構，目前也使用重構場景 傳統3D的重構是需要大量的人力監督來完成，因此有人提出微分渲染 有人提出重要的NeRFs，可以達到在複雜場景下仍能以不同視角的合成 隱涵神經網路模型 體渲染技術 遇到挑戰" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/giraffe-representing-scenes-as-compositional-generative-neural-feature-fields/" /><meta property="article:section" content="paper_notes" />
 <meta property="article:published_time" content="2022-01-10T00:00:00+00:00" />
@@ -160,7 +166,7 @@
 
   
   <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"/>
-<meta name="twitter:description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields Abstract 問題情境
+<meta name="twitter:description" content="Abstract 問題情境
 除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的
 過去解法
 研究latent code的解耦合，想辦法透過不同的factor來控制data的變異性 問題發現
@@ -173,7 +179,9 @@
 將場景體積渲染到一個較低畫素的特徵圖片 透過神經渲染過程來處理特徵圖，最後輸出最終渲染圖
 2. Related work GAN-based Image Synthesis 目前情況
 已被證實可以成功在高解析度(1024$\times$1024)圖片下進行合成 多個研究如何在不給予額外監督下，也能對不同的factor進行解耦合 修改訓練目標(training objective) 改變網路架構 研究潛在空間 遇到挑戰
-傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變"/>
+傳統的GAN方法都沒有明確的模擬場景的構成性質，目前開始研究如何對object-level進行控制 創新改變
+撇開在2D空間的思維，將所有運算轉成在3D空間進行 發現能夠達到更好的解耦合且更可控的合成 Implicit Functions 目前情況
+重塑3D幾何結構，目前也使用重構場景 傳統3D的重構是需要大量的人力監督來完成，因此有人提出微分渲染 有人提出重要的NeRFs，可以達到在複雜場景下仍能以不同視角的合成 隱涵神經網路模型 體渲染技術 遇到挑戰"/>
 
   
   
@@ -281,8 +289,7 @@
     
   </header>
 
-  <section><h1 id="giraffe-representing-scenes-as-compositional-generative-neural-feature-fields">GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1>
-<h1 id="abstract">Abstract</h1>
+  <section><h1 id="abstract">Abstract</h1>
 <p><strong>問題情境</strong></p>
 <p>除了能更真實的合成(生成)圖片，還要能讓圖片內容是可以控制的</p>
 <p><strong>過去解法</strong></p>

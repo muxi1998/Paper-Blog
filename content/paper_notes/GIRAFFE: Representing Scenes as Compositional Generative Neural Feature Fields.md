@@ -4,8 +4,6 @@ date: 2022-01-10
 draft: false
 ---
 
-# GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields
-
 # Abstract
 
 **問題情境**

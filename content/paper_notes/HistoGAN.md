@@ -4,9 +4,6 @@ date: 2021-10-06
 draft: false
 ---
 
-# HistoGAN: Controlling Colors of GAN-Generated and Real Images via Color Histograms
-
-
 方法不局限於同個domain下的顏色轉換，而是單純就color histogram來轉換顏色，而內容保留
 
 # Main idea

@@ -4,8 +4,6 @@ date: 2021-10-06
 draft: false
 ---
 
-# Style-based Encoder Pre-training for Multi-modal Image Synthesis
-
 # Main idea
 
 ## Scheme

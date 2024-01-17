@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>A Style-Based Generator Architecture for Generative Adversarial Networks - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,15 @@
   
   
   
-  <meta name="description" content="" />
+  <meta name="description" content="Abstract 此篇論文提出一個新的GAN架構，可以達到以下目的 自動且非監督式學習將高階的特徵（動作和身份）分開 利用隨機噪聲達到生成圖片的隨機變化(stochastic variation) Ex: 雀斑位置、頭髮文理 更直觀、特定尺度的合成 其他成果： disentangle latent factors，達到更好的interpolation 提供兩種量化糾纏基準的指標 提供一個高畫質且高多樣性的人臉資料集 1. Introduction 過去在使用GAN生成圖偏食會面臨到以下問題 整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源） 對於latent space的特性不熟悉 沒有一個量化基準來比較不同GAN生成圖片的interpolation 提出方法： 先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性 透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement 提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效） perceptual path length linear separability 其他貢獻：
+FFHQ資料集（Flickr-Faces-HQ） 高品質 多樣性廣 2. Style-based generator 與過往的GAN不同，用一個learned const來取代傳統的input layer
+過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積
+StyleGAN將input latent code映射到中介latent space $W$
+$W$透過AdaIN來控制各層卷積
+AdaIN 笔记
+在卷積運算後會加入高斯雜訊
+架構概述
+A 是一個預先學習好的仿射轉換 B 是一個預先學習好的noise scaling機制 mapping網路 8層全連接卷積 合成網路 $g$ 18層 $4^2-1024^2$的解析度各兩層 輸出層是用$1\times1$卷積來將圖片轉換成RGB 比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -105,23 +113,47 @@
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="">
-
-<meta itemprop="wordCount" content="0">
+  <meta itemprop="name" content="A Style-Based Generator Architecture for Generative Adversarial Networks">
+<meta itemprop="description" content="Abstract 此篇論文提出一個新的GAN架構，可以達到以下目的 自動且非監督式學習將高階的特徵（動作和身份）分開 利用隨機噪聲達到生成圖片的隨機變化(stochastic variation) Ex: 雀斑位置、頭髮文理 更直觀、特定尺度的合成 其他成果： disentangle latent factors，達到更好的interpolation 提供兩種量化糾纏基準的指標 提供一個高畫質且高多樣性的人臉資料集 1. Introduction 過去在使用GAN生成圖偏食會面臨到以下問題 整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源） 對於latent space的特性不熟悉 沒有一個量化基準來比較不同GAN生成圖片的interpolation 提出方法： 先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性 透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement 提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效） perceptual path length linear separability 其他貢獻：
+FFHQ資料集（Flickr-Faces-HQ） 高品質 多樣性廣 2. Style-based generator 與過往的GAN不同，用一個learned const來取代傳統的input layer
+過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積
+StyleGAN將input latent code映射到中介latent space $W$
+$W$透過AdaIN來控制各層卷積
+AdaIN 笔记
+在卷積運算後會加入高斯雜訊
+架構概述
+A 是一個預先學習好的仿射轉換 B 是一個預先學習好的noise scaling機制 mapping網路 8層全連接卷積 合成網路 $g$ 18層 $4^2-1024^2$的解析度各兩層 輸出層是用$1\times1$卷積來將圖片轉換成RGB 比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積"><meta itemprop="datePublished" content="2021-11-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-11-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="285">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="" />
+  <meta property="og:title" content="A Style-Based Generator Architecture for Generative Adversarial Networks" />
+<meta property="og:description" content="Abstract 此篇論文提出一個新的GAN架構，可以達到以下目的 自動且非監督式學習將高階的特徵（動作和身份）分開 利用隨機噪聲達到生成圖片的隨機變化(stochastic variation) Ex: 雀斑位置、頭髮文理 更直觀、特定尺度的合成 其他成果： disentangle latent factors，達到更好的interpolation 提供兩種量化糾纏基準的指標 提供一個高畫質且高多樣性的人臉資料集 1. Introduction 過去在使用GAN生成圖偏食會面臨到以下問題 整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源） 對於latent space的特性不熟悉 沒有一個量化基準來比較不同GAN生成圖片的interpolation 提出方法： 先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性 透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement 提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效） perceptual path length linear separability 其他貢獻：
+FFHQ資料集（Flickr-Faces-HQ） 高品質 多樣性廣 2. Style-based generator 與過往的GAN不同，用一個learned const來取代傳統的input layer
+過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積
+StyleGAN將input latent code映射到中介latent space $W$
+$W$透過AdaIN來控制各層卷積
+AdaIN 笔记
+在卷積運算後會加入高斯雜訊
+架構概述
+A 是一個預先學習好的仿射轉換 B 是一個預先學習好的noise scaling機制 mapping網路 8層全連接卷積 合成網路 $g$ 18層 $4^2-1024^2$的解析度各兩層 輸出層是用$1\times1$卷積來將圖片轉換成RGB 比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/" /><meta property="article:section" content="paper_notes" />
-
-
+<meta property="article:published_time" content="2021-11-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-11-10T00:00:00+00:00" />
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Style-Based Generator Architecture for Generative Adversarial Networks"/>
+<meta name="twitter:description" content="Abstract 此篇論文提出一個新的GAN架構，可以達到以下目的 自動且非監督式學習將高階的特徵（動作和身份）分開 利用隨機噪聲達到生成圖片的隨機變化(stochastic variation) Ex: 雀斑位置、頭髮文理 更直觀、特定尺度的合成 其他成果： disentangle latent factors，達到更好的interpolation 提供兩種量化糾纏基準的指標 提供一個高畫質且高多樣性的人臉資料集 1. Introduction 過去在使用GAN生成圖偏食會面臨到以下問題 整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源） 對於latent space的特性不熟悉 沒有一個量化基準來比較不同GAN生成圖片的interpolation 提出方法： 先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性 透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement 提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效） perceptual path length linear separability 其他貢獻：
+FFHQ資料集（Flickr-Faces-HQ） 高品質 多樣性廣 2. Style-based generator 與過往的GAN不同，用一個learned const來取代傳統的input layer
+過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積
+StyleGAN將input latent code映射到中介latent space $W$
+$W$透過AdaIN來控制各層卷積
+AdaIN 笔记
+在卷積運算後會加入高斯雜訊
+架構概述
+A 是一個預先學習好的仿射轉換 B 是一個預先學習好的noise scaling機制 mapping網路 8層全連接卷積 合成網路 $g$ 18層 $4^2-1024^2$的解析度各兩層 輸出層是用$1\times1$卷積來將圖片轉換成RGB 比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積"/>
 
   
   
@@ -215,10 +247,12 @@
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">A Style-Based Generator Architecture for Generative Adversarial Networks</h1>
 
     
     <div class="text-sm antialiased opacity-60">
+      
+      <time>Nov 10, 2021</time>
       
       
       
@@ -227,7 +261,304 @@
     
   </header>
 
-  <section></section>
+  <section><h1 id="abstract">Abstract</h1>
+<ul>
+<li>此篇論文提出一個新的GAN架構，可以達到以下目的
+<ol>
+<li>自動且非監督式學習將高階的特徵（動作和身份）分開</li>
+<li>利用隨機噪聲達到生成圖片的隨機變化(stochastic variation)
+Ex: 雀斑位置、頭髮文理</li>
+<li>更直觀、特定尺度的合成</li>
+</ol>
+</li>
+<li>其他成果：
+<ol>
+<li>disentangle latent factors，達到更好的interpolation</li>
+<li>提供兩種量化糾纏基準的指標</li>
+<li>提供一個高畫質且高多樣性的人臉資料集</li>
+</ol>
+</li>
+</ul>
+<h1 id="1-introduction">1. Introduction</h1>
+<ul>
+<li>過去在使用GAN生成圖偏食會面臨到以下問題
+<ol>
+<li>整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源）</li>
+<li>對於latent space的特性不熟悉</li>
+<li>沒有一個量化基準來比較不同GAN生成圖片的interpolation</li>
+</ol>
+</li>
+<li>提出方法：
+<ol>
+<li>先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性</li>
+<li>透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement</li>
+<li>提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效）
+<ol>
+<li>perceptual path length</li>
+<li>linear separability</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p>其他貢獻：</p>
+<ul>
+<li>FFHQ資料集（Flickr-Faces-HQ）
+<ul>
+<li>高品質</li>
+<li>多樣性廣</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-style-based-generator">2. Style-based generator</h1>
+<ul>
+<li>
+<p>與過往的GAN不同，用一個learned const來取代傳統的input layer</p>
+<ul>
+<li>
+<p>過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積</p>
+</li>
+<li>
+<p>StyleGAN將input latent code映射到中介latent space $W$</p>
+</li>
+<li>
+<p>$W$透過AdaIN來控制各層卷積</p>
+<!-- raw HTML omitted -->
+<p><a href="https://zhuanlan.zhihu.com/p/158657861">AdaIN 笔记</a></p>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+<li>
+<p>在卷積運算後會加入高斯雜訊</p>
+</li>
+<li>
+<p>架構概述</p>
+<ul>
+<li>A 是一個預先學習好的仿射轉換</li>
+<li>B 是一個預先學習好的noise scaling機制</li>
+<li>mapping網路
+<ul>
+<li>8層全連接卷積</li>
+</ul>
+</li>
+<li>合成網路 $g$
+<ul>
+<li>18層</li>
+<li>$4^2-1024^2$的解析度各兩層</li>
+</ul>
+</li>
+<li>輸出層是用$1\times1$卷積來將圖片轉換成RGB</li>
+</ul>
+</li>
+<li>
+<p>比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積</p>
+</li>
+<li>
+<p>利用加入額外的噪聲輸入來生成隨機細節</p>
+<ul>
+<li>噪聲為一通道的高斯雜訊圖片</li>
+<li>放入模型的各層且broadcast to各個feature map</li>
+<li>scaling 轉換是事先學習好的</li>
+</ul>
+</li>
+</ul>
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%882.06.04.png" alt="截圖 2021-11-18 下午2.06.04.png"></p>
+<h2 id="21-quality-of-generated-images">2.1 Quality of generated images</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>總共有6種配置
+<ol>
+<li>Progressive GAN Baseline</li>
+<li>配置1加上bilinear up/downsampling計算、訓練更久、tuned 參數</li>
+<li>配置2加上 mapping網路和AdaIN
+在這步驟的訓練發現latent code不用從第一個卷積層輸入
+此時原本傳統的輸入層還存在</li>
+<li>配置3移除傳統輸入層
+此時發現當風格特徵只從旁注入至各層的效果也不錯</li>
+<li>配置4加入噪聲輸入</li>
+<li>配置5使用mixing regularization</li>
+</ol>
+</li>
+<li>評分機制使用兩種
+<ul>
+<li>WGAN-GP
+<ul>
+<li>CelebA-HQ資料集下所有配置</li>
+<li>FFHQ的A配置</li>
+</ul>
+</li>
+<li>non-saturating loss with $R_1$ regularization
+<ul>
+<li>FFHQ的B-F配置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在展示圖片和影片時會使用truncation trick來確保不會採樣到latent space $W$中的極端區域，而在FID計算分數時並不會適用truncation trick</li>
+</ul>
+<!-- raw HTML omitted -->
+<p><a href="https://blog.csdn.net/qq_27261889/article/details/86483505">【深度理解】如何评价GAN网络的好坏？IS（inception score）和FID（Fréchet Inception Distance）_月下花弄影-CSDN博客</a></p>
+<!-- raw HTML omitted -->
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%882.45.57.png" alt="截圖 2021-11-18 下午2.45.57.png"></p>
+<h2 id="21-prior-art">2.1 Prior art</h2>
+<ul>
+<li>過去在提升GAN能力時大部分都著重於discriminator的改進
+<ul>
+<li>使用multiple discriminator</li>
+<li>multiresolution discrimination</li>
+<li>self-attention</li>
+</ul>
+</li>
+<li>對於GAN的改善也多著重於input latent分佈
+<ul>
+<li>試圖找到最好的input latent分佈</li>
+<li>透過高斯混合模ㄕㄕ型來重塑input latent space</li>
+<li>clustering</li>
+</ul>
+</li>
+<li>最近的conditional generator透過額外的embedding網路來將class identifier餵入generator
+input latent仍是從輸入層進入模型</li>
+</ul>
+<h1 id="3-properties-of-the-style-based-generator">3. Properties of the style-based generator</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>mapping network和affine transformation可以視為從一個已知的分佈採樣其中一個為指定風格，並將該風格畫在輸入圖片上</li>
+<li>synthesis network可以視為從一個風格集合中選擇一個風格來生成圖片（此生成的樣子參考input）</li>
+<li>指定風格的影響是區域性的分佈在網路中
+<ul>
+<li>修改一個特定風格的子集合（此風格可能有某種共通性）
+Ex: 此子集合都是短頭髮</li>
+<li>則只會影響生成圖片的某個層面
+Ex: 此生成的圖片除了頭髮維持短髮外，其他可能會稍微不同</li>
+</ul>
+</li>
+</ul>
+<h2 id="31-style-mixing">3.1 Style mixing</h2>
+<ul>
+<li>
+<p>試圖將風格區域化 → mixing regularization</p>
+<ul>
+<li>隨機找到兩組latent code $z_1,z_2$</li>
+<li>分別將兩組latent code丟入mapping network的到兩個$w_1,w_2$</li>
+<li>設定在generative network的某個點要交換風格</li>
+<li>一開始先使用$w_1$來生成圖片，直到到達crossover point</li>
+<li>換成用$w_2$風格來改變圖片</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>圖3可以看到當兩種風格在不同尺度下融合會有不一樣的效果</p>
+</li>
+</ul>
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%883.47.46.png" alt="截圖 2021-11-18 下午3.47.46.png"></p>
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%883.50.06.png" alt="截圖 2021-11-18 下午3.50.06.png"></p>
+<h2 id="32-stochastic-variation">3.2 Stochastic variation</h2>
+<p>在人像上仍有許多特徵本質上就是隨機會發生的</p>
+<ul>
+<li>頭髮垂放的位置</li>
+<li>雀斑位置</li>
+<li>皮膚毛孔</li>
+</ul>
+<p>以上的特徵都是隨機出現的，因此只要在不影響整個圖片的感知下，是可以隨機生成這些特徵，只要遵循正確的分佈</p>
+<p><strong>傳統方法</strong></p>
+<p>在傳統方法中所有輸入都由輸入層進入模型中，因此模型需要自己想到一個方法產生偽隨機數，避免被激活韓式影響，使得在需要時能被正確使用</p>
+<ul>
+<li>消耗大量的模型能力</li>
+<li>不容易隱藏週期性資訊，導致模型容易產生看起來重複的圖片</li>
+</ul>
+<p><strong>StyleGAN方法</strong></p>
+<ul>
+<li>直接在每次卷積運算後加入per-pixel noise</li>
+<li>圖4可以看到不同噪聲對圖片生成的影響</li>
+<li>圖５可以看到在不同尺度下使用噪聲帶來的影響</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%884.02.19.png" alt="截圖 2021-11-18 下午4.02.19.png"></p>
+<h2 id="33-separation-of-global-effects-from-stochasticity">3.3 Separation of global effects from stochasticity</h2>
+<ul>
+<li>style可以有全域性的改變，noise可以有較為無關緊要的隨機性特徵變化</li>
+<li>對應到整個StyleGAN的架構是合理的
+<ul>
+<li>風格會影響整張圖因為整個feature map一起被scaled和biased
+Ex: 改變姿勢、光源、背景</li>
+<li>noise是獨立被加到各個pixel中，適合控制（改變）隨機性
+模型若想嘗試用noise來改變全域特徵（姿態等）會導致生成的圖片缺乏連貫性，此時就會被判別器懲罰，因此生成器不會希望用noise來改變大局</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h1 id="4-disentanglement-studies">4. Disentanglement studies</h1>
+<h3 id="latent-code-disentanglement">Latent code disentanglement</h3>
+<ul>
+<li>latent space包含多個線性的子集合，任一個都是控制風格的某個變異性</li>
+<li>而在採樣latent code $z$ 時需要對應到訓練資料的密度、分佈（避免產生訓練集外的圖）</li>
+</ul>
+<h3 id="本篇論文發現">本篇論文發現</h3>
+<ul>
+<li>latent space $W$不用提供從固定的分佈採樣的方法，該採樣的空間密度是來自一個學習來的連續mapping $f(z)$</li>
+<li>$f(z)$可以用來解開$W$，如此factor的變化性會變得更線性</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="disentanglement量化問題">Disentanglement量化問題</h3>
+<ul>
+<li>過去在量化disentanglement時需要一個encoder來將input map轉成latent code</li>
+<li>此基準不適合本篇論文的方法，因為要另外訓練一個encoder是不切實際的，勁量避免訓練多餘的東西</li>
+<li>因此提出兩個量化方法
+<ul>
+<li>不需要另外使用encoder</li>
+<li>可以應用在任何圖片資料集和生成器上</li>
+</ul>
+</li>
+</ul>
+<h2 id="41-perceptual-path-length">4.1 Perceptual path length</h2>
+<p>若latent space糾纏的情況很嚴重的話，interpolation可能會有明顯的非線性變化</p>
+<p>可以透過觀察interpolation的過程中，變化的猛烈程度來判斷latent space的糾纏有多嚴重</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>透過將圖片放入VGG16取得該embedding來計算兩個latent code的差異</li>
+<li>將一段latent code區分為多個小段計算差距，整條路徑總和即為perceptual path length</li>
+</ul>
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%885.54.35.png" alt="截圖 2021-11-18 下午5.54.35.png"></p>
+<p><img src="../paper_resources/StyleGAN/%E6%88%AA%E5%9C%96_2021-11-18_%E4%B8%8B%E5%8D%885.57.20.png" alt="截圖 2021-11-18 下午5.57.20.png"></p>
+<h2 id="42-linear-separability">4.2 Linear separability</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>若latent code的意義都明顯且獨立，則應該可以使用一個超平面將latent space分割成兩項</li>
+</ul>
+<h3 id="製作細節">製作細節</h3>
+<ul>
+<li>對生成圖片進行標籤
+<ul>
+<li>訓練一個輔助分類器（特徵都是二元）</li>
+<li>使用CELEBA-HQ 資料集訓練（包含40種特徵）</li>
+</ul>
+</li>
+<li>使用一個SVM來對$z$和$w$進行預測，並計算entropy $H(Y|X)$
+$X$是SVM的預測結果、$Y$是自己訓練的classifier分類的結果</li>
+</ul>
+<h3 id="結果">結果</h3>
+<ul>
+<li>$w$相較於$z$可以更被分割 → 耦合性較低</li>
+<li>透過實驗發現將mapping network加深可以提高影像品質及$W$的分離性</li>
+<li>即便是在傳統的生成網路輸入層錢前加入mapping network改變原本輸入的分佈，也可以改善GAN的效果</li>
+</ul>
+<h1 id="5-conclusion">5. Conclusion</h1>
+<ul>
+<li>style-based GAN的效能遠好於傳統的GAN</li>
+<li>發現高層次特徵和隨機性的影響</li>
+<li>intermediate latent space的線性變化讓我們對於模型的控制性有更好的理解</li>
+<li>兩種評價基準可以用來協助訓練時的正規化</li>
+</ul>
+</section>
 
   
   
@@ -240,15 +571,15 @@
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/"
-      ><span class="mr-1.5">←</span><span></span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan3/"
+      ><span class="mr-1.5">←</span><span>Alias-Free Generative Adversarial Networks</span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/"
-      ><span></span><span class="ml-1.5">→</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/"
+      ><span>Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications</span><span class="ml-1.5">→</span></a
     >
     
   </nav>

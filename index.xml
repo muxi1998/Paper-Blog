@@ -37,6 +37,13 @@
       <description>Abstract 問題發現 圖片合成的過程過度依賴像素座標，導致圖片細節可能黏在座標上而非描繪對象的表面&#xA;解決概念&#xA;將網路中的信息都是為連續的&#xA;解決方法&#xA;小幅度修改原本模型架構，達到普遍適用性高且能避免不需要知資訊洩漏至分層融合的過程&#xA;結果成效&#xA;對動態影像的合成有很大的幫助&#xA;1 Introduction 目前最大問題 在現實中不同尺度的細節往往是分層轉換的，而GAN並沒有做到自然的分層 細節特徵的位置應該繼承較上層粗略的特徵，彼此應該有繼承關係&#xA;猜測與發現 目前的網路會參考隱藏層中洩漏出的位置訊息來畫上細節，但如此的分層結構並不自然 image border&#xA;在進行卷積運算時常常會使用到zero-padding，而此舉動會不經意的洩漏出絕對位置的訊息&#xA;參考資訊 HOW MUCH POSITION INFORMATION DO CONVOLUTIONAL NEURAL NETWORKS ENCODE?&#xA;猜測在CNN各層卷積中隱含著絕對位置的資訊 zero-padding造成模型在無意間學習的特徵的絕對位置 per-pixel noise inputs&#xA;positional encoding&#xA;aliasing&#xA;可能造成混疊問題發生的原因 使用非理想採樣濾波器造成的，像素網格弱化（pixel位置資訊混淆？） Ex: nearest, bilinear, strided卷積 針對各個pixel使用非線性轉換 Ex: ReLU, swish 因為以上兩種可能導致網路會不自覺得將不同尺度的資訊都畫在basis上，而此basis就是螢幕中看到的平面座標 解決方法 去除所有可能的絕對位置參考來源 使得各層卷積的生成能夠更平等，而非受限於洩漏的絕對位置資訊 目前的上採樣filter並沒有很好的抑制混疊 使用low-pass filter來對原本的result再進一步處理來修正pointwise非線性造成的混疊問題 全面檢修StyleGAN2的信息處理 提出了一個更根本不同的圖片生成概念 Equivariance vs. Inquivariance Equivariance 等變性 對於輸入施加一些改變會反映在輸出上 $f(g(x))=g(f(x))$ $f(\cdot):$ 特徵函數 $g(\cdot):$ 變換函數 Inquivariance 不變性 對輸入施加一些改變不會影響輸出 CNN中的equivariant vs.</description>
     </item>
     <item>
+      <title>A Style-Based Generator Architecture for Generative Adversarial Networks</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/</guid>
+      <description>Abstract 此篇論文提出一個新的GAN架構，可以達到以下目的 自動且非監督式學習將高階的特徵（動作和身份）分開 利用隨機噪聲達到生成圖片的隨機變化(stochastic variation) Ex: 雀斑位置、頭髮文理 更直觀、特定尺度的合成 其他成果： disentangle latent factors，達到更好的interpolation 提供兩種量化糾纏基準的指標 提供一個高畫質且高多樣性的人臉資料集 1. Introduction 過去在使用GAN生成圖偏食會面臨到以下問題 整體過程像是黑盒子，對合成過程不了解（隨機特徵的起源） 對於latent space的特性不熟悉 沒有一個量化基準來比較不同GAN生成圖片的interpolation 提出方法： 先進的方式來控制圖片合成的流程，從Style的latent code修改各層卷積的資訊，達到在不同尺度下修改風格，同時另外加入噪聲增加隨機性 透過將input latent code映射到intermediate latent space，可以相對有效的disentanglement 提出兩個量化disentanglement的基準 （幫助比較不同GAN的成效） perceptual path length linear separability 其他貢獻：&#xA;FFHQ資料集（Flickr-Faces-HQ） 高品質 多樣性廣 2. Style-based generator 與過往的GAN不同，用一個learned const來取代傳統的input layer&#xA;過去的latent code只有出現在輸入層，而StyleGAN的input latent code可以輸入至各層卷積&#xA;StyleGAN將input latent code映射到中介latent space $W$&#xA;$W$透過AdaIN來控制各層卷積&#xA;AdaIN 笔记&#xA;在卷積運算後會加入高斯雜訊&#xA;架構概述&#xA;A 是一個預先學習好的仿射轉換 B 是一個預先學習好的noise scaling機制 mapping網路 8層全連接卷積 合成網路 $g$ 18層 $4^2-1024^2$的解析度各兩層 輸出層是用$1\times1$卷積來將圖片轉換成RGB 比起其他風格轉換方法，風格資訊只從輸入層放入，StyleGAN是將紑格的latent code $w$轉換到各層卷積</description>
+    </item>
+    <item>
       <title>Anomaly Detection Neural Network with Dual Auto-Encoders GAN and Its Industrial Inspection Applications</title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/anomaly-detection-neural-network-with-dual-auto-encoders-gan-and-its-industrial-inspection-applications/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
@@ -83,13 +90,6 @@
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/sttn/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/stylegan/</guid>
       <description></description>
     </item>
     <item>

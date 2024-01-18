@@ -86,13 +86,6 @@
       <description></description>
     </item>
     <item>
-      <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Deep Image Compositing</title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/deep-image-compositing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -105,6 +98,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/zits/</guid>
       <description>Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3.</description>
+    </item>
+    <item>
+      <title>Temporal Group Fusion Network for Deep Video Inpainting</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/</guid>
+      <description>Abstract 問題情境&#xA;對一段影片中缺失的區塊進行內容的填補&#xA;過去方法及問題&#xA;過去使用的DL方式多使用align的方式將參考frame與目標frame的估計動作的資訊整合在一起 問題是上述方法會讓performance高度依賴frame與frame間的align精准度 提出方法&#xA;提出一個Temporal Group Fusion Network (TGF-Net) 來透過兩階段的fusion策略來有效的整合時序上的資訊 階段零：在最初會使用一個粗略的alignment模型來處理large motion&#xA;階段一：&#xA;輸入的frame會先被分到不同的group中 分類完後使用intra-group fusion module來整合group內部的資訊 階段二：&#xA;使用一個temporal attention model來整合不同group間的資訊 實驗結果&#xA;利用兩階段的fusion策略來整合時序上的資訊，可以避免過度依賴align的結果 明顯的提高視覺上的品質以及時序間的相依性 1. Introduction Video inpainting是一個很基礎的task，重點在於合成一個視覺上貌似真實且在缺失的部分維持時序上的相依性&#xA;應用一、修復損毀的影片 應用二、移除不想要的物件 應用三、影片重訂向(video retargeting) video inpainting和image inpainting的差異在於video多了時序上的資訊，可以利用連續性的資料來對遺失部分進行更好的填補，因為缺失的部分可能有在其他frame中出現過，例如以下影片中的frame1~frame4中缺失的黃色部份可以在frame30中找到&#xA;儘管可以在其他frame中找的相關的信息，但因為鏡頭或各種因素，很難直接將該資訊直接應用在填補缺失上，因此要如何妥善利用這樣的資訊是很重要的問題&#xA;過去CNN方法著&#xA;重於alignment在進行fusion 使用3D-CNN來提取特徵（如此會受限receptive field） 本篇的特色 提出一個novel的end-to-end模型Temporal Group Fusion Network 兩階段的fusion策略 先整合group間的資訊 使用3D卷積來對各個group間的資訊進行整合 在各個group中都有一份target frame，此target frame是用來引導網路提取有意義的時序資訊 在整合不同group間彼此的資訊（善用不同group frame間互補的資訊） 不同group分別提供了不同(互補)的資訊來幫助填補缺口 使用temporal attention model來整合不同group間的資訊 此attention model會學習哪些特徵是有助於修補缺口，並且忽略無效區域 兩階段的fusion策略的確讓修補的效果看起來更為真實且保持時序上的連貫相依性，且避免了過度依賴alignment 此篇論文的方式仍有限制，感受野上(receptive field)的限制 若影片中具有大規模的動作時會有問題 因此在最初處理時還是會用個粗略的alignlment模型來做一些初步的補償，如此來減少target frame和reference frame間的差異，幫助該論文的模型能專注於object motion 2.</description>
     </item>
   </channel>
 </rss>

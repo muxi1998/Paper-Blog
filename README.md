@@ -2,7 +2,7 @@
 
 Recently studying topics related to transformer or VLP.
 
-
+TODO: Change the scheme
 
 ## About Me
 Master of Artificial Intelligence, Specializing in Deep Learning and Generative AI

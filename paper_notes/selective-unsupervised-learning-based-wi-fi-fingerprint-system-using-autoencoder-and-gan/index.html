@@ -42,7 +42,7 @@
   />
 
   
-  <title> - My Paper note site</title>
+  <title>Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN - My Paper note site</title>
 
   
   <meta name="theme-color" />
@@ -51,7 +51,11 @@
   
   
   
-  <meta name="description" content="" />
+  <meta name="description" content="Abstract 預期目標
+建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統 過去方法
+TOA (time-ofr-arrival) 提出方法
+使用UDRM演算法→Unsupervised dual radio mapping (UDRM) 選定一個主要參考的樓層建立最初的radio map 其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map 適用於室內環境 基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map 不需要label data 呈現成果
+1. Introduction 情境說明 GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統 TOA (time-of-arrival) 計算發收端和接收端的訊號抵達時間來估算兩者間的距離 fingerprint 計算AP訓好的強度來估算在室內的定位 相較TOA更為穩定，使用Wi-Fi，藍牙等 僅需要universal device而不需要到處部署發送端和接收端 Fingerprint說明 分為兩個階段 training phase 計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m 利用preprocessing演算法來用RP建立radio map deterministic或機率模型 眾包 (crowdsourcing) 分類模型 positioning phase 即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置 使用SVM或k-nearest neighbor來找到最相似的RP 此論文方法重點 提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法： UDRM → unsupervised dual radio mapping 演算法 MDLP-based RMF 演算法 MDLP → minimum description length principle RMF → radio map feedback 如何建立其他樓層的初始radio map?" />
   <meta name="author" content="My Paper note site" />
   
 
@@ -105,14 +109,22 @@
   
   
   
-  <meta itemprop="name" content="">
-<meta itemprop="description" content="">
+  <meta itemprop="name" content="Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN">
+<meta itemprop="description" content="Abstract 預期目標
+建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統 過去方法
+TOA (time-ofr-arrival) 提出方法
+使用UDRM演算法→Unsupervised dual radio mapping (UDRM) 選定一個主要參考的樓層建立最初的radio map 其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map 適用於室內環境 基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map 不需要label data 呈現成果
+1. Introduction 情境說明 GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統 TOA (time-of-arrival) 計算發收端和接收端的訊號抵達時間來估算兩者間的距離 fingerprint 計算AP訓好的強度來估算在室內的定位 相較TOA更為穩定，使用Wi-Fi，藍牙等 僅需要universal device而不需要到處部署發送端和接收端 Fingerprint說明 分為兩個階段 training phase 計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m 利用preprocessing演算法來用RP建立radio map deterministic或機率模型 眾包 (crowdsourcing) 分類模型 positioning phase 即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置 使用SVM或k-nearest neighbor來找到最相似的RP 此論文方法重點 提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法： UDRM → unsupervised dual radio mapping 演算法 MDLP-based RMF 演算法 MDLP → minimum description length principle RMF → radio map feedback 如何建立其他樓層的初始radio map?">
 
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="295">
 <meta itemprop="keywords" content="" />
   
-  <meta property="og:title" content="" />
-<meta property="og:description" content="" />
+  <meta property="og:title" content="Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN" />
+<meta property="og:description" content="Abstract 預期目標
+建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統 過去方法
+TOA (time-ofr-arrival) 提出方法
+使用UDRM演算法→Unsupervised dual radio mapping (UDRM) 選定一個主要參考的樓層建立最初的radio map 其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map 適用於室內環境 基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map 不需要label data 呈現成果
+1. Introduction 情境說明 GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統 TOA (time-of-arrival) 計算發收端和接收端的訊號抵達時間來估算兩者間的距離 fingerprint 計算AP訓好的強度來估算在室內的定位 相較TOA更為穩定，使用Wi-Fi，藍牙等 僅需要universal device而不需要到處部署發送端和接收端 Fingerprint說明 分為兩個階段 training phase 計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m 利用preprocessing演算法來用RP建立radio map deterministic或機率模型 眾包 (crowdsourcing) 分類模型 positioning phase 即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置 使用SVM或k-nearest neighbor來找到最相似的RP 此論文方法重點 提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法： UDRM → unsupervised dual radio mapping 演算法 MDLP-based RMF 演算法 MDLP → minimum description length principle RMF → radio map feedback 如何建立其他樓層的初始radio map?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/" /><meta property="article:section" content="paper_notes" />
 
@@ -120,8 +132,12 @@
 
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN"/>
+<meta name="twitter:description" content="Abstract 預期目標
+建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統 過去方法
+TOA (time-ofr-arrival) 提出方法
+使用UDRM演算法→Unsupervised dual radio mapping (UDRM) 選定一個主要參考的樓層建立最初的radio map 其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map 適用於室內環境 基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map 不需要label data 呈現成果
+1. Introduction 情境說明 GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統 TOA (time-of-arrival) 計算發收端和接收端的訊號抵達時間來估算兩者間的距離 fingerprint 計算AP訓好的強度來估算在室內的定位 相較TOA更為穩定，使用Wi-Fi，藍牙等 僅需要universal device而不需要到處部署發送端和接收端 Fingerprint說明 分為兩個階段 training phase 計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m 利用preprocessing演算法來用RP建立radio map deterministic或機率模型 眾包 (crowdsourcing) 分類模型 positioning phase 即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置 使用SVM或k-nearest neighbor來找到最相似的RP 此論文方法重點 提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法： UDRM → unsupervised dual radio mapping 演算法 MDLP-based RMF 演算法 MDLP → minimum description length principle RMF → radio map feedback 如何建立其他樓層的初始radio map?"/>
 
   
   
@@ -215,7 +231,7 @@
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5"></h1>
+    <h1 class="!my-0 pb-2.5">Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN</h1>
 
     
     <div class="text-sm antialiased opacity-60">
@@ -227,7 +243,322 @@
     
   </header>
 
-  <section></section>
+  <section><h1 id="abstract">Abstract</h1>
+<p><strong>預期目標</strong></p>
+<ul>
+<li>建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統</li>
+</ul>
+<p><strong>過去方法</strong></p>
+<ul>
+<li>TOA (time-ofr-arrival)</li>
+</ul>
+<p><strong>提出方法</strong></p>
+<ul>
+<li>使用UDRM演算法→Unsupervised dual radio mapping (UDRM)
+<ul>
+<li>選定一個主要參考的樓層建立最初的radio map</li>
+<li>其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map</li>
+</ul>
+</li>
+<li>適用於室內環境</li>
+<li>基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map</li>
+<li>不需要label data</li>
+</ul>
+<p><strong>呈現成果</strong></p>
+<h1 id="1-introduction">1. Introduction</h1>
+<h3 id="情境說明">情境說明</h3>
+<ul>
+<li>GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統
+<ul>
+<li>TOA (time-of-arrival)
+<ul>
+<li>計算發收端和接收端的訊號抵達時間來估算兩者間的距離</li>
+</ul>
+</li>
+<li>fingerprint
+<ul>
+<li>計算AP訓好的強度來估算在室內的定位</li>
+<li>相較TOA更為穩定，使用Wi-Fi，藍牙等</li>
+<li>僅需要universal device而不需要到處部署發送端和接收端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="fingerprint說明">Fingerprint說明</h3>
+<ul>
+<li>分為兩個階段
+<ul>
+<li>training phase
+<ul>
+<li>計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m</li>
+<li>利用preprocessing演算法來用RP建立radio map
+<ul>
+<li>deterministic或機率模型</li>
+<li>眾包 (crowdsourcing)</li>
+<li>分類模型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>positioning phase
+<ul>
+<li>即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置
+<ul>
+<li>使用SVM或k-nearest neighbor來找到最相似的RP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="此論文方法重點">此論文方法重點</h3>
+<ul>
+<li>提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法：
+<ul>
+<li>UDRM → unsupervised dual radio mapping 演算法</li>
+<li>MDLP-based RMF 演算法
+<ul>
+<li>MDLP → minimum description length principle</li>
+<li>RMF → radio map feedback</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何建立其他樓層的初始radio map?
+<ul>
+<li>先有一個過往方法利用RSSI計算好的radio map當作參考</li>
+<li>套用UDRM演算法來產生新樓層的radio map，UDRM會分兩條路走 (視新樓層的室內結構是否與參考樓層類似決定)
+<ul>
+<li>modified autoencoder</li>
+<li>modified GAN</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何進行定位或是因應AP變化進行radio map的修正？
+<ul>
+<li>使用RMF演算法</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-unsupervised-learning">2. Unsupervised Learning</h1>
+<h2 id="a-autoencoder">A. Autoencoder</h2>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-20_%25E4%25B8%258B%25E5%258D%25885.18.46.png" alt="截圖 2022-07-20 下午5.18.46.png"></p>
+<ul>
+<li>為一種非監督式學習
+<ul>
+<li>不用給label</li>
+<li>可預測的範圍不會被訓練資料受限</li>
+</ul>
+</li>
+</ul>
+<h2 id="b-generative-adversarial-networks">B. Generative Adversarial Networks</h2>
+<ul>
+<li>對抗式生成網路</li>
+<li>生成器的output會是個$3m\times 3m$大小的pixel，剛好對應到RP的間隔區間</li>
+</ul>
+<h2 id="c-minimum-description-length-principle">C. Minimum Description Length Principle</h2>
+<ul>
+<li>一個將連續資訊離散化的演算法</li>
+<li>MDLP可以同時最佳化和分類資料</li>
+<li>此演算法使用<a href="https://medium.com/%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7-%E5%80%92%E5%BA%95%E6%9C%89%E5%A4%9A%E6%99%BA%E6%85%A7/entropy-%E7%86%B5-%E6%98%AF%E7%94%9A%E9%BA%BC-%E5%9C%A8%E8%B3%87%E8%A8%8A%E9%A0%98%E5%9F%9F%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF-1551e55110fa">entropy</a>來將RSSIs資料集分散化
+<ul>
+<li>entropy熵表示一個特定值在資料集中出現的機率 $P_i=\frac{D_i}{T}$</li>
+<li>$T:$ 資料的總數</li>
+<li>$D_i:$ 表示一個任意值在資料集中出現的機率</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-proposed-fingerprint-system">3. Proposed Fingerprint System</h1>
+<ul>
+<li>提出的系統分為<strong>訓練</strong>階段和<strong>定位</strong>階段
+<ul>
+<li>訓練階段 → UDRM</li>
+<li>定位階段 → MDLP-based RMF</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-proposed-udrm-algorithm">A. Proposed UDRM Algorithm</h2>
+<ul>
+<li>
+<p>原本主要有兩種生成radio map的方式</p>
+<ul>
+<li>Wi-Fi measurement-based</li>
+<li>prediction-based ← 此篇論文的方法
+<ul>
+<li>需要考慮室內環境 因為Wi-Fi訊號會因為室內結構和空間有不同的衰減程度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>UDRM主要分為兩個演算法</p>
+<ul>
+<li>微調的autoencoder
+<ul>
+<li>應用於與參考樓層類似的室內結構</li>
+<li>有兩個輸入 (原始的autoencoder只有一個輸入)
+<ol>
+<li>參考樓層的RSSI</li>
+<li>另一個樓層的AP座標</li>
+</ol>
+</li>
+<li>目標是將其映射到另一層</li>
+</ul>
+</li>
+<li>微調的GAN
+<ul>
+<li>與原始的GAN不同，原始的GAN輸入是高斯噪聲</li>
+<li>微調後的GAN有三個輸入
+<ol>
+<li>2D radio map</li>
+<li>AP座標</li>
+<li>高斯雜訊</li>
+</ol>
+</li>
+<li>輸出以AP為中心點的RSSI</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>UDRM運作流程</p>
+<ul>
+<li>
+<p>首先選擇一個參考樓層，取得真實的Wi-Fi訊號來訓練微調的autoencoder和微調的GAN</p>
+<ul>
+<li>收集的Wi-Fi訊號包含各個SSID和其RSSI</li>
+<li>每個RP點都會有各個SSID的RSSI訊號值</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="微調的autoencoder">微調的autoencoder</h3>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-24_%25E4%25B8%258B%25E5%258D%258811.52.31.png" alt="截圖 2022-07-24 下午11.52.31.png"></p>
+<ul>
+<li>
+<p>autoencoder學習參考樓層上的RSSI</p>
+</li>
+<li>
+<p>輸出的無線電地圖預計是參考樓層上每個RP的RSSI</p>
+<ul>
+<li>需要將其與實際二維地圖的固定AP座標相結合</li>
+</ul>
+</li>
+<li>
+<p>微調後的autoencoder輸入如下</p>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%258812.01.06.png" alt="截圖 2022-07-25 上午12.01.06.png"></p>
+<ul>
+<li>$k$ : 是某個在參考樓層上任意的一個AP</li>
+<li>$n$ : 是RP的數量 → 可以視為在該樓層的位置</li>
+</ul>
+</li>
+<li>
+<p>autoencoder輸出的AP訊號分佈將此分佈matching到其他樓層位置近似的AP上來製作新樓層的radio map</p>
+</li>
+</ul>
+<h3 id="微調的gan">微調的GAN</h3>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%258812.10.13.png" alt="截圖 2022-07-25 上午12.10.13.png"></p>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-24_%25E4%25B8%258B%25E5%258D%258811.17.23.png" alt="截圖 2022-07-24 下午11.17.23.png"></p>
+<ul>
+<li>
+<p>修改後的GAN輸入為</p>
+<ul>
+<li>高斯噪聲</li>
+<li>參考樓層的的二維無線電地圖 → 反映出測量出的radio map對應到的室內結構</li>
+<li>新樓層的AP座標</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p>對抗式學習的過程如下</p>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%258812.20.42.png" alt="截圖 2022-07-25 上午12.20.42.png"></p>
+<ul>
+<li>$x_{wifi}$ : 表示從一個AP實際收集到的RSSI訊號所建立出的2D無線電圖</li>
+<li>$z_{wifi}$ : 表示塑形成2D無線電圖樣子的噪聲資訊作為生成器的輸入</li>
+<li>此學習的目標是要最大化$1-D(G(z_wifi))$ → 最大化生成器生成看似真實的虛擬無線電圖的概率｀</li>
+</ul>
+</li>
+</ul>
+<h2 id="b-mdlp-based-rmf-algorithm">B. MDLP-Based RMF Algorithm</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>在進行使用者定位時，會使用歐幾里得距離來比對在使用者端收到的AP訊號與使用UDRM畫好的無線電地圖中的AP訊號分佈，公式如下：</p>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%25889.04.43.png" alt="截圖 2022-07-25 上午9.04.43.png"></p>
+<ul>
+<li>P 是使用者的最終定位位置</li>
+<li>n 是計算的RSSIs訊號數量 → 第幾個AP</li>
+<li>$AP_j$ : 第 j 個SSID的RSSIs</li>
+<li>$AP_{rj}$ : 使用者即時量到的RSSI</li>
+<li>擁有與使用者量測到的RSSIs有最高相似度的RP就會被視為使用者當前的位置</li>
+</ul>
+</li>
+<li>
+<p>此MDLP-based RMF演算法透過過濾掉不必要的AP信號，達到只使用區分性高代表性的AP來建立無線電地圖（降低為度），來達到更好的定位效能 → 較不會被雜訊干擾</p>
+</li>
+</ul>
+<h3 id="要如何使用有效的ap更新無線電圖如何判斷有效無效">要如何使用有效的AP更新無線電圖？如何判斷有效無效？</h3>
+<ul>
+<li>傳統的MDLP表達了某個物質的失序程度
+<ul>
+<li>
+<p>無法根據信號RP數值表達出該信號的分離程度</p>
+</li>
+<li>
+<p>因此需要再透過IG操作來量化他</p>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%25889.24.28.png" alt="截圖 2022-07-25 上午9.24.28.png"></p>
+</li>
+<li>
+<p>$x$  : 一個AP</p>
+</li>
+<li>
+<p>$y$ : 一個RP</p>
+</li>
+<li>
+<p>$H(y)$ : 表達在一個RP位置上的entropy → 在某的RP位置上各個AP RSSI的失序程度</p>
+</li>
+<li>
+<p>$p$ : 是一個RSSI被測量的機率</p>
+</li>
+</ul>
+</li>
+<li>量化的AP數據特徵在數值上代表了不同AP間的相似性</li>
+<li>傳統的MDLP只對連續數據進行拆分，須在使用IG來驗證應用在連續資料下的效能</li>
+<li>若一個AP可以透過RSSI清楚的區分各個RP點的話，該IG分數會較高，反之若一個AP無法透過RSSI來區分RP位置的話，其IG分數較低，因此我們可以透過計算一個AP的IG分數來判斷該AP是否有用
+$IG(M(AP))&gt;0$</li>
+<li></li>
+</ul>
+<p><img src="../paper_resources/Selective%20Unsupervised%20Learning-Based%20Wi-Fi%20Fingerprint%20System%20Using%20Autoencoder%20and%20GAN/%25E6%2588%25AA%25E5%259C%2596_2022-07-25_%25E4%25B8%258A%25E5%258D%25889.00.56.png" alt="截圖 2022-07-25 上午9.00.56.png"></p>
+<h1 id="4-experiments-and-results">4. Experiments and Results</h1>
+<h2 id="a-experimental-environment-and-configuration">A. Experimental Environment and Configuration</h2>
+<h2 id="b-result-of-udrm-algorithm">B. Result of UDRM Algorithm</h2>
+<h2 id="c-result-of-mdlp-based-rmf-algorithm">C. Result of MDLP-Based RMF Algorithm</h2>
+<h1 id="5-conclusion">5. Conclusion</h1>
+<h1 id="-專有名詞解釋">* 專有名詞解釋</h1>
+<h3 id="unsupervised-dual-radio-mapping-udrm">Unsupervised dual radio mapping (UDRM)</h3>
+<h3 id="mdlp-based">MDLP-based</h3>
+<h3 id="rmf">RMF</h3>
+<h3 id="radio-map">Radio map</h3>
+<ul>
+<li>radio map可以看作一個database地圖，由多個reference point (RP)建立而成</li>
+<li>每個RP包含兩個資訊
+<ol>
+<li>該RP的物理位置</li>
+<li>該RP所收到所有AP的RSS</li>
+</ol>
+</li>
+</ul>
+</section>
 
   
   
@@ -240,15 +571,15 @@
     
     <a
       class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/fuseformer-fusing-fine-grained-information-in-transformers-for-video-inpainting/"
-      ><span class="mr-1.5">←</span><span></span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/zits/"
+      ><span class="mr-1.5">←</span><span>Incremental Transformer Structure Enhanced Image Inpainting with Masking Positional Encoding</span></a
     >
     
     
     <a
       class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
-      href="https://muxi1998.github.io/Paper-Blog/paper_notes/self-attention-temporal-convolutional-network-for-long-term-daily-living-activity-detection/"
-      ><span></span><span class="ml-1.5">→</span></a
+      href="https://muxi1998.github.io/Paper-Blog/paper_notes/temporal_group_fusion_network_dvi/"
+      ><span>Temporal Group Fusion Network for Deep Video Inpainting</span><span class="ml-1.5">→</span></a
     >
     
   </nav>

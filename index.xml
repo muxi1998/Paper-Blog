@@ -73,13 +73,6 @@
     </item>
     <item>
       <title></title>
-      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title></title>
       <link>https://muxi1998.github.io/Paper-Blog/paper_notes/self-attention-temporal-convolutional-network-for-long-term-daily-living-activity-detection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/self-attention-temporal-convolutional-network-for-long-term-daily-living-activity-detection/</guid>
@@ -105,6 +98,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/zits/</guid>
       <description>Abstract 1. Introduction Inpainting的重點 coherent texture visually reasonable structures 過去的Inpainting方法有4大問題 感受野過小：CNN kernel的關係，就算是dilated CNN也會在在過大的毀損區域或高解析度的情境下降低效能 遺失整體的結構：若模型不了解整體的結構，則很難還原細節 計算量重：訓練GAN對大影像的還原是困難且耗費資源的，且效能會隨著影像解析度提高而降低 遮罩區域沒有位置資訊：模型容易在遺失區域產生偽影 2. Related work 3. Method 簡寫說明 ZITS : ZeroRA based Incremental Transformer Structure MPE : Masking Positional Encoding TSR : Transformer Structure Restorer FTR : Fourier CNN Texture Restoration Overview Structure restoration 輸入為$TSR(I_m, I_e, I_l, M)$ $I_m:$ 被遮罩的輸入影像 $I_e:$ 邊緣資訊 $I_l:$ 線條資訊 $M:$ 二元mask 輸出為草圖域 $[\tilde{I_e}, \tilde{I_l}]=TSR(I_m, I_e, I_l, M)$ Simple Structure upsample 在推論期間會使用SSU來將灰階的草圖上採樣至任意大小 Extract structure feature 在使用一個gated convolution based SFE來提取多尺度的特徵 $S_k=SFE(\tilde{I_e}, \tilde{I_l},M), {k=0,1,2,3}$ Add to to the fourier CNN texture restoration 將$S_k$資訊逐步加入(ZeroRA)相對應的FTR layer中 3.</description>
+    </item>
+    <item>
+      <title>Selective Unsupervised Learning-Based Wi-Fi Fingerprint System Using Autoencoder and GAN</title>
+      <link>https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://muxi1998.github.io/Paper-Blog/paper_notes/selective-unsupervised-learning-based-wi-fi-fingerprint-system-using-autoencoder-and-gan/</guid>
+      <description>Abstract 預期目標&#xA;建立一個基於神經網路的自動化且低時耗的多樓層Wi-Fi指紋建立系統 過去方法&#xA;TOA (time-ofr-arrival) 提出方法&#xA;使用UDRM演算法→Unsupervised dual radio mapping (UDRM) 選定一個主要參考的樓層建立最初的radio map 其他樓層則觀察與參考樓層的結構差異來分別選擇autoencoder或GAN來建立自己的radio map 適用於室內環境 基於MDLP最小描述長度原則與RMF無線電地圖反饋機制來同時優化並更新radio map 不需要label data 呈現成果&#xA;1. Introduction 情境說明 GPS定位的應用非常廣泛，但在室內應用中，GPS的訊號會受限，因此許多研究在找尋替代GPS的室內定位系統 TOA (time-of-arrival) 計算發收端和接收端的訊號抵達時間來估算兩者間的距離 fingerprint 計算AP訓好的強度來估算在室內的定位 相較TOA更為穩定，使用Wi-Fi，藍牙等 僅需要universal device而不需要到處部署發送端和接收端 Fingerprint說明 分為兩個階段 training phase 計算APs的RSSIs來建立radio map，以RP(reference point)為單位 → RP間隔為2-3m 利用preprocessing演算法來用RP建立radio map deterministic或機率模型 眾包 (crowdsourcing) 分類模型 positioning phase 即時的定位結果是利用將使用者當下的RSSI值與已建立好的radio map進行比對來找到在radio map中最接近的RSSI分佈，將該RP作為定位位置 使用SVM或k-nearest neighbor來找到最相似的RP 此論文方法重點 提出一個automatic Wi-Fi fingerprint system based on unsupervised learning，主要包含兩大演算法： UDRM → unsupervised dual radio mapping 演算法 MDLP-based RMF 演算法 MDLP → minimum description length principle RMF → radio map feedback 如何建立其他樓層的初始radio map?</description>
     </item>
     <item>
       <title>Temporal Group Fusion Network for Deep Video Inpainting</title>

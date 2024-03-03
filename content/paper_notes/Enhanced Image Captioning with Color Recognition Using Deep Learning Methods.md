@@ -62,6 +62,34 @@ draft: false
     - 強調了文本描述轉語音的模塊，擴展了模型的實用性。
 
 # 3. Methods
+![model_arch.png](../paper_resources/Enhanced%20Image%20Captioning%20with%20Color%20Recognition%20Using%20Deep%20Learning%20Methods/model_arch.png)
+
+### Object Detection
+- Two approaches
+    1. Machine Leanring based
+    2. Deep Learning based
+        1. RPN (Regional Proposed Network)
+        2. SSD (Single Shot Multibox Detector)
+            - 在本研究中使用SSD當作物件偵測主要方法，來找到目標物件，使用SSD-MobileNet-V2
+
+- Mask R-CNN用於完整目標檢測：
+    - Mask R-CNN是一種深度神經網絡，用於解決計算機視覺中的實例分割問題。
+- ROIAlign方法的應用：
+    - 在Mask R-CNN中，使用雙線性插值獲取邊界信息，稱為ROIAlign方法。
+    - ROIAlign使用四個邊界點獲取中心的平均像素值，解決了傳統ROI池化引起的偏移問題。
+- Mask R-CNN的工作流程：
+    - 基於Mask R-CNN，獲取圖像中目標對象的目標區域。
+    - 生成目標對象的像素級遮罩，用於詳細的物體檢測。
+    - 通過ROIAlign獲取候選區域後，使用卷積神經網絡獲取遮罩。
+- 前景分割應用於色彩分析：
+    - 利用圖像的前景分割獲取的物體輪廓進行後續色彩分析。
+- 網絡深度引起的問題：
+    - 隨著網絡深度增加，梯度爆炸問題變得更嚴重，可能導致網絡難以或甚至無法收斂。
+    - 更深的網絡帶來另一個問題，即隨著網絡深度增加，訓練集的準確性下降。
+ 
+### Color Analysis
+
+### Image Captioning
 
 # 4. Experiments and Results
 

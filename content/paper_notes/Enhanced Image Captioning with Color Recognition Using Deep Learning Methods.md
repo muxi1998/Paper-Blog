@@ -88,6 +88,8 @@ draft: false
     - 更深的網絡帶來另一個問題，即隨著網絡深度增加，訓練集的準確性下降。
  
 ### Color Analysis
+![model_arch.png](../paper_resources/Enhanced%20Image%20Captioning%20with%20Color%20Recognition%20Using%20Deep%20Learning%20Methods/color.png)
+- HSV is better than RGB for recognizing the object
 
 ### Image Captioning
 
